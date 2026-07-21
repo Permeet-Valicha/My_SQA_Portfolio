@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assessment Manual QA Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Test Engineer Sidebar */
+        .qa-sidebar {
+            width: 280px;
+            background-color: #1e293b;
+            color: #94a3b8;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            border-right: 1px solid #334155;
+        }
+
+        .qa-step {
+            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #0f172a;
+            font-size: 13px;
+            border-left: 4px solid #334155;
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+
+        .qa-step.active {
+            opacity: 1;
+            border-left-color: #3b82f6;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .qa-step.passed {
+            border-left-color: #22c55e;
+        }
+
+        /* App Simulation Area */
+        .app-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at center, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .mbti-app {
+            width: 450px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .app-header {
+            background: #6366f1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #e2e8f0;
+            width: 100%;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4f46e5;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .question-content {
+            padding: 40px 30px;
+            min-height: 300px;
+        }
+
+        .option-btn {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #f1f5f9;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            text-align: left;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-btn:hover {
+            border-color: #6366f1;
+            background: #f5f3ff;
+        }
+
+        .option-btn.selected {
+            border-color: #6366f1;
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        /* Result View */
+        .result-view {
+            text-align: center;
+            padding: 40px 30px;
+            display: none;
+        }
+
+        .personality-type {
+            font-size: 48px;
+            font-weight: 800;
+            color: #6366f1;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        /* QA Highlights */
+        .qa-highlight {
+            position: absolute;
+            border: 2px solid #ef4444;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .qa-cursor {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%236366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>');
+            background-size: contain;
+            pointer-events: none;
+            z-index: 110;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+
+        .validation-toast {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #0f172a;
+            color: #4ade80;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transform: translateX(200px);
+            transition: transform 0.4s;
+        }
+
+        .validation-toast.show { transform: translateX(0); }
+    </style>
+</head>
+<body>
+    <div class="qa-cursor" id="cursor"></div>
+    <div class="qa-highlight" id="highlight"></div>
+
+    <!-- QA Sidebar -->
+    <div class="qa-sidebar">
+        <div style="margin-bottom: 40px;">
+            <div style="color: white; font-weight: 700; font-size: 18px;">Manual Test Execution</div>
+            <div style="font-size: 12px;">AI Assessment Pipeline</div>
+        </div>
+
+        <div class="qa-step" id="step-1">
+            <div style="font-weight: 600; margin-bottom: 4px;">1. Workflow Integrity</div>
+            Check if next question triggers based on previous input logic.
+        </div>
+        <div class="qa-step" id="step-2">
+            <div style="font-weight: 600; margin-bottom: 4px;">2. Validation Check</div>
+            Ensure no question can be skipped without selection.
+        </div>
+        <div class="qa-step" id="step-3">
+            <div style="font-weight: 600; margin-bottom: 4px;">3. Logic Accuracy</div>
+            Verify if final "Personality Type" matches scoring matrix.
+        </div>
+        <div class="qa-step" id="step-4">
+            <div style="font-weight: 600; margin-bottom: 4px;">4. UI Responsiveness</div>
+            Validate button states and progress bar accuracy.
+        </div>
+    </div>
+
+    <!-- App Container -->
+    <div class="app-container">
+        <div class="validation-toast" id="toast">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+            Logic Validated: Correct Type Computed
+        </div>
+
+        <div class="mbti-app" id="app">
+            <div class="app-header">
+                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">Personality Assessment</div>
+                <div style="font-size: 18px; font-weight: 700;">Find Your Core Type</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+
+            <div class="question-content" id="question-box">
+                <div style="color: #64748b; font-size: 12px; margin-bottom: 10px;">QUESTION 1 OF 3</div>
+                <div style="font-size: 18px; font-weight: 600; margin-bottom: 30px;" id="q-text">At a social event, you usually:</div>
+                
+                <div class="option-btn" id="opt-1">
+                    <div style="width: 20px; height: 20px; border: 2px solid #cbd5e1; border-radius: 50%;"></div>
+                    Interact with many people, including strangers.
+                </div>
+                <div class="option-btn" id="opt-2">
+                    <div style="width: 20px; height: 20px; border: 2px solid #cbd5e1; border-radius: 50%;"></div>
+                    Interact with a few people you know well.
+                </div>
+            </div>
+
+            <div class="result-view" id="result-box">
+                <div style="color: #64748b; margin-bottom: 20px;">YOUR EVALUATED TYPE IS:</div>
+                <div class="personality-type" id="type-id">INTJ</div>
+                <div style="font-weight: 600; color: #1e293b; margin-bottom: 15px;">"The Architect"</div>
+                <div style="font-size: 14px; color: #64748b; line-height: 1.6;">Strategic thinkers with a plan for everything.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const highlight = document.getElementById('highlight');
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+        async function moveCursorTo(elId, click = false) {
+            const el = document.getElementById(elId);
+            const rect = el.getBoundingClientRect();
+            cursor.style.opacity = 1;
+            cursor.style.top = (rect.top + rect.height/2) + 'px';
+            cursor.style.left = (rect.left + rect.width/2) + 'px';
+            await delay(800);
+            if(click) {
+                cursor.style.transform = 'scale(0.8)';
+                el.classList.add('selected');
+                await delay(100);
+                cursor.style.transform = 'scale(1)';
+            }
+        }
+
+        async function showHighlight(elId) {
+            const el = document.getElementById(elId);
+            const rect = el.getBoundingClientRect();
+            highlight.style.top = (rect.top - 4) + 'px';
+            highlight.style.left = (rect.left - 4) + 'px';
+            highlight.style.width = (rect.width + 8) + 'px';
+            highlight.style.height = (rect.height + 8) + 'px';
+            highlight.style.opacity = 1;
+            await delay(1000);
+            highlight.style.opacity = 0;
+        }
+
+        async function runDemo() {
+            // Reset
+            document.getElementById('question-box').style.display = 'block';
+            document.getElementById('result-box').style.display = 'none';
+            document.getElementById('progress').style.width = '0%';
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.qa-step').forEach(s => s.className = 'qa-step');
+            document.getElementById('toast').classList.remove('show');
+            cursor.style.opacity = 0;
+
+            await delay(1000);
+
+            // Step 1: Workflow Integrity
+            document.getElementById('step-1').classList.add('active');
+            await moveCursorTo('opt-1', true);
+            document.getElementById('progress').style.width = '33%';
+            await delay(500);
+            document.getElementById('step-1').classList.add('passed');
+            
+            // Step 2: UI/UX Highlight
+            document.getElementById('step-4').classList.add('active');
+            await showHighlight('progress');
+            document.getElementById('step-4').classList.add('passed');
+
+            // Next Question Simulation
+            document.getElementById('q-text').innerText = 'You prefer to focus on:';
+            document.getElementById('opt-1').innerText = 'The big picture and future possibilities.';
+            document.getElementById('opt-2').innerText = 'Concrete facts and immediate realities.';
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            await delay(800);
+
+            // Step 2: Selection Logic
+            await moveCursorTo('opt-2', true);
+            document.getElementById('progress').style.width = '66%';
+            await delay(800);
+
+            // Final Question
+            document.getElementById('q-text').innerText = 'In making decisions, you rely more on:';
+            document.getElementById('opt-1').innerText = 'Logic and objective analysis.';
+            document.getElementById('opt-2').innerText = 'Personal values and feelings.';
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            
+            await moveCursorTo('opt-1', true);
+            document.getElementById('progress').style.width = '100%';
+            await delay(1000);
+
+            // Step 3: Logic Accuracy
+            document.getElementById('step-3').classList.add('active');
+            document.getElementById('question-box').style.display = 'none';
+            document.getElementById('result-box').style.display = 'block';
+            await delay(500);
+            document.getElementById('toast').classList.add('show');
+            await delay(1500);
+            document.getElementById('step-3').classList.add('passed');
+            document.getElementById('toast').classList.remove('show');
+
+            cursor.style.opacity = 0;
+            await delay(5000);
+            runDemo();
+        }
+
+        runDemo();
+    </script>
+</body>
+</html>

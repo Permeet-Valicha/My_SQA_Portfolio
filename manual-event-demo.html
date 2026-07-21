@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management Manual QA Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* QA Control Panel */
+        .qa-panel {
+            width: 300px;
+            background: #1e293b;
+            color: white;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #334155;
+        }
+
+        .qa-header {
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #38bdf8;
+        }
+
+        .test-case {
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            border-left: 4px solid #334155;
+            transition: all 0.3s;
+        }
+
+        .test-case.active { border-left-color: #38bdf8; background: #1e293b; }
+        .test-case.passed { border-left-color: #22c55e; }
+
+        /* App Viewport */
+        .viewport {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #ffffff 0%, #e2e8f0 100%);
+        }
+
+        .event-app {
+            width: 700px;
+            height: 500px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            overflow: hidden;
+        }
+
+        .app-sidebar {
+            width: 200px;
+            background: #f8fafc;
+            border-right: 1px solid #e2e8f0;
+            padding: 20px;
+        }
+
+        .nav-item {
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 5px;
+            border-radius: 6px;
+        }
+
+        .nav-item.active { background: #38bdf8; color: white; }
+
+        .app-main { flex: 1; padding: 25px; display: flex; flex-direction: column; }
+
+        .event-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .attendee-list {
+            flex: 1;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .attendee-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 13px;
+        }
+
+        /* QA Highlights */
+        .qa-cursor {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2338bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>');
+            background-size: contain;
+            pointer-events: none;
+            z-index: 100;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+
+        .qa-focus {
+            position: absolute;
+            border: 2px solid #ef4444;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 90;
+        }
+
+        .payment-modal {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 200;
+        }
+        .payment-modal.show { opacity: 1; pointer-events: auto; }
+        .modal-body { background: white; padding: 30px; border-radius: 12px; width: 350px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="qa-cursor" id="cursor"></div>
+    <div class="qa-focus" id="focus"></div>
+
+    <!-- Sidebar -->
+    <div class="qa-panel">
+        <div style="margin-bottom: 30px;">
+            <div class="qa-header">Event Platform QA</div>
+            <div style="font-size: 12px; opacity: 0.6;">Collaboration & Engagement</div>
+        </div>
+
+        <div class="test-case" id="tc-1">
+            <div style="font-weight: 700; margin-bottom: 4px;">TC-Event-01</div>
+            Validate Event Creation & Attendee Limit Logic.
+        </div>
+        <div class="test-case" id="tc-2">
+            <div style="font-weight: 700; margin-bottom: 4px;">TC-Collab-02</div>
+            Verify real-time group chat & task assignment.
+        </div>
+        <div class="test-case" id="tc-3">
+            <div style="font-weight: 700; margin-bottom: 4px;">TC-Pay-03</div>
+            Manual check of Ticket Payment & QR Generation.
+        </div>
+    </div>
+
+    <!-- Viewport -->
+    <div class="viewport">
+        <div class="event-app">
+            <div class="app-sidebar">
+                <div style="font-weight: 800; color: #38bdf8; font-size: 18px; margin-bottom: 30px;">Eventify</div>
+                <div class="nav-item active" id="nav-events">Events</div>
+                <div class="nav-item" id="nav-groups">Groups</div>
+                <div class="nav-item">Settings</div>
+            </div>
+            
+            <div class="app-main">
+                <div id="view-events">
+                    <div style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Upcoming Events</div>
+                    <div class="event-card" id="main-event">
+                        <div style="width: 80px; height: 80px; background: #e2e8f0; border-radius: 8px;"></div>
+                        <div style="flex:1;">
+                            <div style="font-weight: 700;">Tech Conference 2024</div>
+                            <div style="font-size: 12px; color: #64748b;">San Francisco • Dec 12</div>
+                            <button style="margin-top: 10px; background: #38bdf8; color: white; padding: 6px 15px; border-radius: 4px; font-size: 12px; font-weight: 600;" id="btn-buy">Get Ticket - $99</button>
+                        </div>
+                    </div>
+
+                    <div class="attendee-list" id="attendees">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 10px;">Confirmed Attendees (12/100)</div>
+                        <div class="attendee-row"><span>John Doe</span><span>Verified</span></div>
+                        <div class="attendee-row"><span>Sarah Smith</span><span>Verified</span></div>
+                        <div class="attendee-row" id="new-attendee" style="display:none; color: #22c55e; font-weight: 700;"><span>Alex Rivers</span><span>New</span></div>
+                    </div>
+                </div>
+
+                <div id="view-groups" style="display:none;">
+                    <div style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">QA Team Group</div>
+                    <div style="border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px;">
+                        <div style="font-size: 12px; color: #64748b; margin-bottom: 10px;">TASK ASSIGNMENT</div>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <div style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%;"></div>
+                            <div style="font-size: 14px;">Verify Ticket QR Logic</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-modal" id="modal">
+            <div class="modal-body">
+                <div style="width: 50px; height: 50px; background: #dcfce7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                    <svg width="24" height="24" fill="#166534" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                </div>
+                <div style="font-weight: 700; margin-bottom: 10px;">Payment Successful</div>
+                <div style="font-size: 12px; color: #64748b;">Ticket #99238 has been generated for Alex Rivers.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const focus = document.getElementById('focus');
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+        async function moveCursorTo(elId, click = false) {
+            const el = document.getElementById(elId);
+            const rect = el.getBoundingClientRect();
+            cursor.style.opacity = 1;
+            cursor.style.top = (rect.top + rect.height/2) + 'px';
+            cursor.style.left = (rect.left + rect.width/2) + 'px';
+            await delay(800);
+            if(click) {
+                cursor.style.transform = 'scale(0.8)';
+                await delay(100);
+                cursor.style.transform = 'scale(1)';
+            }
+        }
+
+        async function showFocus(elId) {
+            const el = document.getElementById(elId);
+            const rect = el.getBoundingClientRect();
+            focus.style.top = (rect.top - 4) + 'px';
+            focus.style.left = (rect.left - 4) + 'px';
+            focus.style.width = (rect.width + 8) + 'px';
+            focus.style.height = (rect.height + 8) + 'px';
+            focus.style.opacity = 1;
+            await delay(1000);
+            focus.style.opacity = 0;
+        }
+
+        async function runDemo() {
+            // Reset
+            document.getElementById('view-events').style.display = 'block';
+            document.getElementById('view-groups').style.display = 'none';
+            document.getElementById('modal').classList.remove('show');
+            document.getElementById('new-attendee').style.display = 'none';
+            document.querySelectorAll('.test-case').forEach(t => t.className = 'test-case');
+            cursor.style.opacity = 0;
+
+            await delay(1000);
+
+            // TC 1: Event Creation Logic
+            document.getElementById('tc-1').classList.add('active');
+            await showFocus('attendees');
+            document.getElementById('tc-1').classList.add('passed');
+            await delay(500);
+
+            // TC 2: Collaboration Flow
+            document.getElementById('tc-2').classList.add('active');
+            await moveCursorTo('nav-groups', true);
+            document.getElementById('view-events').style.display = 'none';
+            document.getElementById('view-groups').style.display = 'block';
+            await delay(1000);
+            document.getElementById('tc-2').classList.add('passed');
+            
+            // TC 3: Payment Flow
+            document.getElementById('tc-3').classList.add('active');
+            await moveCursorTo('nav-events', true);
+            document.getElementById('view-events').style.display = 'block';
+            document.getElementById('view-groups').style.display = 'none';
+            await delay(500);
+            await moveCursorTo('btn-buy', true);
+            document.getElementById('modal').classList.add('show');
+            await delay(1500);
+            document.getElementById('modal').classList.remove('show');
+            document.getElementById('new-attendee').style.display = 'flex';
+            await delay(500);
+            document.getElementById('tc-3').classList.add('passed');
+
+            cursor.style.opacity = 0;
+            await delay(5000);
+            runDemo();
+        }
+
+        runDemo();
+    </script>
+</body>
+</html>

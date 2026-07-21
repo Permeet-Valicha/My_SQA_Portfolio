@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace Workflow Manual QA Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* QA Console Sidebar */
+        .qa-sidebar {
+            width: 300px;
+            background-color: #0f172a;
+            color: #94a3b8;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            border-right: 1px solid #1e293b;
+        }
+
+        .role-badge {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+        .role-hirer { background: #3b82f6; color: white; }
+        .role-worker { background: #10b981; color: white; }
+        .role-admin { background: #f59e0b; color: white; }
+
+        .qa-task {
+            background: #1e293b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            border-left: 3px solid #334155;
+            transition: all 0.3s;
+        }
+
+        .qa-task.active {
+            border-left-color: #3b82f6;
+            background: #0f172a;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .qa-task.done {
+            border-left-color: #10b981;
+            opacity: 0.6;
+        }
+
+        /* Platform View */
+        .platform-container {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+        }
+
+        .app-window {
+            width: 600px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-nav {
+            background: white;
+            padding: 15px 25px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .workflow-stage {
+            padding: 30px;
+            min-height: 350px;
+        }
+
+        /* Status Pills */
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status-open { background: #dcfce7; color: #166534; }
+        .status-review { background: #fef9c3; color: #854d0e; }
+        .status-paid { background: #dbeafe; color: #1e40af; }
+
+        /* QA Highlights */
+        .qa-cursor {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%233b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>');
+            background-size: contain;
+            pointer-events: none;
+            z-index: 100;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+
+        .toast {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: #1e293b;
+            color: #10b981;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(100px);
+            transition: transform 0.4s;
+        }
+        .toast.show { transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="qa-cursor" id="cursor"></div>
+
+    <!-- Sidebar -->
+    <div class="qa-sidebar">
+        <div style="margin-bottom: 30px;">
+            <div style="color: white; font-weight: 700; font-size: 18px;">Workflow QA Audit</div>
+            <div style="font-size: 12px; opacity: 0.7;">Job Marketplace & Payments</div>
+        </div>
+
+        <div class="qa-task" id="task-1">
+            <span class="role-badge role-hirer">Hirer</span>
+            <div style="font-weight: 600; color: white;">Validate Job Posting</div>
+            Ensure form validation and state transition to "Open".
+        </div>
+        <div class="qa-task" id="task-2">
+            <span class="role-badge role-worker">Worker</span>
+            <div style="font-weight: 600; color: white;">Verify Submission</div>
+            Check document upload and "Under Review" status update.
+        </div>
+        <div class="qa-task" id="task-3">
+            <span class="role-badge role-admin">Admin</span>
+            <div style="font-weight: 600; color: white;">Release Payment</div>
+            Confirm Stripe webhook trigger and balance update.
+        </div>
+    </div>
+
+    <!-- Platform -->
+    <div class="platform-container">
+        <div class="toast" id="toast">✔ Test Passed: Payment Released Successfully</div>
+
+        <div class="app-window">
+            <div class="app-nav">
+                <div style="font-weight: 800; font-size: 20px; color: #1e293b;">WorkPort</div>
+                <div id="user-display" style="font-size: 13px; font-weight: 600;">Hirer: <span style="color:#3b82f6;">Alex Rivers</span></div>
+            </div>
+
+            <div class="workflow-stage" id="stage-content">
+                <!-- Step 1: Create Job -->
+                <div id="step-create">
+                    <div style="font-size: 18px; font-weight: 700; margin-bottom: 25px;">Post a New Task</div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-size: 12px; color: #64748b; font-weight: 600;">Task Title</label>
+                        <div style="border: 1px solid #e2e8f0; padding: 10px; border-radius: 6px; background: #f8fafc;" id="input-title">Logo Design for AI Startup</div>
+                    </div>
+                    <div style="margin-bottom: 25px;">
+                        <label style="font-size: 12px; color: #64748b; font-weight: 600;">Budget</label>
+                        <div style="border: 1px solid #e2e8f0; padding: 10px; border-radius: 6px; background: #f8fafc;" id="input-budget">$500.00</div>
+                    </div>
+                    <button style="background: #3b82f6; color: white; width: 100%; padding: 12px; border-radius: 6px; font-weight: 700;" id="btn-post">Post Task</button>
+                </div>
+
+                <!-- Step 2: Submission List -->
+                <div id="step-review" style="display:none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <div style="font-size: 18px; font-weight: 700;">Task: Logo Design...</div>
+                        <span class="status-pill status-review">UNDER REVIEW</span>
+                    </div>
+                    <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; background: #f8fafc;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 10px;">Submission from: <span style="color:#10b981;">Sarah K.</span></div>
+                        <div style="background: white; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 6px; text-align: center; color: #64748b; font-size: 13px;">
+                            📎 logo_final_v2.ai (4.2 MB)
+                        </div>
+                        <button style="background: #10b981; color: white; width: 100%; padding: 12px; border-radius: 6px; font-weight: 700; margin-top: 20px;" id="btn-approve">Approve & Pay</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Confirmation -->
+                <div id="step-done" style="display:none; text-align: center; padding-top: 50px;">
+                    <div style="width: 80px; height: 80px; background: #dcfce7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <svg width="40" height="40" fill="#166534" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div style="font-size: 24px; font-weight: 800; color: #1e293b;">Payment Released!</div>
+                    <div style="color: #64748b; margin-top: 10px;">Transaction ID: #TRX-9923-AP</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+        async function moveCursorTo(elId, click = false) {
+            const el = document.getElementById(elId);
+            const rect = el.getBoundingClientRect();
+            cursor.style.opacity = 1;
+            cursor.style.top = (rect.top + rect.height/2) + 'px';
+            cursor.style.left = (rect.left + rect.width/2) + 'px';
+            await delay(800);
+            if(click) {
+                cursor.style.transform = 'scale(0.8)';
+                await delay(100);
+                cursor.style.transform = 'scale(1)';
+            }
+        }
+
+        async function runWorkflow() {
+            // Reset
+            document.getElementById('step-create').style.display = 'block';
+            document.getElementById('step-review').style.display = 'none';
+            document.getElementById('step-done').style.display = 'none';
+            document.getElementById('user-display').innerHTML = 'Hirer: <span style="color:#3b82f6;">Alex Rivers</span>';
+            document.querySelectorAll('.qa-task').forEach(t => t.className = 'qa-task');
+            document.getElementById('toast').classList.remove('show');
+            cursor.style.opacity = 0;
+
+            await delay(1000);
+
+            // Task 1: Hirer Flow
+            document.getElementById('task-1').classList.add('active');
+            await moveCursorTo('btn-post', true);
+            await delay(400);
+            document.getElementById('task-1').className = 'qa-task done';
+            
+            // Switch to Review
+            document.getElementById('step-create').style.display = 'none';
+            document.getElementById('step-review').style.display = 'block';
+            document.getElementById('user-display').innerHTML = 'Admin: <span style="color:#f59e0b;">System Control</span>';
+            
+            // Task 2: Review Flow
+            await delay(800);
+            document.getElementById('task-2').classList.add('active');
+            await moveCursorTo('btn-approve', true);
+            await delay(400);
+            document.getElementById('task-2').className = 'qa-task done';
+
+            // Task 3: Payment Flow
+            document.getElementById('task-3').classList.add('active');
+            document.getElementById('step-review').style.display = 'none';
+            document.getElementById('step-done').style.display = 'block';
+            
+            await delay(500);
+            document.getElementById('toast').classList.add('show');
+            await delay(1500);
+            document.getElementById('task-3').className = 'qa-task done';
+            document.getElementById('toast').classList.remove('show');
+
+            cursor.style.opacity = 0;
+            await delay(5000);
+            runWorkflow();
+        }
+
+        runWorkflow();
+    </script>
+</body>
+</html>

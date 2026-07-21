@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regression Testing Manual QA Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Regression Console Sidebar */
+        .console-sidebar {
+            width: 320px;
+            background-color: #020617;
+            border-right: 1px solid #1e293b;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .module-card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .module-card.active {
+            border-color: #38bdf8;
+            background: #1e293b;
+            transform: scale(1.02);
+        }
+
+        .case-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #334155; }
+        .status-dot.pass { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+
+        /* Reading App Viewport */
+        .viewport {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+
+        .reading-app {
+            width: 400px;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            border: 8px solid #334155;
+            position: relative;
+            overflow: hidden;
+            color: #1e293b;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-content {
+            flex: 1;
+            padding: 30px;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            font-size: 16px;
+            transition: font-size 0.3s;
+        }
+
+        .app-tools {
+            height: 50px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        /* QA Highlights */
+        .qa-cursor {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2338bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>');
+            background-size: contain;
+            pointer-events: none;
+            z-index: 100;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+
+        .qa-highlight {
+            position: absolute;
+            border: 2px solid #ef4444;
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 90;
+        }
+
+        .toast {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            transform: translateY(-100px);
+            transition: transform 0.4s;
+        }
+        .toast.show { transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="qa-cursor" id="cursor"></div>
+    <div class="qa-highlight" id="highlight"></div>
+
+    <!-- Sidebar -->
+    <div class="console-sidebar">
+        <div style="margin-bottom: 30px;">
+            <div style="color: #38bdf8; font-weight: 800; font-size: 18px;">Regression Suite</div>
+            <div style="font-size: 11px; opacity: 0.6; text-transform: uppercase;">Build v2.4.0 (Stable)</div>
+        </div>
+
+        <div class="module-card" id="mod-reader">
+            <div style="font-weight: 700;">Reader Core Module</div>
+            <div class="case-pill"><div class="status-dot" id="dot-1"></div> Font Scaling Logic</div>
+            <div class="case-pill"><div class="status-dot" id="dot-2"></div> Text Alignment Check</div>
+        </div>
+
+        <div class="module-card" id="mod-engage">
+            <div style="font-weight: 700;">Engagement Features</div>
+            <div class="case-pill"><div class="status-dot" id="dot-3"></div> Bookmark Syncing</div>
+            <div class="case-pill"><div class="status-dot" id="dot-4"></div> Offline Reading Cache</div>
+        </div>
+
+        <div class="module-card" id="mod-perf">
+            <div style="font-weight: 700;">Performance & UX</div>
+            <div class="case-pill"><div class="status-dot" id="dot-5"></div> Page Transition Latency</div>
+            <div class="case-pill"><div class="status-dot" id="dot-6"></div> Image Loading Pipeline</div>
+        </div>
+    </div>
+
+    <!-- Viewport -->
+    <div class="viewport">
+        <div class="toast" id="toast">Module Verified: PASS</div>
+
+        <div class="reading-app">
+            <div style="padding: 15px 25px; border-bottom: 1px solid #e2e8f0; font-weight: 800; text-align: center;">E-Reader Pro</div>
+            
+            <div class="book-content" id="book-text">
+                <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 15px;">Chapter 1: The Code</h2>
+                <p>The manual testing phase for the digital reading platform focused heavily on content flow stability. Every module was checked to ensure regression cases were passing...</p>
+                <p style="margin-top: 15px;">User engagement features like bookmarking and font scaling were critical for a premium reading experience.</p>
+            </div>
+
+            <div class="app-tools">
+                <div style="display:flex; gap:15px;" id="font-tools">
+                    <button style="width:30px; height:30px; border:1px solid #e2e8f0; border-radius:4px; font-weight:800;" id="btn-small">A-</button>
+                    <button style="width:30px; height:30px; border:1px solid #e2e8f0; border-radius:4px; font-weight:800;" id="btn-large">A+</button>
+                </div>
+                <div style="width: 1px; height: 20px; background: #e2e8f0;"></div>
+                <button id="btn-bookmark">🔖 Bookmark</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const highlight = document.getElementById('highlight');
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+        async function moveCursorTo(elId, click = false) {
+            const el = document.getElementById(elId);
+            const rect = el.getBoundingClientRect();
+            cursor.style.opacity = 1;
+            cursor.style.top = (rect.top + rect.height/2) + 'px';
+            cursor.style.left = (rect.left + rect.width/2) + 'px';
+            await delay(800);
+            if(click) {
+                cursor.style.transform = 'scale(0.8)';
+                await delay(100);
+                cursor.style.transform = 'scale(1)';
+            }
+        }
+
+        async function runRegression() {
+            // Reset
+            document.querySelectorAll('.status-dot').forEach(d => d.className = 'status-dot');
+            document.querySelectorAll('.module-card').forEach(m => m.classList.remove('active'));
+            document.getElementById('book-text').style.fontSize = '16px';
+            document.getElementById('toast').classList.remove('show');
+            cursor.style.opacity = 0;
+
+            await delay(1000);
+
+            // Module 1: Reader Core
+            document.getElementById('mod-reader').classList.add('active');
+            await moveCursorTo('btn-large', true);
+            document.getElementById('book-text').style.fontSize = '20px';
+            await delay(400);
+            document.getElementById('dot-1').classList.add('pass');
+            await delay(400);
+            document.getElementById('dot-2').classList.add('pass');
+            
+            // Module 2: Engagement
+            document.getElementById('mod-reader').classList.remove('active');
+            document.getElementById('mod-engage').classList.add('active');
+            await moveCursorTo('btn-bookmark', true);
+            document.getElementById('btn-bookmark').innerText = '🔖 Bookmarked';
+            await delay(400);
+            document.getElementById('dot-3').classList.add('pass');
+            await delay(400);
+            document.getElementById('dot-4').classList.add('pass');
+
+            // Module 3: Performance
+            document.getElementById('mod-engage').classList.remove('active');
+            document.getElementById('mod-perf').classList.add('active');
+            await delay(800);
+            document.getElementById('dot-5').classList.add('pass');
+            document.getElementById('dot-6').classList.add('pass');
+
+            // Final Validation
+            document.getElementById('toast').classList.add('show');
+            await delay(2000);
+            document.getElementById('toast').classList.remove('show');
+
+            cursor.style.opacity = 0;
+            await delay(5000);
+            runRegression();
+        }
+
+        runRegression();
+    </script>
+</body>
+</html>

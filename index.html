@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth scroll-pt-[120px]" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Permeet Valicha</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    animation: {
+                        'marquee': 'marquee 20s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    },
+                    "colors": {
+                        "secondary-container": "#dae2f9",
+                        "on-surface": "#191c1d",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface": "#f8f9fa",
+                        "on-primary-fixed": "#001a40",
+                        "primary-fixed": "#d7e2ff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#5c6478",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-bright": "#f8f9fa",
+                        "surface-container": "#edeeef",
+                        "secondary-fixed-dim": "#bec6dc",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c2c6d4",
+                        "surface-tint": "#115cb9",
+                        "secondary": "#565e71",
+                        "outline": "#727784",
+                        "on-primary-fixed-variant": "#004491",
+                        "surface-variant": "#e1e3e4",
+                        "on-background": "#191c1d",
+                        "primary-container": "#0056b3",
+                        "tertiary": "#004762",
+                        "primary": "#003f87",
+                        "secondary-fixed": "#dae2f9",
+                        "on-surface-variant": "#424752",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#c4e7ff",
+                        "inverse-primary": "#acc7ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d9dadb",
+                        "on-primary-container": "#bbd0ff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#98d8ff",
+                        "inverse-surface": "#2e3132",
+                        "background": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#87cff9",
+                        "tertiary-container": "#006083",
+                        "on-tertiary-fixed": "#001e2c",
+                        "on-secondary-fixed": "#131b2c",
+                        "surface-container-low": "#f3f4f5",
+                        "on-tertiary-fixed-variant": "#004c69",
+                        "primary-fixed-dim": "#acc7ff",
+                        "on-secondary-fixed-variant": "#3f4759"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-surface font-body text-on-surface overflow-x-hidden">
+    <!-- Stunning 2-Page Intro Section -->
+    <div id="intro-overlay">
+        <!-- Blueprint Grid & Circuit Background -->
+        <div class="intro-bg-grid"></div>
+        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+            <div class="circuit-line horizontal top-[30%]"></div>
+            <div class="circuit-line horizontal top-[60%] animation-delay-2"></div>
+            <div class="circuit-line vertical left-[25%]"></div>
+            <div class="circuit-line vertical right-[20%] animation-delay-3"></div>
+
+            <!-- Tech Particles -->
+            <div class="tech-marker top-[20%] left-[15%]"></div>
+            <div class="tech-marker top-[80%] right-[10%]"></div>
+        </div>
+
+        <div class="intro-particle-layer">
+            <div class="intro-particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="intro-particle" style="left: 30%; animation-delay: 2s;"></div>
+            <div class="intro-particle" style="left: 50%; animation-delay: 4s;"></div>
+            <div class="intro-particle" style="left: 70%; animation-delay: 1s;"></div>
+            <div class="intro-particle" style="left: 90%; animation-delay: 3s;"></div>
+        </div>
+
+        <!-- Page 1 -->
+        <div id="intro-page-1" class="intro-page">
+            <h1 class="intro-text-1">SQA Engineer | Ensuring Bug-Free & Reliable Software Experiences</h1>
+        </div>
+
+        <!-- Page 2 -->
+        <div id="intro-page-2" class="intro-page">
+            <h1 class="intro-text-2">Quality Architect | Breaking Systems to Build Better User Experiences</h1>
+        </div>
+    </div>
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-white border-b border-slate-100">
+        <div
+            class="flex justify-between items-center w-full px-6 py-2 max-w-7xl mx-auto font-['Manrope'] tracking-tight">
+            <div class="flex items-center gap-4">
+                <img src="images/logo.png" alt="Permeet Valicha Logo" class="brand-logo h-16 w-16 object-contain mix-blend-multiply">
+                <span class="text-2xl font-extrabold tracking-tighter text-blue-900 uppercase">Permeet Valicha</span>
+            </div>
+            <div class="hidden md:flex gap-8 items-center">
+                <a class="text-slate-600 hover:text-blue-900 transition-colors" href="#about">About</a>
+                <a class="text-slate-600 hover:text-blue-900 transition-colors" href="#skills">Skills</a>
+                <a class="text-slate-600 hover:text-blue-900 transition-colors" href="#experience">Experience</a>
+                <a class="text-slate-600 hover:text-blue-900 transition-colors"
+                    href="#certifications">Certifications</a>
+                <a class="text-slate-600 hover:text-blue-900 transition-colors" href="#projects">Projects</a>
+                <a class="text-slate-600 hover:text-blue-900 transition-colors" href="#qa-samples">Testimonials</a>
+
+                <button id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"
+                    class="theme-toggle w-10 h-10 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors inline-flex items-center justify-center">
+                    <span class="material-symbols-outlined theme-icon">dark_mode</span>
+                    <span class="sr-only">Toggle dark mode</span>
+                </button>
+
+                <button id="contact-btn-nav"
+                    class="bg-primary text-on-primary px-6 py-2 rounded-lg font-semibold hover:bg-primary-container transition-colors inline-flex items-center justify-center">Contact
+                    Me</button>
+            </div>
+            <!-- Mobile Menu Icon -->
+            <div class="md:hidden flex items-center gap-3">
+                <button id="theme-toggle-mobile" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"
+                    class="theme-toggle w-10 h-10 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors inline-flex items-center justify-center">
+                    <span class="material-symbols-outlined theme-icon">dark_mode</span>
+                    <span class="sr-only">Toggle dark mode</span>
+                </button>
+                <div class="cursor-pointer" id="mobile-menu-btn">
+                <span class="material-symbols-outlined text-primary text-3xl">menu</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay (Backdrop) -->
+        <div id="mobile-menu-backdrop"
+            class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300">
+        </div>
+
+        <!-- Mobile Menu Sidebar -->
+        <div id="mobile-menu"
+            class="fixed top-0 right-0 h-screen w-[300px] bg-white z-[60] flex flex-col transform translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] md:hidden shadow-[-10px_0_50px_rgba(0,0,0,0.1)]">
+
+            <!-- Sidebar Header with Title & Close -->
+            <div class="p-8 flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-blue-900 tracking-tight">Explore</h2>
+                <button id="close-menu"
+                    class="w-8 h-8 rounded-lg bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-slate-100 transition-all">
+                    <span class="material-symbols-outlined text-xl">close</span>
+                </button>
+            </div>
+
+            <!-- Main Menu Section -->
+            <div class="flex-1 overflow-y-auto px-6 space-y-1">
+                <a href="#about"
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl bg-blue-50 text-blue-900 transition-all duration-300">
+                    <span class="material-symbols-outlined text-blue-700">person</span>
+                    <span class="font-medium">About Me</span>
+                </a>
+                <a href="#skills"
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
+                    <span class="material-symbols-outlined">terminal</span>
+                    <span class="font-medium">Technical Skills</span>
+                </a>
+                <a href="#experience"
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
+                    <span class="material-symbols-outlined">work</span>
+                    <span class="font-medium">Experience</span>
+                </a>
+                <a href="#projects"
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
+                    <span class="material-symbols-outlined">rocket_launch</span>
+                    <span class="font-medium">Projects</span>
+                </a>
+                <a href="#qa-samples"
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
+                    <span class="material-symbols-outlined">star</span>
+                    <span class="font-medium">Testimonials</span>
+                </a>
+                <a href="#certifications"
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
+                    <span class="material-symbols-outlined">description</span>
+                    <span class="font-medium">Certifications</span>
+                </a>
+            </div>
+
+            <!-- Bottom Profile Card -->
+            <div class="p-6">
+                <div class="p-4 bg-slate-50 rounded-[1.5rem] flex items-center gap-3">
+                    <img src="images/PV-IMG 1.jpg" class="w-12 h-12 rounded-xl object-cover object-[50%_10%]"
+                        alt="Profile">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-bold text-slate-800 text-sm truncate">Permeet V...</h4>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">SQA ENGINEER</p>
+                    </div>
+                    <button id="contact-btn-mobile"
+                        class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center hover:bg-blue-200 transition-all">
+                        <span class="material-symbols-outlined text-xl">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section
+        class="relative min-h-screen flex flex-col lg:flex-row lg:items-center pt-19 lg:pt-0 blueprint-grid overflow-hidden"
+        id="hero-section">
+        <!-- Interactive Particle Canvas -->
+        <canvas id="hero-canvas" class="absolute inset-0 z-10 pointer-events-none opacity-15"></canvas>
+
+        <!-- Advanced Circuit Background Animation -->
+        <div class="hidden lg:block absolute inset-0 overflow-hidden pointer-events-none z-0">
+            <div class="circuit-line horizontal top-[20%]"></div>
+            <div class="circuit-line horizontal top-[50%] animation-delay-2"></div>
+            <div class="circuit-line horizontal top-[80%] animation-delay-5"></div>
+            <div class="circuit-line vertical left-[20%]"></div>
+            <div class="circuit-line vertical left-[60%] animation-delay-3"></div>
+            <div class="circuit-line vertical right-[15%] animation-delay-1"></div>
+
+            <!-- Tech Particles -->
+            <div class="tech-marker top-[15%] left-[25%]"></div>
+            <div class="tech-marker top-[70%] right-[30%]"></div>
+        </div>
+
+
+        <div
+            class="editorial-margin grid lg:grid-cols-12 gap-4 lg:gap-16 items-center w-full relative z-20 pointer-events-none">
+            <!-- Left Side Content -->
+            <div class="lg:col-span-7 space-y-2 pointer-events-auto">
+                <!-- Availability Badge -->
+                <!-- Availability Badge & Marquee -->
+                <div class="fade-up mt-20 flex items-center gap-6 overflow-hidden">
+                    <div class="badge-pulse flex-shrink-0">
+                        <span class="dot-pulsing"></span>
+                        Available for New Roles
+                    </div>
+                    <!-- Inline Marquee Stream -->
+                    <div class="hidden md:block w-full max-w-lg overflow-hidden border-l border-primary/10 pl-6">
+                        <div class="flex whitespace-nowrap animate-marquee">
+                            <span class="text-[10px] font-bold tracking-[0.3em] text-primary/40 uppercase px-8">⚡
+                                Automation Architecture</span>
+                            <span class="text-[10px] font-bold tracking-[0.3em] text-primary/40 uppercase px-8">⚡ High
+                                Precision Testing</span>
+                            <span class="text-[10px] font-bold tracking-[0.3em] text-primary/40 uppercase px-8">⚡ CI/CD
+                                Integration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Name & Role -->
+                <div class="space-y-4">
+                    <h1
+                        class="text-5xl lg:text-7xl font-headline font-extrabold tracking-tighter text-primary leading-tight fade-up delay-1">
+                        PERMEET VALICHA
+                    </h1>
+                    <div class="text-2xl lg:text-3xl text-on-surface-variant font-medium fade-up delay-2">
+                        <span id="typing-role" class="typing-cursor"></span>
+                    </div>
+                </div>
+
+                <!-- Tagline & Description -->
+                <div class="space-y-4 fade-up delay-3">
+                    <p class="text-2xl font-bold text-primary">Breaking systems before users do.</p>
+                    <p class="text-lg text-on-surface-variant max-w-xl leading-relaxed text-justify">
+                        Meticulous SQA Engineer with 2+ years of experience in ensuring software excellence through
+                        rigorous automated and manual testing methodologies.
+                    </p>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="flex flex-wrap gap-2 py-4">
+                    <div class="stats-card animate-slide-left delay-6">
+                        <div class="text-2xl font-black text-primary counter" data-target="50" data-suffix="+">0</div>
+                        <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Bugs Found</div>
+                    </div>
+                    <div class="stats-card animate-slide-left delay-12">
+                        <div class="text-2xl font-black text-primary counter" data-target="20" data-suffix="+">0</div>
+                        <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Projects</div>
+                    </div>
+                    <div class="stats-card animate-slide-left delay-18">
+                        <div class="text-2xl font-black text-primary counter" data-target="99" data-suffix="%">0</div>
+                        <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Quality Focus
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap gap-4 pt-4 fade-up delay-5">
+                    <a href="#projects"
+                        class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:bg-primary-container transition-all hover:shadow-xl hover:translate-y-[-4px]">
+                        View Projects
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                    <a href="Permeet_Valicha_QA_Resume.pdf" download
+                        class="border-2 border-primary/20 text-primary px-8 py-4 rounded-xl font-bold hover:bg-primary/5 transition-all hover:translate-y-[-4px]">
+                        Download CV
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Side Cube -->
+            <div
+                class="lg:col-span-5 relative flex items-center justify-center fade-up delay-3 pointer-events-auto mt-4 lg:mt-0 min-h-[400px] lg:min-h-0 scale-[0.6] sm:scale-75 md:scale-100 transform origin-center">
+                <div class="cube-glow" id="cube-glow"></div>
+                <!-- 3D Rubik's Cube Wrapper for Parallax -->
+                <div id="cube-wrapper" style="transform-style: preserve-3d; transition: transform 0.2s ease-out;">
+                    <div class="rubiks-cube-3d" id="rubiksCube3d">
+                        <div class="cube-face front">
+                            <div class="cube-grid">
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">bug_report</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">smart_toy</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">api</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">speed</span>
+                                </div>
+                                <div class="cube-cell center-cell">SQA</div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">security</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">sync</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">code</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">device_hub</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cube-face back">
+                            <div class="cube-grid">
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">rule</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">fact_check</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">verified</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">assignment</span>
+                                </div>
+                                <div class="cube-cell center-cell">SQA</div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">checklist</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">description</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">inventory</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">task_alt</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cube-face right">
+                            <div class="cube-grid">
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">monitor</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">phone_android</span></div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">web</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">visibility</span>
+                                </div>
+                                <div class="cube-cell center-cell">SQA</div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">touch_app</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">desktop_windows</span></div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">devices</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">responsive_layout</span></div>
+                            </div>
+                        </div>
+                        <div class="cube-face left">
+                            <div class="cube-grid">
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">science</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">biotech</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">biomolecule</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">psychology</span>
+                                </div>
+                                <div class="cube-cell center-cell">SQA</div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">psychology_alt</span></div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">auto_graph</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">show_chart</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">analytics</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cube-face top">
+                            <div class="cube-grid">
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">folder</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">folder_open</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">drive_file</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">note</span>
+                                </div>
+                                <div class="cube-cell center-cell">SQA</div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">article</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">receipt_long</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">summarize</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">menu_book</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cube-face bottom">
+                            <div class="cube-grid">
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">group</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">groups</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">person</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">support_agent</span></div>
+                                <div class="cube-cell center-cell">SQA</div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">handshake</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">diversity</span>
+                                </div>
+                                <div class="cube-cell"><span
+                                        class="material-symbols-outlined cell-icon">engineering</span>
+                                </div>
+                                <div class="cube-cell"><span class="material-symbols-outlined cell-icon">badge</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Closing cube-wrapper -->
+            </div>
+        </div>
+
+
+    </section>
+    <!-- About Section -->
+    <section class="py-12 bg-surface-container-low relative overflow-hidden book-container" id="about">
+        <!-- Subtle Tech Background with Animation -->
+        <div class="absolute inset-0 z-0 opacity-[0.08] pointer-events-none overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop"
+                class="w-full h-full object-cover animate-bg-drift" alt="Tech Background">
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-surface-container-low via-transparent to-surface-container-low">
+            </div>
+
+            <!-- Floating Tech Particles -->
+            <div class="tech-particle" style="left: 10%; top: 80%; animation-delay: 0s;"></div>
+            <div class="tech-particle" style="left: 30%; top: 60%; animation-delay: 2s;"></div>
+            <div class="tech-particle" style="left: 70%; top: 90%; animation-delay: 4s;"></div>
+            <div class="tech-particle" style="left: 90%; top: 40%; animation-delay: 1s;"></div>
+            <div class="tech-particle" style="left: 50%; top: 70%; animation-delay: 3s;"></div>
+        </div>
+
+        <div class="reveal book-inner">
+            <div class="book-spine"></div>
+
+            <div class="editorial-margin relative z-4 py-4">
+                <!-- Mobile Heading (Visible only on Mobile) -->
+                <div class="lg:hidden mb-8">
+                    <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase text-center">About Me</h3>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Image Left -->
+                    <div class="order-1 lg:order-1 relative reveal reveal-left flex justify-center"
+                        style="transition-delay: 100ms;">
+                        <div class="relative w-[280px] lg:w-full lg:max-w-sm">
+                            <div class="absolute -inset-4 border-2 border-primary/10 rounded-[2.5rem] transform rotate-3 z-0"></div>
+                            <div class="absolute -inset-4 bg-primary/5 rounded-[2.5rem] transform -rotate-3 z-0"></div>
+
+                            <div class="relative aspect-[4/5] rounded-[2rem] shadow-2xl z-10 transition-all duration-700 hover:scale-[1.02] border-trace about-image-frame">
+                                <img alt="Permeet Valicha" id="profile-pic"
+                                    class="w-full h-full object-cover object-[50%_10%] grayscale hover:grayscale-0 transition-all duration-700"
+                                    src="images/PV-IMG 1.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- About Me Text Right -->
+                    <div class="order-2 lg:order-2 space-y-6 reveal reveal-right" style="transition-delay: 400ms;">
+                        <h3 class="hidden lg:block text-label text-primary font-bold tracking-[0.2em] uppercase">About Me</h3>
+                    <h2 class="text-4xl font-headline font-bold text-on-surface leading-tight">The Precision Mindset
+                    </h2>
+                    <p class="text-lg text-on-surface-variant leading-relaxed text-justify">
+                        Quality is not an act, it is a habit. As an SQA Engineer, I approach every project with a
+                        meticulous eye for detail and a strategic, systems-driven mindset. My focus is not only to
+                        ensure functionality, but to build software that is reliable, scalable, and resilient under
+                        real-world conditions.
+                    </p>
+                    <p class="text-lg text-on-surface-variant leading-relaxed text-justify">
+                        I thrive in environments where excellence is the standard, not an afterthought. By designing
+                        effective testing strategies and maintaining a strong commitment to quality, I aim to safeguard
+                        user experience while strengthening overall product integrity.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="reveal reveal-left competency-card p-4 bg-surface rounded-xl border border-primary/5 hover:border-primary/20"
+                            style="transition-delay: 400ms;">
+                            <span class="material-symbols-outlined text-primary mb-2">fact_check</span>
+                            <h4 class="font-bold text-on-surface">Manual QA Specialist</h4>
+                            <p class="text-sm text-on-surface-variant leading-tight">End-to-end testing of mobile & web
+                                applications.</p>
+                        </div>
+                        <div class="reveal reveal-right competency-card p-4 bg-surface rounded-xl border border-primary/5 hover:border-primary/20"
+                            style="transition-delay: 800ms;">
+                            <span class="material-symbols-outlined text-primary mb-2">rule</span>
+                            <h4 class="font-bold text-on-surface">Test Case Design Expert</h4>
+                            <p class="text-sm text-on-surface-variant leading-tight">Structured test scenarios including
+                                edge & negative cases.</p>
+                        </div>
+                        <div class="reveal reveal-left competency-card p-4 bg-surface rounded-xl border border-primary/5 hover:border-primary/20"
+                            style="transition-delay: 1200ms;">
+                            <span class="material-symbols-outlined text-primary mb-2">bug_report</span>
+                            <h4 class="font-bold text-on-surface">Bug Lifecycle Management</h4>
+                            <p class="text-sm text-on-surface-variant leading-tight">Defect reporting, tracking,
+                                prioritization & verification.</p>
+                        </div>
+                        <div class="reveal reveal-right competency-card p-4 bg-surface rounded-xl border border-primary/5 hover:border-primary/20"
+                            style="transition-delay: 1600ms;">
+                            <span class="material-symbols-outlined text-primary mb-2">settings_backup_restore</span>
+                            <h4 class="font-bold text-on-surface">Regression & Release Testing</h4>
+                            <p class="text-sm text-on-surface-variant leading-tight">Ensuring stability across multiple
+                                release cycles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Skills Section -->
+    <section class="py-12 bg-surface relative overflow-hidden" id="skills">
+        <!-- f Floating Tool Logos -->
+        <div class="floating-icon" style="left: 5%; top: 20%; animation-delay: 0s;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
+                class="tool-logo github-logo" />
+        </div>
+        <div class="floating-icon" style="left: 15%; top: 60%; animation-delay: 1s;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                alt="PostgreSQL" class="tool-logo" />
+        </div>
+        <div class="floating-icon" style="left: 85%; top: 30%; animation-delay: 2s;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" alt="Selenium"
+                class="tool-logo" />
+        </div>
+        <div class="floating-icon" style="left: 90%; top: 70%; animation-delay: 0.5s;">
+            <img src="https://mobileboxlab.github.io/appium-java-repl/assets/images/logo.svg" alt="Appium"
+                class="tool-logo" />
+        </div>
+        <div class="floating-icon" style="left: 50%; top: 15%; animation-delay: 1.5s;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman"
+                class="tool-logo" />
+        </div>
+        <div class="floating-icon" style="left: 70%; top: 85%; animation-delay: 2.5s;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg"
+                alt="Playwright" class="tool-logo" />
+        </div>
+        <div class="floating-icon" style="left: 25%; top: 85%; animation-delay: 3s;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"
+                class="tool-logo" />
+        </div>
+        <div class="editorial-margin relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+                <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-4">Core Competencies</h3>
+                <h2 class="text-4xl font-headline font-bold text-on-surface">Technical Skills</h2>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4 reveal" style="transition-delay: 200ms;">
+                <!-- Skill Chips with Original Tool Icons -->
+                <div data-skill="Manual Testing"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <span class="material-symbols-outlined text-primary" style="font-size: 1.25rem;">fact_check</span>
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">Manual Testing</span>
+                </div>
+                <div data-skill="Regression Testing"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <span class="material-symbols-outlined text-primary"
+                        style="font-size: 1.25rem;">settings_backup_restore</span>
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">Regression</span>
+                </div>
+                <div data-skill="Sanity / Smoke Testing"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <span class="material-symbols-outlined text-primary" style="font-size: 1.25rem;">bolt</span>
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">Sanity / Smoke Testing</span>
+                </div>
+                <div data-skill="UI/UX Testing"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <span class="material-symbols-outlined text-primary" style="font-size: 1.25rem;">devices</span>
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">UI/UX Testing</span>
+                </div>
+                <div data-skill="API Testing"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg"
+                        class="w-5 h-5" alt="API Testing">
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">API Testing</span>
+                </div>
+                <div data-skill="Selenium WebDriver"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg"
+                        class="w-5 h-5" alt="Selenium">
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">Selenium WebDriver</span>
+                </div>
+                <div data-skill="Bug Reporting"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" class="w-5 h-5"
+                        alt="Jira">
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">Bug Reporting</span>
+                </div>
+                <div data-skill="Python"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                        class="w-5 h-5" alt="Python">
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">Python</span>
+                </div>
+                <div data-skill="Java"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="w-5 h-5"
+                        alt="Java">
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">Java</span>
+                </div>
+                <div data-skill="JMeter"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <img src="https://jmeter.apache.org/images/favicon.png" class="w-5 h-5" alt="JMeter">
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">JMeter</span>
+                </div>
+                <div data-skill="SDLC/STLC"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <span class="material-symbols-outlined text-primary" style="font-size: 1.25rem;">schema</span>
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">SDLC/STLC</span>
+                </div>
+                <div data-skill="MySQL"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                        class="w-5 h-5" alt="MySQL">
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">MySQL</span>
+                </div>
+                <div data-skill="Git"
+                    class="skill-chip flex items-center gap-3 px-6 py-3 bg-white shadow-sm rounded-full border border-surface-container-highest hover:border-primary hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                        class="w-5 h-5 github-logo" alt="Git">
+                    <span class="font-bold text-on-surface-variant text-sm tracking-wide">Git</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Experience Section -->
+    <section class="py-12 bg-surface-container-low relative overflow-hidden blueprint-grid" id="experience">
+        <!-- Advanced Circuit Background Animation -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+            <div class="circuit-line horizontal top-[20%]"></div>
+            <div class="circuit-line horizontal top-[50%] animation-delay-2"></div>
+            <div class="circuit-line horizontal top-[80%] animation-delay-5"></div>
+            <div class="circuit-line vertical left-[20%]"></div>
+            <div class="circuit-line vertical left-[60%] animation-delay-3"></div>
+            <div class="circuit-line vertical right-[15%] animation-delay-1"></div>
+
+            <!-- Tech Particles -->
+            <div class="tech-marker top-[15%] left-[25%]"></div>
+            <div class="tech-marker top-[70%] right-[30%]"></div>
+        </div>
+        <div class="editorial-margin">
+            <h2 class="text-4xl font-headline font-bold text-on-surface mb-10 text-center lg:text-left reveal">
+                Professional Experience</h2>
+            <div class="space-y-12">
+                <!-- VativeApps -->
+                <div class="relative pl-12 border-l-2 border-primary-container reveal">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-primary rounded-full ring-4 ring-primary-fixed">
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <a href="https://vativeapps.com" target="_blank" rel="noopener noreferrer"
+                                class="relative z-50 flex items-center gap-4 group hover:scale-[1.02] transition-all duration-300">
+                                <img src="images/dark-logo.png" alt="vativeApps" class="experience-logo"
+                                    style="width: 130px; height: auto; object-fit: contain;" />
+                                <h4
+                                    class="text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">
+                                    vativeApps</h4>
+                            </a>
+                        </div>
+                        <span
+                            class="text-sm font-bold text-on-secondary-container px-3 py-1 bg-secondary-container rounded-lg w-fit">April
+                            2026
+                            — Present</span>
+                    </div>
+                    <h5 class="text-lg font-semibold text-on-surface-variant mb-4">Mid-level SQA Engineer</h5>
+                    <ul class="space-y-3 text-on-surface-variant max-w-3xl">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Involved in manual testing of mobile and web applications across enterprise and
+                            product-based environments, ensuring end-to-end quality coverage.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Worked on platform-based systems and AI-driven solutions, performing module-level and
+                            functional validation across features.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Designed and executed comprehensive test cases covering positive, negative, and edge
+                            scenarios to ensure requirement validation.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Managed defect lifecycle activities, including structured bug reporting, prioritization, and
+                            verification after fixes.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Performed regression testing across release cycles to ensure application stability and
+                            consistent quality.
+                        </li>
+                    </ul>
+                </div>
+                <!-- Previous Tech Corp -->
+                <div class="relative pl-12 border-l-2 border-outline-variant reveal">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-outline-variant rounded-full ring-4 ring-surface">
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <a href="https://weuno.com" target="_blank" rel="noopener noreferrer"
+                                class="relative z-50 flex items-center gap-4 group hover:scale-[1.02] transition-all duration-300">
+                                <img src="images/Weuno_logo.png" alt="WeUno Logo" class="experience-logo"
+                                    style="width: 70px; height: auto; object-fit: contain;" />
+                                <h4
+                                    class="text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">
+                                    WeUno Technologies</h4>
+                            </a>
+                        </div>
+                        <span
+                            class="text-sm font-bold text-on-surface-variant px-3 py-1 bg-surface-container-high rounded-lg w-fit">Jan
+                            2025 — March 2026</span>
+                    </div>
+                    <h5 class="text-lg font-semibold text-on-surface-variant mb-4">Jr. SQA Engineer</h5>
+                    <ul class="space-y-3 text-on-surface-variant max-w-3xl">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Worked across multiple diverse and complex enterprise-level projects, including AI-based
+                            assessment and intelligent platform systems.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Actively involved in end-to-end manual testing, ensuring comprehensive coverage through
+                            detailed test case design (edge cases, positive, and negative scenarios).
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Contributed to API testing to validate data integrity, system communication, and functional
+                            reliability across different modules.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Performed performance testing to evaluate system responsiveness and stability under various
+                            load conditions.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Played a key role in identifying critical issues early in development and strengthening
+                            regression testing efforts to improve overall product stability.
+                        </li>
+                    </ul>
+                </div>
+                <!-- Previous Tech Corp -->
+                <div class="relative pl-12 border-l-2 border-outline-variant reveal">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-outline-variant rounded-full ring-4 ring-surface">
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <a href="https://sapphire.co" target="_blank" rel="noopener noreferrer"
+                                class="relative z-50 flex items-center gap-4 group hover:scale-[1.02] transition-all duration-300">
+                                <img src="images/sapphire.png" alt="Sapphire Logo" class="experience-logo"
+                                    style="width: 80px; height: auto; object-fit: contain;" />
+                                <h4
+                                    class="text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">
+                                    Sapphire Consultancy Services</h4>
+                            </a>
+                        </div>
+                        <span
+                            class="text-sm font-bold text-on-surface-variant px-3 py-1 bg-surface-container-high rounded-lg w-fit">Dec
+                            2023 — Dec 2024</span>
+                    </div>
+                    <h5 class="text-lg font-semibold text-on-surface-variant mb-4">SQA Intern & Trainee Consultant-SQA
+                    </h5>
+                    <ul class="space-y-3 text-on-surface-variant max-w-3xl">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Engaged in ad-hoc testing on a project within a dynamic team, actively contributing to the
+                            execution and gaining valuable insights into processes for successful implementation.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Conducted Manual Testing includes Smoke Testing, Sanity Testing, Regression Testing, UI
+                            Testing etc.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Performed Automation Testing using Selenium.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Developed and executed test cases with attention to detail.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Reported identified issues through bug reporting using Redmine.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-sm mt-1"
+                                data-icon="check_circle">check_circle</span>
+                            Actively participated in meetings, engaging in discussions with the QA team.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Licenses & Certifications Section -->
+    <section class="py-12 bg-surface" id="certifications">
+        <div class="editorial-margin">
+            <h2 class="text-4xl font-headline font-bold text-on-surface mb-10 text-center lg:text-left reveal">Licenses
+                & Certifications</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Certification 1 -->
+                <div class="reveal" style="transition-delay: 100ms;">
+                    <div
+                        class="bg-white p-6 rounded-xl shadow-sm border border-surface-container-highest hover:shadow-md transition-shadow h-full">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div
+                                class="w-12 h-12 bg-white rounded-lg flex items-center justify-center overflow-hidden border border-slate-100">
+                                <img src="https://play-lh.googleusercontent.com/VuLUU2a2Xj_la1svukRfwXOULqo_Ey19wHpyKeVzbFGZWeSIr_TS3J0NcvuVRiit6g=w480-h960-rw"
+                                    alt="10Pearls University" class="w-10 h-auto object-contain" />
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-on-surface">QA Fundamentals</h4>
+                                <p class="text-sm text-on-surface-variant">10Pearls University</p>
+                            </div>
+                        </div>
+                        <span
+                            class="certification-year inline-block text-xs font-bold text-primary bg-primary-fixed px-2 py-1 rounded mb-3">2024</span>
+                        <p class="text-sm text-on-surface-variant">Comprehensive foundation in Quality Assurance, manual
+                            testing methodologies, and software testing lifecycles.</p>
+                    </div>
+                </div>
+                <!-- Certification 2 -->
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <div
+                        class="bg-white p-6 rounded-xl shadow-sm border border-surface-container-highest hover:shadow-md transition-shadow h-full">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div
+                                class="w-12 h-12 bg-white rounded-lg flex items-center justify-center overflow-hidden border border-slate-100 p-1">
+                                <img src="https://hazzainstitute.org/wp-content/uploads/2020/03/hazza-logo-removebg-preview.png"
+                                    alt="Hazza Institute" class="w-full h-auto object-contain" />
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-on-surface">Cloud Solution Architecture (AWS)</h4>
+                                <p class="text-sm text-on-surface-variant">Hazza Institute of Technology</p>
+                            </div>
+                        </div>
+                        <span
+                            class="certification-year inline-block text-xs font-bold text-primary bg-primary-fixed px-2 py-1 rounded mb-3">2024</span>
+                        <p class="text-sm text-on-surface-variant">In-depth training on AWS cloud services,
+                            infrastructure design, and cloud-native solution architecture.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Projects Section -->
+    <section class="py-12 bg-surface relative" id="projects">
+        <div class="editorial-margin">
+            <!-- Header -->
+            <div class="mb-10 text-center lg:text-left reveal">
+                <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-4">Portfolio</h3>
+                <h2 class="text-4xl lg:text-4xl font-headline font-bold text-on-surface">Featured Projects</h2>
+                <div class="w-20 h-1.5 bg-primary mt-6 rounded-full mx-auto lg:mx-0"></div>
+            </div>
+
+            <!-- Carousel Container -->
+            <div class="relative">
+                <!-- Navigation Arrows -->
+                <button id="project-prev"
+                    class="absolute -left-20 top-1/2 -translate-y-1/2 z-30 bg-white shadow-xl rounded-full p-3 text-primary transition-all hover:bg-primary hover:text-white hidden lg:flex border border-slate-100"
+                    style="display: none;">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button id="project-next"
+                    class="absolute -right-16 top-1/2 -translate-y-1/2 z-30 bg-white shadow-xl rounded-full p-3 text-primary transition-all hover:bg-primary hover:text-white hidden lg:flex border border-slate-100">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+
+                <!-- Scrollable Viewport -->
+                <div id="project-slider"
+                    class="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 px-4 -mx-4">
+                    <!-- Card 1 -->
+                    <div class="min-w-[100%] md:min-w-[calc(50%-1rem)] lg:min-w-[calc(33.333%-1.5rem)] snap-start">
+                        <div
+                            class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reveal border border-surface-container-highest flex flex-col h-full">
+                            <div class="relative aspect-video overflow-hidden bg-slate-100">
+                                <div
+                                    class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10">
+                                </div>
+                                <img alt="Public Sector Platform"
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=800&auto=format&fit=crop" />
+                                <div
+                                    class="project-label absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-primary shadow-sm">
+                                    Public Sector QA
+                                </div>
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col">
+                                <h4
+                                    class="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">
+                                    Enterprise Public Sector Digital Platform QA</h4>
+                                <p class="text-on-surface-variant leading-relaxed mb-6 flex-1 text-sm">
+                                    Tested a large-scale public service platform with complex citizen workflows and
+                                    role-based access controls.
+                                    Ensured reliability and security through end-to-end manual and Selenium automation
+                                    testing.
+                                </p>
+                                <div class="flex flex-wrap gap-1.5 mb-6">
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">Selenium</span>
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">RBAC</span>
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">E2E
+                                        Testing</span>
+                                </div>
+                                <button
+                                    class="video-trigger inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all mt-auto w-max text-sm"
+                                    data-video="./hrms-demo.html">
+                                    View Details <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="min-w-[100%] md:min-w-[calc(50%-1rem)] lg:min-w-[calc(33.333%-1.5rem)] snap-start">
+                        <div class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reveal border border-surface-container-highest flex flex-col h-full"
+                            style="transition-delay: 100ms;">
+                            <div class="relative aspect-video overflow-hidden bg-slate-100">
+                                <div
+                                    class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10">
+                                </div>
+                                <img alt="Publishing Platform"
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                                    src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=800&auto=format&fit=crop" />
+                                <div
+                                    class="project-label absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-primary shadow-sm">
+                                    Storytelling QA
+                                </div>
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col">
+                                <h4
+                                    class="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">
+                                    Creative Publishing & Collaboration Platform QA</h4>
+                                <p class="text-on-surface-variant leading-relaxed mb-6 flex-1 text-sm">
+                                    Validated end-to-end user journeys for a global creative platform, including CMS
+                                    workflows,
+                                    contributor collaboration, and integrated payment gateway (Stripe-like) distribution
+                                    systems.
+                                </p>
+                                <div class="flex flex-wrap gap-1.5 mb-6">
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">CMS
+                                        Testing</span>
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">Stripe
+                                        API</span>
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">UAT</span>
+                                </div>
+                                <button
+                                    class="video-trigger inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all mt-auto w-max text-sm"
+                                    data-video="./manual-demo.html">
+                                    View Details <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="min-w-[100%] md:min-w-[calc(50%-1rem)] lg:min-w-[calc(33.333%-1.5rem)] snap-start">
+                        <div class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reveal border border-surface-container-highest flex flex-col h-full"
+                            style="transition-delay: 200ms;">
+                            <div class="relative aspect-video overflow-hidden bg-slate-100">
+                                <div
+                                    class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10">
+                                </div>
+                                <img alt="AI Personality Platform"
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                                    src="https://images.unsplash.com/photo-1675271591211-126ad94e495d?q=80&w=800&auto=format&fit=crop" />
+                                <div
+                                    class="project-label absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-primary shadow-sm">
+                                    AI & Behavioral QA
+                                </div>
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col">
+                                <h4
+                                    class="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">
+                                    AI-Based Assessment & Personality Evaluation Platform QA</h4>
+                                <p class="text-on-surface-variant leading-relaxed mb-6 flex-1 text-sm">
+                                    Manual testing of an AI-driven assessment system. Ensured accuracy of personality
+                                    evaluation logic,
+                                    dynamic questionnaire workflows, and behavioral analysis data integrity.
+                                </p>
+                                <div class="flex flex-wrap gap-1.5 mb-6">
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">AI
+                                        Workflow</span>
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">UI/UX</span>
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">Data
+                                        Validation</span>
+                                </div>
+                                <button
+                                    class="video-trigger inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all mt-auto w-max text-sm"
+                                    data-video="./manual-ai-demo.html">
+                                    View Details <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="min-w-[100%] md:min-w-[calc(50%-1rem)] lg:min-w-[calc(33.333%-1.5rem)] snap-start">
+                        <div
+                            class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reveal border border-surface-container-highest flex flex-col h-full">
+                            <div class="relative aspect-video overflow-hidden bg-slate-100">
+                                <div
+                                    class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10">
+                                </div>
+                                <img alt="AI Business Workflow"
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop" />
+                                <div
+                                    class="project-label absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-primary shadow-sm">
+                                    Marketplace QA</div>
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col">
+                                <h4
+                                    class="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">
+                                    AI-Powered Business Workflow & Job Marketplace QA</h4>
+                                <p class="text-on-surface-variant leading-relaxed mb-6 flex-1 text-sm">Tested a
+                                    multi-role platform for job postings, task execution, and approval systems.
+                                    Validated role transitions and payment releases.</p>
+                                <div class="flex flex-wrap gap-1.5 mb-6">
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">Workflow
+                                        Automation</span>
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">Payments</span>
+                                </div>
+                                <button
+                                    class="video-trigger inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all mt-auto w-max text-sm"
+                                    data-video="./manual-marketplace-demo.html">View Details <span
+                                        class="material-symbols-outlined text-xs">arrow_forward</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="min-w-[100%] md:min-w-[calc(50%-1rem)] lg:min-w-[calc(33.333%-1.5rem)] snap-start">
+                        <div
+                            class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reveal border border-surface-container-highest flex flex-col h-full">
+                            <div class="relative aspect-video overflow-hidden bg-slate-100">
+                                <div
+                                    class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10">
+                                </div>
+                                <img alt="Event Collaboration"
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                                    src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800&auto=format&fit=crop" />
+                                <div
+                                    class="project-label absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-primary shadow-sm">
+                                    Event QA</div>
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col">
+                                <h4
+                                    class="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">
+                                    Event Management & Group Collaboration Platform QA</h4>
+                                <p class="text-on-surface-variant leading-relaxed mb-6 flex-1 text-sm">Worked on a
+                                    dynamic event platform supporting group participation and task-based engagement
+                                    systems with payments.</p>
+                                <div class="flex flex-wrap gap-1.5 mb-6">
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">Event
+                                        Management</span>
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">Collaboration</span>
+                                </div>
+                                <button
+                                    class="video-trigger inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all mt-auto w-max text-sm"
+                                    data-video="./manual-event-demo.html">View Details <span
+                                        class="material-symbols-outlined text-xs">arrow_forward</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="min-w-[100%] md:min-w-[calc(50%-1rem)] lg:min-w-[calc(33.333%-1.5rem)] snap-start">
+                        <div
+                            class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reveal border border-surface-container-highest flex flex-col h-full">
+                            <div class="relative aspect-video overflow-hidden bg-slate-100">
+                                <div
+                                    class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10">
+                                </div>
+                                <img alt="Digital Publishing"
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                                    src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop" />
+                                <div
+                                    class="project-label absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-primary shadow-sm">
+                                    Publishing QA</div>
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col">
+                                <h4
+                                    class="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">
+                                    Digital Content & Book Publishing Platform QA</h4>
+                                <p class="text-on-surface-variant leading-relaxed mb-6 flex-1 text-sm">Tested a digital
+                                    reading platform. Focused on content flow stability, user engagement features, and
+                                    performance consistency.</p>
+                                <div class="flex flex-wrap gap-1.5 mb-6">
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">Content
+                                        QA</span>
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-surface-container-high text-on-surface rounded-md">Regression</span>
+                                </div>
+                                <button
+                                    class="video-trigger inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all mt-auto w-max text-sm"
+                                    data-video="./manual-regression-demo.html">View Details <span
+                                        class="material-symbols-outlined text-xs">arrow_forward</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- QA Samples Section -->
+    <section class="py-12 bg-primary text-on-primary" id="qa-samples">
+        <div class="editorial-margin">
+            <div class="flex flex-col lg:flex-row items-center gap-16 reveal">
+                <div class="lg:w-1/2 space-y-8">
+                    <h3 class="text-label text-on-primary-container font-bold tracking-[0.2em] uppercase">The Proof of
+                        Quality</h3>
+                    <h2 class="text-4xl font-headline font-bold leading-tight">Sample Documentation &amp; Test Evidence
+                    </h2>
+                    <p class="text-on-primary-container text-lg">
+                        Clarity is the cornerstone of effective SQA. Explore how I document bugs and structure test
+                        cases to provide maximum value to developers and stakeholders.
+                    </p>
+                    <div class="space-y-4">
+                        <div
+                            class="flex items-center gap-4 p-4 bg-primary-container/30 rounded-xl border border-primary-container/50 reveal">
+                            <span class="material-symbols-outlined text-4xl" data-icon="description">description</span>
+                            <div>
+                                <h5 class="font-bold">Detailed Bug Report</h5>
+                                <p class="text-sm opacity-80 text-on-primary-container">Structured approach to
+                                    reproducing and classifying defects.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-primary-container/30 rounded-xl border border-primary-container/50 reveal"
+                            style="transition-delay: 200ms;">
+                            <span class="material-symbols-outlined text-4xl" data-icon="task">task</span>
+                            <div>
+                                <h5 class="font-bold">Test Case Specification</h5>
+                                <p class="text-sm opacity-80 text-on-primary-container">Comprehensive test coverage for
+                                    complex user journeys.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-5/12 relative">
+                    <div
+                        class="bg-white p-1 rounded-2xl shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <img alt="Sample Bug Report" class="rounded-lg shadow-sm w-full"
+                            src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" />
+                    </div>
+                    <div class="absolute -top-10 -left-10 w-24 h-24 bg-tertiary-container/20 blur-3xl rounded-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200/40 relative overflow-hidden">
+        <div
+            class="relative z-10 flex flex-col md:flex-row justify-between items-center w-full px-8 py-12 max-w-7xl mx-auto font-['Inter'] text-sm tracking-wide">
+            <div class="flex items-center gap-3 mb-6 md:mb-0">
+                <img src="images/logo.png" alt="Permeet Valicha Logo" class="brand-logo footer-logo h-12 w-auto mix-blend-multiply">
+                <span class="text-lg font-black text-blue-900 normal-case">Permeet Valicha</span>
+            </div>
+            <div class="flex gap-6 mb-6 md:mb-0 items-center">
+                <a class="text-slate-400 hover:text-[#0077b5] transition-colors flex items-center gap-2 group"
+                    href="https://www.linkedin.com/in/permeet-valicha-016511210/?skipRedirect=true" target="_blank">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+                        class="w-5 h-5 grayscale group-hover:grayscale-0 transition-all" alt="LinkedIn">
+                    <span class="font-semibold">LinkedIn</span>
+                </a>
+                <a class="text-slate-400 hover:text-black transition-all flex items-center gap-2 group"
+                    href="https://github.com/permeetvalicha" target="_blank">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                        class="w-5 h-5 github-logo grayscale group-hover:grayscale-0 transition-all" alt="GitHub">
+                    <span class="font-semibold">GitHub</span>
+                </a>
+            </div>
+            <p class="text-slate-500">© 2026 Permeet Valicha. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Skill Details Modal -->
+    <div id="skill-modal"
+        class="fixed inset-0 z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div id="skill-modal-backdrop" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+
+        <!-- Modal Content -->
+        <div class="relative bg-surface-container-lowest w-[85%] max-w-md rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,63,135,0.3)] border border-surface-container-highest overflow-hidden transform scale-95 opacity-0 transition-all duration-500 ease-out flex flex-col"
+            id="skill-modal-content">
+
+            <!-- Top Gradient Accent -->
+            <div class="absolute top-0 left-0 w-full h-[0px] bg-gradient-to-r from-primary to-tertiary z-30"></div>
+
+            <!-- Dynamic Cover Image Container -->
+            <div class="w-full h-32 md:h-48 bg-slate-100 relative overflow-hidden flex-shrink-0">
+                <img id="skill-modal-cover" src=""
+                    class="w-full h-full object-cover transition-transform duration-1000 ease-out" alt="Skill Cover" />
+            </div>
+
+            <!-- Text Content -->
+            <div class="px-6 md:px-10 pb-8 md:pb-10 pt-2 relative z-20 flex flex-col items-center text-center -mt-10">
+                <div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-primary mb-4 shadow-lg border-4 border-surface-container-lowest transform -translate-y-2 transition-transform duration-500 ease-out relative z-30"
+                    id="skill-modal-icon-container">
+                    <img id="skill-modal-icon" src="" class="w-8 h-8 object-contain" alt="Skill Icon">
+                </div>
+
+                <h3 id="skill-modal-title"
+                    class="text-2xl md:text-3xl font-headline font-black text-on-surface tracking-tight mb-4 transform translate-y-2 transition-transform duration-500 ease-out">
+                    Skill Title</h3>
+
+                <div class="w-12 h-1 bg-gradient-to-r from-primary/50 to-transparent mb-6 rounded-full mx-auto"></div>
+
+                <p id="skill-modal-desc"
+                    class="text-on-surface-variant text-base leading-relaxed transform translate-y-2 transition-transform duration-500 ease-out">
+                    Skill description goes here.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <!-- Contact Modal -->
+    <div id="contact-modal"
+        class="fixed inset-0 z-[100] flex items-center justify-center hidden opacity-0 transition-all duration-300 pointer-events-none">
+        <div id="contact-modal-backdrop"
+            class="absolute inset-0 bg-slate-900/20 backdrop-blur-sm transition-opacity duration-300"></div>
+        <div id="contact-modal-content"
+            class="relative w-full max-w-sm mx-4 bg-white rounded-[24px] p-6 shadow-[0_20px_50px_rgba(0,63,135,0.15)] border border-slate-100 transform translate-y-8 scale-95 opacity-0 transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)">
+            <!-- Close Button -->
+            <button id="contact-modal-close"
+                class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-50 hover:bg-slate-100 text-slate-400 hover:text-primary transition-all">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <div class="px-6 py-2 rounded-full bg-primary/10 flex items-center justify-center mb-4 mx-auto w-max">
+                    <span class="text-sm font-bold text-primary uppercase tracking-widest">Connect with Me</span>
+                </div>
+                <h2 class="text-2xl font-headline font-bold text-on-surface mb-1">Let's work together</h2>
+                <p class="text-slate-500 text-xs px-4">Reach out through any channel. I'm usually quick to respond!</p>
+            </div>
+
+            <!-- Contact List -->
+            <div class="space-y-3 mb-6">
+                <!-- Email -->
+                <div
+                    class="group p-3 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-between hover:border-primary/30 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-base">mail</span>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0">Email</p>
+                            <p class="text-on-surface font-semibold text-sm">permeetvalicha@gmail.com</p>
+                        </div>
+                    </div>
+                    <button
+                        class="copy-btn w-7 h-7 flex items-center justify-center rounded-lg bg-white text-slate-300 hover:text-primary shadow-sm transition-all"
+                        data-copy="permeetvalicha@gmail.com">
+                        <span class="material-symbols-outlined text-base">content_copy</span>
+                    </button>
+                </div>
+
+                <!-- LinkedIn -->
+                <div
+                    class="group p-3 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-between hover:border-primary/30 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-[#0077b5] shadow-sm group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-base">link</span>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0">LinkedIn</p>
+                            <p class="text-on-surface font-semibold text-sm">/permeet-valicha</p>
+                        </div>
+                    </div>
+                    <a href="https://www.linkedin.com/in/permeet-valicha-016511210/?skipRedirect=true" target="_blank"
+                        class="w-7 h-7 flex items-center justify-center rounded-lg bg-white text-slate-300 hover:text-primary shadow-sm transition-all">
+                        <span class="material-symbols-outlined text-base">open_in_new</span>
+                    </a>
+                </div>
+
+                <!-- Phone -->
+                <div
+                    class="group p-3 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-between hover:border-primary/30 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-base">call</span>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0">Phone</p>
+                            <p class="text-on-surface font-semibold text-sm">+92 334 2563545</p>
+                        </div>
+                    </div>
+                    <button
+                        class="copy-btn w-7 h-7 flex items-center justify-center rounded-lg bg-white text-slate-300 hover:text-primary shadow-sm transition-all"
+                        data-copy="+923342563545">
+                        <span class="material-symbols-outlined text-base">content_copy</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="https://wa.me/923342563545" target="_blank"
+                class="w-full py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                    class="w-4 h-4 brightness-0 invert" alt="WhatsApp">
+                Drop a Message (WhatsApp)
+            </a>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="video-modal"
+        class="fixed inset-0 z-[110] flex items-center justify-center hidden opacity-0 transition-all duration-300 pointer-events-none">
+        <div id="video-modal-backdrop"
+            class="absolute inset-0 bg-slate-900/90 backdrop-blur-md transition-opacity duration-300"></div>
+        <div id="video-modal-content"
+            class="relative w-[95%] md:w-full max-w-4xl mx-auto bg-black rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform translate-y-8 scale-95 opacity-0 transition-all duration-500">
+
+            <!-- Close Button -->
+            <button id="video-modal-close"
+                class="absolute top-4 right-4 w-10 h-10 z-10 flex items-center justify-center rounded-full bg-black/50 hover:bg-primary text-white transition-all">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+
+            <!-- Video Player Wrapper -->
+            <div class="relative pt-[56.25%] w-full bg-slate-900">
+                <iframe id="video-iframe" class="absolute inset-0 w-full h-full border-0" src=""
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+    <script>
+        // --- Fixed Intro Sequence Logic ---
+        function runIntro() {
+            // Force scroll to top and prevent browser scroll restoration
+            window.scrollTo(0, 0);
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+
+            const overlay = document.getElementById('intro-overlay');
+            const page1 = document.getElementById('intro-page-1');
+            const page2 = document.getElementById('intro-page-2');
+            const page3 = document.getElementById('intro-page-3');
+            const pageLoader = document.getElementById('intro-page-loader');
+
+            // Stage 1: Statement 1
+            setTimeout(() => {
+                page1.classList.add('active');
+            }, 300);
+
+            // Stage 2: Statement 2
+            setTimeout(() => {
+                page1.classList.remove('active');
+                page1.classList.add('exit');
+                setTimeout(() => {
+                    page2.classList.add('active');
+                }, 800);
+            }, 3000);
+
+            // Final Reveal (Skip Stage 3 and Stage 4)
+            setTimeout(() => {
+                page2.classList.remove('active');
+                page2.classList.add('exit');
+                setTimeout(() => {
+                    overlay.classList.add('intro-reveal-zoom');
+                    document.body.classList.remove('overflow-hidden');
+                    setTimeout(() => {
+                        overlay.remove();
+                    }, 1200);
+                }, 800);
+            }, 6500);
+        }
+
+        // Initialize when ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', runIntro);
+        } else {
+            runIntro();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile QA Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Appium Terminal Side */
+        .terminal {
+            width: 50%;
+            background-color: #020617;
+            border-right: 1px solid #334155;
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            display: flex;
+            flex-direction: column;
+            overflow-y: hidden;
+            position: relative;
+        }
+        
+        .terminal-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            align-items: center;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background-color: #ef4444; }
+        .dot.yellow { background-color: #eab308; }
+        .dot.green { background-color: #22c55e; }
+
+        .log-container {
+            flex: 1;
+            overflow-y: auto;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #94a3b8;
+        }
+
+        .log-line {
+            opacity: 0;
+            animation: fadeIn 0.2s forwards;
+            margin-bottom: 4px;
+            word-wrap: break-word;
+        }
+
+        .text-info { color: #38bdf8; }
+        .text-success { color: #4ade80; }
+        .text-warning { color: #facc15; }
+        .text-appium { color: #db2777; font-weight: bold; }
+        .text-cmd { color: #e2e8f0; }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Mobile Emulator Side */
+        .emulator-container {
+            width: 50%;
+            background-color: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .mobile-device {
+            width: 320px;
+            height: 650px;
+            background-color: #0f172a;
+            border-radius: 40px;
+            border: 12px solid #334155;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 25px;
+            background-color: #334155;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 20;
+        }
+
+        /* Health App UI */
+        .app-screen {
+            position: absolute;
+            inset: 0;
+            background: white;
+            color: #0f172a;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s ease-in-out;
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .app-screen.active {
+            transform: translateX(0);
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .app-header {
+            background: #0ea5e9;
+            color: white;
+            padding: 40px 20px 15px 20px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Splash Screen */
+        #screen-splash {
+            background: #0ea5e9;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(0);
+            opacity: 1;
+            z-index: 15;
+        }
+
+        .app-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        /* Login Screen */
+        .input-field {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .btn-primary {
+            background: #0ea5e9;
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Home Screen */
+        .patient-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .patient-avatar {
+            width: 40px;
+            height: 40px;
+            background: #cbd5e1;
+            border-radius: 20px;
+        }
+
+        /* Visual Test Focus Box */
+        .test-focus {
+            position: absolute;
+            border: 3px solid #db2777;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(219, 39, 119, 0.6);
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .touch-indicator {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(219, 39, 119, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 110;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        @keyframes tap {
+            0% { opacity: 0.8; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(1.5); }
+        }
+
+        .tapping {
+            animation: tap 0.6s ease-out;
+        }
+
+        /* Success Overlay */
+        .success-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(34, 197, 94, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 200;
+            backdrop-filter: blur(2px);
+        }
+
+        .success-badge {
+            background: #22c55e;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.5);
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-overlay.show {
+            opacity: 1;
+        }
+        .success-overlay.show .success-badge {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Terminal Emulation (Appium) -->
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            <div style="margin-left: 10px; font-weight: bold; font-family: 'Inter', sans-serif;">Appium Server Console</div>
+        </div>
+        <div id="logs" class="log-container">
+            <!-- Logs will be injected here -->
+        </div>
+    </div>
+
+    <!-- Mobile Emulator Emulation -->
+    <div class="emulator-container">
+        <div class="mobile-device" id="device">
+            <div class="notch"></div>
+            <div class="test-focus" id="focus-box"></div>
+            <div class="touch-indicator" id="touch-indicator"></div>
+
+            <!-- Screen: Splash -->
+            <div class="app-screen" id="screen-splash" style="display:flex;">
+                <div class="app-logo">
+                    <svg width="40" height="40" fill="none" stroke="#0ea5e9" stroke-width="2" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                </div>
+                <div style="font-size: 24px; font-weight: bold;">HealthCare+</div>
+            </div>
+
+            <!-- Screen: Login -->
+            <div class="app-screen" id="screen-login">
+                <div class="app-header">Sign In</div>
+                <div style="padding: 30px 20px;">
+                    <div style="margin-bottom: 20px; font-size: 14px; color: #64748b;">Secure Provider Login</div>
+                    <div class="input-field" id="input-username">Username or ID</div>
+                    <div class="input-field" id="input-password">Password</div>
+                    <div class="btn-primary" id="btn-login">Login Securely</div>
+                </div>
+            </div>
+
+            <!-- Screen: Home/Dashboard -->
+            <div class="app-screen" id="screen-home">
+                <div class="app-header" style="text-align: left; padding-left: 20px;">
+                    <div style="font-size: 14px; font-weight: normal; opacity: 0.8;">Welcome Dr. Smith</div>
+                    <div>Patient Records</div>
+                </div>
+                <div style="padding: 20px;">
+                    <div class="patient-card" id="patient-1">
+                        <div class="patient-avatar"></div>
+                        <div>
+                            <div style="font-weight: bold; color: #0f172a;">Doe, John A.</div>
+                            <div style="font-size: 12px; color: #64748b;">ID: #983472 • Room 4B</div>
+                        </div>
+                    </div>
+                    <div class="patient-card">
+                        <div class="patient-avatar"></div>
+                        <div>
+                            <div style="font-weight: bold; color: #0f172a;">Smith, Mary</div>
+                            <div style="font-size: 12px; color: #64748b;">ID: #983473 • Room 2A</div>
+                        </div>
+                    </div>
+                    <div class="patient-card">
+                        <div class="patient-avatar"></div>
+                        <div>
+                            <div style="font-weight: bold; color: #0f172a;">Johnson, Alex</div>
+                            <div style="font-size: 12px; color: #64748b;">ID: #983474 • ICU</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="success-overlay" id="success-screen">
+                <div class="success-badge">✔ SUITE PASSED</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const logsContainer = document.getElementById('logs');
+        const focusBox = document.getElementById('focus-box');
+        const touchIndicator = document.getElementById('touch-indicator');
+        
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+        function log(msg) {
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            line.innerHTML = msg;
+            logsContainer.appendChild(line);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+
+        function switchScreen(id) {
+            document.querySelectorAll('.app-screen').forEach(el => {
+                if(el.id !== 'screen-splash') {
+                    el.classList.remove('active');
+                }
+            });
+            if(id !== 'screen-splash') {
+                document.getElementById('screen-splash').style.opacity = 0;
+            }
+            const screen = document.getElementById(id);
+            if(screen) screen.classList.add('active');
+        }
+
+        function highlightBox(elId) {
+            const el = document.getElementById(elId);
+            if(!el) {
+                focusBox.style.opacity = 0;
+                return;
+            }
+            const rect = el.getBoundingClientRect();
+            const deviceRect = document.getElementById('device').getBoundingClientRect();
+            focusBox.style.top = (rect.top - deviceRect.top - 2) + 'px';
+            focusBox.style.left = (rect.left - deviceRect.left - 2) + 'px';
+            focusBox.style.width = (rect.width + 4) + 'px';
+            focusBox.style.height = (rect.height + 4) + 'px';
+            focusBox.style.opacity = 1;
+        }
+
+        async function simulateTap(elId) {
+            const el = document.getElementById(elId);
+            if(!el) return;
+            const rect = el.getBoundingClientRect();
+            const deviceRect = document.getElementById('device').getBoundingClientRect();
+            
+            touchIndicator.style.top = (rect.top - deviceRect.top + rect.height/2 - 15) + 'px';
+            touchIndicator.style.left = (rect.left - deviceRect.left + rect.width/2 - 15) + 'px';
+            
+            touchIndicator.classList.remove('tapping');
+            // trigger reflow
+            void touchIndicator.offsetWidth;
+            touchIndicator.classList.add('tapping');
+            await delay(600);
+        }
+
+        function typeText(elId, text) {
+            const el = document.getElementById(elId);
+            if(!el) return;
+            el.innerText = text;
+            el.style.color = '#0f172a';
+            el.style.fontWeight = 'bold';
+        }
+
+        async function runAutomation() {
+            // Reset
+            logsContainer.innerHTML = '';
+            document.getElementById('success-screen').classList.remove('show');
+            document.getElementById('screen-splash').style.opacity = 1;
+            document.getElementById('screen-splash').style.display = 'flex';
+            switchScreen('screen-splash');
+            document.getElementById('input-username').innerText = 'Username or ID';
+            document.getElementById('input-username').style.color = '#64748b';
+            document.getElementById('input-username').style.fontWeight = 'normal';
+            document.getElementById('input-password').innerText = 'Password';
+            document.getElementById('input-password').style.color = '#64748b';
+            document.getElementById('input-password').style.fontWeight = 'normal';
+            focusBox.style.opacity = 0;
+
+            await delay(500);
+            log('<span class="text-appium">[Appium]</span> Welcome to Appium v2.0.0');
+            log('<span class="text-appium">[Appium]</span> Non-default server args:');
+            log('<span class="text-appium">[Appium]</span>   basePath: /wd/hub');
+            log('<span class="text-appium">[Appium]</span> Appium REST http interface listener started on 0.0.0.0:4723');
+            
+            await delay(800);
+            log('<span class="text-info">[HTTP]</span> <span class="text-cmd">--> POST /wd/hub/session</span>');
+            log('<span class="text-info">[HTTP]</span> {"capabilities":{"alwaysMatch":{"platformName":"Android","appium:automationName":"UiAutomator2","appium:app":"/apps/HealthCare.apk"}}}');
+            await delay(800);
+            
+            log('<span class="text-appium">[AndroidDriver]</span> Creating session with W3C capabilities...');
+            log('<span class="text-appium">[ADB]</span> Starting Android Device logcat process...');
+            await delay(1000);
+            
+            log('<span class="text-appium">[AndroidDriver]</span> Session created. Package: com.healthcare.app');
+            log('<span class="text-info">[HTTP]</span> <span class="text-cmd"><-- POST /wd/hub/session 200 OK</span>');
+            
+            await delay(500);
+            // Switch to Login
+            switchScreen('screen-login');
+            
+            await delay(800);
+            log('<span class="text-info">[HTTP]</span> <span class="text-cmd">--> POST /wd/hub/session/xxx/element</span> {"using":"id","value":"com.healthcare.app:id/username"}');
+            await delay(400);
+            highlightBox('input-username');
+            await delay(400);
+            log('<span class="text-info">[HTTP]</span> <span class="text-cmd">--> POST /wd/hub/session/xxx/element/xxx/value</span> {"text":"provider_admin"}');
+            typeText('input-username', 'provider_admin');
+            await delay(600);
+
+            log('<span class="text-info">[HTTP]</span> <span class="text-cmd">--> POST /wd/hub/session/xxx/element</span> {"using":"id","value":"com.healthcare.app:id/password"}');
+            await delay(400);
+            highlightBox('input-password');
+            await delay(400);
+            log('<span class="text-info">[HTTP]</span> <span class="text-cmd">--> POST /wd/hub/session/xxx/element/xxx/value</span> {"text":"**********"}');
+            typeText('input-password', '••••••••••');
+            await delay(600);
+
+            log('<span class="text-info">[HTTP]</span> <span class="text-cmd">--> POST /wd/hub/session/xxx/element</span> {"using":"id","value":"com.healthcare.app:id/btnLogin"}');
+            await delay(400);
+            highlightBox('btn-login');
+            await simulateTap('btn-login');
+            log('<span class="text-info">[HTTP]</span> <span class="text-cmd">--> POST /wd/hub/session/xxx/element/xxx/click</span>');
+            
+            await delay(800);
+            focusBox.style.opacity = 0;
+            switchScreen('screen-home');
+            log('<span class="text-success">[Appium]</span> Assertion Passed: Successfully navigated to Dashboard Activity.');
+            
+            await delay(1000);
+            log('<span class="text-info">[HTTP]</span> <span class="text-cmd">--> POST /wd/hub/session/xxx/element</span> {"using":"xpath","value":"//android.widget.TextView[@text=\'Doe, John A.\']"}');
+            await delay(600);
+            highlightBox('patient-1');
+            log('<span class="text-success">[Appium]</span> Assertion Passed: Element "Doe, John A." is displayed.');
+            await delay(1000);
+            
+            log('<span class="text-info">[HTTP]</span> <span class="text-cmd">--> DELETE /wd/hub/session/xxx</span>');
+            log('<span class="text-appium">[AndroidDriver]</span> Shutting down Android driver...');
+            focusBox.style.opacity = 0;
+            
+            await delay(800);
+            document.getElementById('success-screen').classList.add('show');
+            
+            // Loop after a delay
+            await delay(5000);
+            runAutomation();
+        }
+
+        // Start animation loop
+        runAutomation();
+    </script>
+</body>
+</html>

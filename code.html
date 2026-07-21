@@ -1,0 +1,648 @@
+import { useState } from "react";
+
+export default function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Design System Colors
+  const colors = {
+    primary: "#003f87",
+    primaryContainer: "#0056b3",
+    surface: "#f8f9fa",
+    surfaceContainerLow: "#f3f4f5",
+    surfaceContainerLowest: "#ffffff",
+    onSurface: "#191c1d",
+    onSurfaceVariant: "#5c6265",
+    secondaryContainer: "#e4eaf2",
+    onSecondaryContainer: "#003f87"
+  };
+
+  const skills = [
+    "Manual Testing", "API Testing", "Selenium", "JIRA", "SQL",
+    "Postman", "JMeter", "TestRail", "Bug Tracking", "Agile/Scrum"
+  ];
+
+  const experiences = [
+    {
+      company: "VativeApps",
+      role: "SQA Engineer",
+      period: "2021 - Present",
+      description: "Leading QA activities for web and mobile applications. Implemented automated testing frameworks and improved bug detection rates by 40%."
+    },
+    {
+      company: "Tech Solutions Inc.",
+      role: "Junior QA Engineer",
+      period: "2019 - 2021",
+      description: "Performed manual testing, created test cases, and managed bug tracking in JIRA."
+    }
+  ];
+
+  const projects = [
+    {
+      title: "HRMS Testing",
+      description: "Complete end-to-end testing of HR management system including employee management, payroll, and attendance modules.",
+      technologies: ["Manual Testing", "SQL", "JIRA"]
+    },
+    {
+      title: "E-commerce Platform QA",
+      description: "Tested shopping cart, payment gateway, and order management features.",
+      technologies: ["Selenium", "API Testing", "Postman"]
+    },
+    {
+      title: "Mobile App Testing",
+      description: "Comprehensive testing of Android and iOS applications for a healthcare platform.",
+      technologies: ["Appium", "Manual Testing", "Bug Tracking"]
+    },
+    {
+      title: "API Automation Framework",
+      description: "Built automation framework for REST API testing using Postman and Newman.",
+      technologies: ["Postman", "JavaScript", "CI/CD"]
+    }
+  ];
+
+  const qaSamples = [
+    { title: "Test Case Documentation", type: "Test Cases", count: "50+ Test Cases" },
+    { title: "Bug Reports", type: "Bug Reports", count: "200+ Bugs Reported" },
+    { title: "Test Plan", type: "Documentation", count: "5 Test Plans" },
+    { title: "API Test Scripts", type: "Automation", count: "100+ Scripts" }
+  ];
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setMenuOpen(false);
+  };
+
+  const handleDownload = () => {
+    const resumeUrl = "https://example.com/resume.pdf";
+    window.open(resumeUrl, "_blank");
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (formErrors[name]) {
+      setFormErrors({ ...formErrors, [name]: "" });
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.name.trim()) errors.name = "Name is required";
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = "Please enter a valid email";
+    }
+    if (!formData.message.trim()) errors.message = "Message is required";
+    return errors;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const errors = validateForm();
+    
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    setIsSubmitting(true);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    setIsSubmitting(false);
+    setSubmitSuccess(true);
+    setFormData({ name: "", email: "", subject: "", message: "" });
+    setTimeout(() => setSubmitSuccess(false), 3000);
+  };
+
+  return (
+    <div style={{ fontFamily: "'Inter', sans-serif", color: colors.onSurface, backgroundColor: colors.surface }}>
+      {/* Navbar - Glassmorphism */}
+      <nav style={{
+        position: "fixed",
+        top: 0,
+        width: "100%",
+        zIndex: 50,
+        backgroundColor: "rgba(248, 249, 250, 0.8)",
+        backdropFilter: "blur(12px)",
+        boxShadow: "0 10px 40px -10px rgba(0, 63, 135, 0.08)"
+      }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1rem 1.5rem", maxWidth: "80rem", margin: "0 auto" }}>
+          <span 
+            style={{ fontSize: "1.25rem", fontWeight: 700, color: colors.primary, cursor: "pointer", fontFamily: "'Manrope', sans-serif" }}
+            onClick={() => scrollToSection("hero")}
+          >
+            PERMEET VALICHA
+          </span>
+
+          <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }} className="desktop-nav">
+            {["about", "skills", "experience", "projects", "qa-samples", "contact"].map((item) => (
+              <button 
+                key={item} 
+                onClick={() => scrollToSection(item)}
+                style={{ color: colors.onSurfaceVariant, fontWeight: 500, background: "none", border: "none", cursor: "pointer", fontSize: "0.875rem" }}
+              >
+                {item.toUpperCase()}
+              </button>
+            ))}
+            <button
+              onClick={() => scrollToSection("contact")}
+              style={{ backgroundColor: colors.primary, color: "#fff", padding: "0.5rem 1rem", borderRadius: "0.375rem", border: "none", cursor: "pointer" }}
+            >
+              Hire Me
+            </button>
+          </div>
+
+          <button
+            className="mobile-menu-btn"
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{ fontSize: "1.5rem", color: colors.primary, background: "none", border: "none", cursor: "pointer", display: "none" }}
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
+        </div>
+
+        {menuOpen && (
+          <div style={{ backgroundColor: colors.surfaceContainerLowest, padding: "1rem", borderTop: `1px solid rgba(92, 98, 101, 0.4)` }} className="mobile-menu">
+            {["about", "skills", "experience", "projects", "qa-samples", "contact"].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item)}
+                style={{ display: "block", width: "100%", textAlign: "left", padding: "0.5rem 1rem", color: colors.onSurface, background: "none", border: "none", cursor: "pointer" }}
+              >
+                {item.charAt(0).toUpperCase() + item.slice(1)}
+              </button>
+            ))}
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section - Gradient */}
+      <section id="hero" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "5rem 1.5rem", background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryContainer} 100%)` }}>
+        <div style={{ maxWidth: "80rem", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2.5rem", alignItems: "center", width: "100%" }}>
+          <div style={{ color: "#fff" }}>
+            <h1 style={{ fontSize: "clamp(2.5rem, 5vw, 3.5rem)", fontWeight: 700, fontFamily: "'Manrope', sans-serif", letterSpacing: "-2%" }}>
+              PERMEET VALICHA
+            </h1>
+            <h2 style={{ fontSize: "1.5rem", marginTop: "1rem", opacity: 0.9 }}>
+              Mid-Level <span style={{ fontWeight: 700 }}>SQA Engineer</span>
+            </h2>
+
+            <p style={{ marginTop: "1rem", opacity: 0.85, fontSize: "1.125rem", lineHeight: 1.6 }}>
+              Specialized in software quality assurance, bug detection, and delivering high-quality software solutions.
+            </p>
+
+            <div style={{ marginTop: "1.5rem", display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <button
+                onClick={handleDownload}
+                style={{ backgroundColor: colors.surfaceContainerLowest, color: colors.primary, padding: "0.75rem 1.5rem", borderRadius: "0.375rem", border: "none", cursor: "pointer", fontWeight: 600, transform: "translateY(0)", transition: "all 0.2s" }}
+              >
+                Download Resume
+              </button>
+
+              <button
+                onClick={() => scrollToSection("contact")}
+                style={{ background: "transparent", color: "#fff", padding: "0.75rem 1.5rem", borderRadius: "0.375rem", border: "2px solid rgba(255,255,255,0.2)", cursor: "pointer", fontWeight: 600 }}
+              >
+                Contact Me
+              </button>
+            </div>
+
+            <div className="social-links" style={{ marginTop: "2rem", display: "flex", gap: "1rem" }}>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", opacity: 0.8 }}>
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", opacity: 0.8 }}>
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ position: "relative" }}>
+              <div className="avatar-container" style={{ 
+                width: "18rem", 
+                height: "18rem", 
+                backgroundColor: colors.surfaceContainerLowest, 
+                borderRadius: "50%", 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center", 
+                color: colors.primary, 
+                fontSize: "3.5rem", 
+                fontWeight: 700,
+                fontFamily: "'Manrope', sans-serif"
+              }}>
+                PV
+              </div>
+              <div className="avatar-badge" style={{ position: "absolute", bottom: "-1rem", right: "-1rem", backgroundColor: colors.surfaceContainerLowest, padding: "1rem", borderRadius: "0.5rem", boxShadow: "0 10px 40px -10px rgba(0, 63, 135, 0.08)" }}>
+                <p style={{ fontSize: "0.875rem", fontWeight: 700, color: colors.primary }}>SQA Engineer</p>
+                <p style={{ fontSize: "0.75rem", color: colors.onSurfaceVariant }}>5+ Years Experience</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section - Surface */}
+      <section id="about" style={{ padding: "5rem 1.5rem", backgroundColor: colors.surface }}>
+        <div style={{ maxWidth: "64rem", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "1.75rem", fontWeight: 700, color: colors.primary, fontFamily: "'Manrope', sans-serif", marginBottom: "1.5rem" }}>About Me</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "2rem" }}>
+            <div>
+              <p style={{ color: colors.onSurfaceVariant, fontSize: "1.125rem", lineHeight: 1.6 }}>
+                I am a dedicated Software Quality Assurance Engineer with over 5 years of experience in ensuring software quality through strong testing strategies and detailed bug analysis. I specialize in both manual and automated testing, with expertise in various testing tools and methodologies.
+              </p>
+              <p style={{ color: colors.onSurfaceVariant, fontSize: "1.125rem", lineHeight: 1.6, marginTop: "1rem" }}>
+                My passion is delivering bug-free software that provides excellent user experiences. I have worked with diverse teams in Agile environments and have a proven track record of improving software quality metrics.
+              </p>
+            </div>
+            <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+              <div className="stat-card" style={{ backgroundColor: colors.secondaryContainer, padding: "1rem", borderRadius: "0.5rem", textAlign: "center" }}>
+                <p style={{ fontSize: "1.875rem", fontWeight: 700, color: colors.primary }}>5+</p>
+                <p style={{ color: colors.onSurfaceVariant, fontSize: "0.875rem" }}>Years Experience</p>
+              </div>
+              <div className="stat-card" style={{ backgroundColor: colors.secondaryContainer, padding: "1rem", borderRadius: "0.5rem", textAlign: "center" }}>
+                <p style={{ fontSize: "1.875rem", fontWeight: 700, color: colors.primary }}>200+</p>
+                <p style={{ color: colors.onSurfaceVariant, fontSize: "0.875rem" }}>Bugs Found</p>
+              </div>
+              <div className="stat-card" style={{ backgroundColor: colors.secondaryContainer, padding: "1rem", borderRadius: "0.5rem", textAlign: "center" }}>
+                <p style={{ fontSize: "1.875rem", fontWeight: 700, color: colors.primary }}>50+</p>
+                <p style={{ color: colors.onSurfaceVariant, fontSize: "0.875rem" }}>Projects Tested</p>
+              </div>
+              <div className="stat-card" style={{ backgroundColor: colors.secondaryContainer, padding: "1rem", borderRadius: "0.5rem", textAlign: "center" }}>
+                <p style={{ fontSize: "1.875rem", fontWeight: 700, color: colors.primary }}>100%</p>
+                <p style={{ color: colors.onSurfaceVariant, fontSize: "0.875rem" }}>Client Satisfaction</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section - Surface Container Low */}
+      <section id="skills" style={{ padding: "5rem 1.5rem", backgroundColor: colors.surfaceContainerLow }}>
+        <div style={{ maxWidth: "64rem", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "1.75rem", fontWeight: 700, color: colors.primary, fontFamily: "'Manrope', sans-serif", marginBottom: "1.5rem" }}>Skills</h2>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+            {skills.map((skill) => (
+              <span 
+                key={skill}
+                className="skill-tag"
+                style={{ 
+                  backgroundColor: colors.secondaryContainer, 
+                  color: colors.onSecondaryContainer, 
+                  padding: "0.5rem 1rem", 
+                  borderRadius: "9999px", 
+                  fontWeight: 500, 
+                  fontSize: "0.875rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem"
+                }}
+              >
+                <span style={{ width: "4px", height: "4px", borderRadius: "50%", backgroundColor: colors.primary }}></span>
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section - Surface */}
+      <section id="experience" style={{ padding: "5rem 1.5rem", backgroundColor: colors.surface }}>
+        <div style={{ maxWidth: "64rem", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "1.75rem", fontWeight: 700, color: colors.primary, fontFamily: "'Manrope', sans-serif", marginBottom: "1.5rem" }}>Experience</h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            {experiences.map((exp, index) => (
+              <div key={index} style={{ borderLeft: `4px solid ${colors.primary}`, paddingLeft: "1.5rem" }}>
+                <h3 style={{ fontWeight: 700, fontSize: "1.25rem", color: colors.onSurface }}>{exp.role}</h3>
+                <p style={{ color: colors.primary, fontWeight: 500 }}>{exp.company}</p>
+                <p style={{ color: colors.onSurfaceVariant, fontSize: "0.875rem" }}>{exp.period}</p>
+                <p style={{ color: colors.onSurfaceVariant, marginTop: "0.5rem" }}>{exp.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section - Surface Container Low */}
+      <section id="projects" style={{ padding: "5rem 1.5rem", backgroundColor: colors.surfaceContainerLow }}>
+        <div style={{ maxWidth: "64rem", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "1.75rem", fontWeight: 700, color: colors.primary, fontFamily: "'Manrope', sans-serif", marginBottom: "1.5rem" }}>Projects</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
+            {projects.map((project, index) => (
+              <div key={index} style={{ backgroundColor: colors.surfaceContainerLowest, padding: "1.5rem", borderRadius: "0.5rem", boxShadow: "0 10px 40px -10px rgba(0, 63, 135, 0.08)" }}>
+                <h4 style={{ fontWeight: 700, fontSize: "1.25rem", color: colors.onSurface, marginBottom: "0.5rem" }}>{project.title}</h4>
+                <p style={{ color: colors.onSurfaceVariant, marginBottom: "1rem" }}>{project.description}</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                  {project.technologies.map((tech) => (
+                    <span key={tech} style={{ backgroundColor: colors.secondaryContainer, color: colors.onSecondaryContainer, fontSize: "0.75rem", padding: "0.25rem 0.5rem", borderRadius: "0.25rem", textTransform: "uppercase", letterSpacing: "0.1rem" }}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* QA Samples Section - Primary */}
+      <section id="qa-samples" style={{ padding: "5rem 1.5rem", backgroundColor: colors.primary, color: "#fff" }}>
+        <div style={{ maxWidth: "64rem", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "1.5rem", fontFamily: "'Manrope', sans-serif" }}>QA Samples</h2>
+          <p style={{ opacity: 0.8, fontSize: "1.125rem", marginBottom: "2rem" }}>
+            Documentation of my testing work including test cases, bug reports, and test plans.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem" }}>
+            {qaSamples.map((sample, index) => (
+              <div key={index} className="qa-card" style={{ backgroundColor: colors.primaryContainer, padding: "1.5rem", borderRadius: "0.5rem", cursor: "pointer", transition: "background-color 0.2s" }}>
+                <p style={{ opacity: 0.8, fontSize: "0.875rem" }}>{sample.type}</p>
+                <h4 style={{ fontWeight: 700, fontSize: "1.125rem", marginTop: "0.25rem" }}>{sample.title}</h4>
+                <p style={{ opacity: 0.7, fontSize: "0.875rem", marginTop: "0.5rem" }}>{sample.count}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section - Surface */}
+      <section id="contact" style={{ padding: "5rem 1.5rem", backgroundColor: colors.surface }}>
+        <div style={{ maxWidth: "56rem", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "1.75rem", fontWeight: 700, color: colors.primary, fontFamily: "'Manrope', sans-serif", marginBottom: "1.5rem" }}>Contact Me</h2>
+          
+          {submitSuccess && (
+            <div style={{ backgroundColor: "#d1fae5", border: "1px solid #34d399", color: "#065f46", padding: "0.75rem 1rem", borderRadius: "0.375rem", marginBottom: "1.5rem" }}>
+              ✅ Message sent successfully! I'll get back to you soon.
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem" }}>
+              <div>
+                <input
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  style={{ 
+                    width: "100%", 
+                    border: "none", 
+                    borderBottom: `2px solid ${formErrors.name ? "#ef4444" : "rgba(92, 98, 101, 0.15)"}`, 
+                    padding: "0.75rem 0", 
+                    backgroundColor: "transparent",
+                    outline: "none",
+                    fontSize: "1rem"
+                  }}
+                  placeholder="Name *"
+                  required
+                />
+                {formErrors.name && <p style={{ color: "#ef4444", fontSize: "0.875rem", marginTop: "0.25rem" }}>{formErrors.name}</p>}
+              </div>
+              <div>
+                <input
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  style={{ 
+                    width: "100%", 
+                    border: "none", 
+                    borderBottom: `2px solid ${formErrors.email ? "#ef4444" : "rgba(92, 98, 101, 0.15)"}`, 
+                    padding: "0.75rem 0", 
+                    backgroundColor: "transparent",
+                    outline: "none",
+                    fontSize: "1rem"
+                  }}
+                  placeholder="Email *"
+                  required
+                />
+                {formErrors.email && <p style={{ color: "#ef4444", fontSize: "0.875rem", marginTop: "0.25rem" }}>{formErrors.email}</p>}
+              </div>
+            </div>
+            <input
+              name="subject"
+              value={formData.subject}
+              onChange={handleInputChange}
+              style={{ 
+                width: "100%", 
+                border: "none", 
+                borderBottom: "2px solid rgba(92, 98, 101, 0.15)", 
+                padding: "0.75rem 0", 
+                backgroundColor: "transparent",
+                outline: "none",
+                fontSize: "1rem"
+              }}
+              placeholder="Subject (Optional)"
+            />
+            <div>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                style={{ 
+                  width: "100%", 
+                  border: "none", 
+                  borderBottom: `2px solid ${formErrors.message ? "#ef4444" : "rgba(92, 98, 101, 0.15)"}`, 
+                  padding: "0.75rem 0", 
+                  backgroundColor: "transparent",
+                  outline: "none",
+                  fontSize: "1rem",
+                  height: "8rem",
+                  resize: "vertical"
+                }}
+                placeholder="Message *"
+                required
+              />
+              {formErrors.message && <p style={{ color: "#ef4444", fontSize: "0.875rem", marginTop: "0.25rem" }}>{formErrors.message}</p>}
+            </div>
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              style={{ 
+                backgroundColor: colors.primary, 
+                color: "#fff", 
+                padding: "0.75rem 1.5rem", 
+                borderRadius: "0.375rem", 
+                border: "none", 
+                cursor: isSubmitting ? "not-allowed" : "pointer",
+                fontWeight: 600,
+                opacity: isSubmitting ? 0.6 : 1
+              }}
+            >
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </button>
+          </form>
+
+          <div style={{ marginTop: "3rem", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem", textAlign: "center" }}>
+            <div style={{ padding: "1rem" }}>
+              <p style={{ fontWeight: 700, color: colors.primary }}>Email</p>
+              <p style={{ color: colors.onSurfaceVariant }}>permeet@example.com</p>
+            </div>
+            <div style={{ padding: "1rem" }}>
+              <p style={{ fontWeight: 700, color: colors.primary }}>Phone</p>
+              <p style={{ color: colors.onSurfaceVariant }}>+1 234 567 890</p>
+            </div>
+            <div style={{ padding: "1rem" }}>
+              <p style={{ fontWeight: 700, color: colors.primary }}>Location</p>
+              <p style={{ color: colors.onSurfaceVariant }}>City, Country</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{ backgroundColor: colors.surfaceContainerLow, padding: "1.5rem", textAlign: "center" }}>
+        <p style={{ color: colors.onSurfaceVariant }}>© 2026 Permeet Valicha. All rights reserved.</p>
+      </footer>
+
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+        
+        * {
+          box-sizing: border-box;
+        }
+        
+        html {
+          scroll-behavior: smooth;
+        }
+        
+        @media (max-width: 768px) {
+          .desktop-nav { display: none !important; }
+          .mobile-menu-btn { display: block !important; }
+          .mobile-menu { display: block !important; }
+          
+          /* Navbar mobile */
+          nav > div {
+            padding: 0.75rem 1rem !important;
+          }
+          
+          /* Hero section mobile */
+          #hero {
+            padding: 6rem 1rem 3rem !important;
+            min-height: auto !important;
+          }
+          #hero > div {
+            gap: 2rem !important;
+            text-align: center;
+          }
+          #hero h1 {
+            font-size: clamp(1.75rem, 8vw, 2.5rem) !important;
+          }
+          #hero h2 {
+            font-size: 1.125rem !important;
+          }
+          #hero > div > div:first-child {
+            order: 2;
+          }
+          #hero > div > div:last-child {
+            order: 1;
+          }
+          #hero .avatar-container {
+            width: 12rem !important;
+            height: 12rem !important;
+            font-size: 2.5rem !important;
+          }
+          #hero .avatar-badge {
+            display: none !important;
+          }
+          #hero > div > div:first-child > div {
+            justify-content: center !important;
+          }
+          #hero .social-links {
+            justify-content: center !important;
+          }
+          
+          /* About section mobile */
+          #about {
+            padding: 3rem 1rem !important;
+          }
+          #about > div > div {
+            gap: 1.5rem !important;
+          }
+          #about .stats-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 0.75rem !important;
+          }
+          #about .stat-card {
+            padding: 0.75rem !important;
+          }
+          #about .stat-card p:first-child {
+            font-size: 1.5rem !important;
+          }
+          
+          /* Skills section mobile */
+          #skills {
+            padding: 3rem 1rem !important;
+          }
+          #skills .skill-tag {
+            font-size: 0.75rem !important;
+            padding: 0.375rem 0.75rem !important;
+          }
+          
+          /* Experience section mobile */
+          #experience {
+            padding: 3rem 1rem !important;
+          }
+          #experience > div > div {
+            gap: 1.5rem !important;
+          }
+          
+          /* Projects section mobile */
+          #projects {
+            padding: 3rem 1rem !important;
+          }
+          #projects > div > div {
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+          }
+          
+          /* QA Samples section mobile */
+          #qa-samples {
+            padding: 3rem 1rem !important;
+          }
+          #qa-samples > div > div:last-child {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 0.75rem !important;
+          }
+          #qa-samples .qa-card {
+            padding: 1rem !important;
+          }
+          
+          /* Contact section mobile */
+          #contact {
+            padding: 3rem 1rem !important;
+          }
+          #contact > div > div:last-child {
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+          }
+          
+          /* Footer mobile */
+          footer {
+            padding: 1rem !important;
+          }
+        }
+        
+        @media (min-width: 769px) {
+          .mobile-menu { display: none !important; }
+        }
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) {
+          button:active {
+            transform: scale(0.98);
+          }
+          .qa-card:active {
+            background-color: #004a99 !important;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
