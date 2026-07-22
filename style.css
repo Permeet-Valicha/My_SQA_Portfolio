@@ -1344,6 +1344,8 @@
         html.dark .bg-blue-50, html.dark .bg-blue-100 { background-color: #17375e !important; }
         html.dark .bg-primary\/5 { background-color: rgba(147, 197, 253, .12) !important; }
         html.dark .cube-face { border-color: #fff; }
+        html.dark .experience-date { background-color: #1e3a8a !important; color: #fff !important; }
+        html.dark .testimonial-video-frame { border: 2px solid #fff; }
         html.dark .brand-logo { background: #fff; border-radius: .5rem; padding: 0; mix-blend-mode: normal !important; box-shadow: 0 4px 12px rgba(0, 0, 0, .28); }
         html.dark .footer-logo { filter: none; }
         html.dark .stats-card {
