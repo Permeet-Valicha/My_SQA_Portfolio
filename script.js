@@ -36,6 +36,16 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Only former employers can display a letter. "Present" means the job is still current.
+    document.querySelectorAll('.experience-entry').forEach(entry => {
+        const period = entry.querySelector('.experience-date')?.textContent || '';
+        const letterButton = entry.querySelector('[data-experience-letter]');
+        if (!letterButton || /\bpresent\b/i.test(period)) return;
+
+        letterButton.classList.remove('hidden');
+        letterButton.classList.add('inline-flex');
+    });
+
     experienceCloseButton?.addEventListener('click', closeExperienceModal);
     experienceDownload?.addEventListener('click', async event => {
         event.preventDefault();
