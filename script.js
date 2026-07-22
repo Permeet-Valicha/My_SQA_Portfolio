@@ -1,6 +1,74 @@
 // JavaScript for Permeet Valicha Portfolio
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Experience-letter preview: viewing stays on the portfolio; saving is an explicit choice.
+    const experienceModal = document.getElementById('experience-letter-modal');
+    const experiencePreview = document.getElementById('experience-letter-preview');
+    const experienceTitle = document.getElementById('experience-letter-title');
+    const experienceDownload = document.getElementById('experience-letter-download');
+    const experienceCloseButton = document.querySelector('[data-close-experience-modal]');
+    let experienceTrigger = null;
+
+    function closeExperienceModal() {
+        if (!experienceModal) return;
+        experienceModal.classList.add('hidden');
+        experienceModal.classList.remove('flex');
+        experienceModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('overflow-hidden');
+        experienceTrigger?.focus();
+    }
+
+    document.querySelectorAll('[data-experience-letter]').forEach(button => {
+        button.addEventListener('click', () => {
+            if (!experienceModal || !experiencePreview || !experienceDownload) return;
+            const imagePath = button.dataset.experienceLetter;
+            experienceTrigger = button;
+            experiencePreview.src = imagePath;
+            experiencePreview.alt = `${button.dataset.experienceTitle || 'Experience letter'} preview`;
+            experienceTitle.textContent = button.dataset.experienceTitle || 'Experience Letter';
+            experienceDownload.href = imagePath;
+            experienceDownload.download = imagePath.split('/').pop() || 'experience-letter.jpg';
+            experienceModal.classList.remove('hidden');
+            experienceModal.classList.add('flex');
+            experienceModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('overflow-hidden');
+            experienceCloseButton?.focus();
+        });
+    });
+
+    experienceCloseButton?.addEventListener('click', closeExperienceModal);
+    experienceDownload?.addEventListener('click', async event => {
+        event.preventDefault();
+        const imagePath = experienceDownload.href;
+        const fileName = experienceDownload.download || 'experience-letter.jpg';
+
+        try {
+            const response = await fetch(imagePath);
+            if (!response.ok) throw new Error('Unable to load experience letter');
+
+            const imageBlob = await response.blob();
+            const temporaryUrl = URL.createObjectURL(imageBlob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = temporaryUrl;
+            downloadLink.download = fileName;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            downloadLink.remove();
+            URL.revokeObjectURL(temporaryUrl);
+        } catch (error) {
+            // Fallback for browsers that block fetching local files.
+            window.open(imagePath, '_blank', 'noopener,noreferrer');
+        }
+    });
+    experienceModal?.addEventListener('click', event => {
+        if (event.target === experienceModal) closeExperienceModal();
+    });
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && experienceModal && !experienceModal.classList.contains('hidden')) {
+            closeExperienceModal();
+        }
+    });
+
     // Theme toggle: preserves the visitor's preference between visits.
     const themeToggles = document.querySelectorAll('.theme-toggle');
     const themeIcons = document.querySelectorAll('.theme-icon');

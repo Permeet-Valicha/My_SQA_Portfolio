@@ -898,11 +898,12 @@
                             Actively participated in meetings, engaging in discussions with the QA team.
                         </li>
                     </ul>
-                    <a href="images/experience-letters/sapphire-experience-letter.jfif" target="_blank" rel="noopener noreferrer"
+                    <button type="button" data-experience-letter="images/experience-letters/sapphire-experience-letter.jfif"
+                        data-experience-title="Sapphire Consultancy Services — Experience Letter"
                         class="experience-letter-button mt-6 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white transition-all hover:bg-primary-container hover:shadow-lg">
                         <span class="material-symbols-outlined text-base">description</span>
                         View Experience Letter
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1340,6 +1341,27 @@
                     class="text-on-surface-variant text-base leading-relaxed transform translate-y-2 transition-transform duration-500 ease-out">
                     Skill description goes here.
                 </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience letter preview dialog -->
+    <div id="experience-letter-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/75 p-4" role="dialog" aria-modal="true" aria-labelledby="experience-letter-title" aria-hidden="true">
+        <div class="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+            <div class="flex items-center justify-between gap-4 border-b border-slate-200 px-5 py-4">
+                <h3 id="experience-letter-title" class="text-base font-bold text-slate-900 sm:text-lg">Experience Letter</h3>
+                <button type="button" data-close-experience-modal aria-label="Close experience letter preview" class="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="min-h-0 flex-1 overflow-auto bg-slate-100 p-3 sm:p-5">
+                <img id="experience-letter-preview" src="" alt="Experience letter preview" class="mx-auto block max-w-full rounded-md bg-white shadow-md" />
+            </div>
+            <div class="flex flex-wrap justify-end gap-3 border-t border-slate-200 px-5 py-4">
+                <a id="experience-letter-download" href="#" download class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white transition-all hover:bg-primary-container">
+                    <span class="material-symbols-outlined text-base">download</span>
+                    Download / Save Image
+                </a>
             </div>
         </div>
     </div>
