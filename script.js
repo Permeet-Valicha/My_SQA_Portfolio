@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const themeToggles = document.querySelectorAll('.theme-toggle');
     const themeIcons = document.querySelectorAll('.theme-icon');
     const savedTheme = localStorage.getItem('portfolio-theme');
-    const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     function setTheme(isDark) {
         document.documentElement.classList.toggle('dark', isDark);
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    setTheme(savedTheme ? savedTheme === 'dark' : prefersDarkTheme);
+    setTheme(savedTheme ? savedTheme === 'dark' : false);
     themeToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             setTheme(!document.documentElement.classList.contains('dark'));
