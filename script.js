@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Theme toggle: preserves the visitor's preference between visits.
     const themeToggles = document.querySelectorAll('.theme-toggle');
     const themeIcons = document.querySelectorAll('.theme-icon');
+    const isLocalhost = window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.protocol === 'file:';
     const savedTheme = localStorage.getItem('portfolio-theme');
 
     function setTheme(isDark) {
@@ -21,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    setTheme(savedTheme ? savedTheme === 'dark' : false);
+    setTheme(isLocalhost ? false : savedTheme ? savedTheme === 'dark' : false);
     themeToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             setTheme(!document.documentElement.classList.contains('dark'));
@@ -29,10 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Protection Logic (Only active on live site, disabled on localhost)
-    const isLocalhost = window.location.hostname === 'localhost' ||
-        window.location.hostname === '127.0.0.1' ||
-        window.location.protocol === 'file:';
-
     if (!isLocalhost) {
         // Disable Text Selection
         document.body.classList.add('no-select');
