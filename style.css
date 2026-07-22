@@ -1393,7 +1393,9 @@
         html.dark .badge-pulse + div { border-color: rgba(147, 197, 253, .35) !important; }
         html.dark .badge-pulse + div .animate-marquee span { color: #bfdbfe !important; }
         html.dark .tool-logo, html.dark img[alt*="Logo"] { filter: brightness(1.12) contrast(1.05); }
+        html.dark img[alt="LinkedIn"] { filter: none !important; }
         html.dark .user-msg .msg-bubble { background: #263956; color: #e5edf8; }
         html.dark .ai-msg .msg-bubble { background: rgba(96, 165, 250, .18); color: #dbeafe; }
         html.dark #ai-messages::-webkit-scrollbar-thumb { background: rgba(226, 232, 240, .24); }
+        html.dark body * { color: #fff !important; }
     
