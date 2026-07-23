@@ -159,6 +159,130 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Recommendations & Testimonials: data is kept in an external JSON file so real LinkedIn feedback can be updated cleanly.
+    const testimonialsGrid = document.getElementById('testimonials-grid');
+    const recommendationModal = document.getElementById('recommendation-modal');
+    const modalName = document.getElementById('modal-recommendation-name');
+    const modalRole = document.getElementById('modal-recommendation-role');
+    const modalText = document.getElementById('modal-recommendation-text');
+    const modalAvatar = document.getElementById('modal-recommendation-avatar');
+    const closeRecommendationModalButton = document.getElementById('close-recommendation-modal');
+
+    function truncateText(text = '', maxLength = 230) {
+        if (!text) return '';
+        return text.length > maxLength ? `${text.slice(0, maxLength).trim()}…` : text;
+    }
+
+    function openRecommendationModal(item) {
+        if (!recommendationModal || !modalName || !modalRole || !modalText || !modalAvatar) return;
+
+        modalName.textContent = item.name || 'LinkedIn Recommendation';
+        modalRole.textContent = item.role || item.company || 'Professional Recommendation';
+        modalText.textContent = item.comment || '';
+
+        if (item.avatar) {
+            modalAvatar.src = item.avatar;
+            modalAvatar.alt = `${item.name || 'Recommendation'} profile`;
+            modalAvatar.classList.remove('hidden');
+        } else {
+            modalAvatar.classList.add('hidden');
+        }
+
+        recommendationModal.classList.remove('hidden');
+        recommendationModal.classList.add('flex');
+        closeRecommendationModalButton?.focus();
+    }
+
+    function closeRecommendationModal() {
+        if (!recommendationModal) return;
+        recommendationModal.classList.add('hidden');
+        recommendationModal.classList.remove('flex');
+    }
+
+    async function loadTestimonials() {
+        try {
+            const response = await fetch('./testimonials.json');
+            if (!response.ok) throw new Error('Unable to load testimonials');
+            const testimonials = await response.json();
+            renderTestimonials(testimonials);
+        } catch (error) {
+            console.warn('Testimonials data could not be loaded:', error);
+            testimonialsGrid.innerHTML = '<p class="text-sm text-on-surface-variant">Recommendations are temporarily unavailable.</p>';
+        }
+    }
+
+    function renderTestimonials(items) {
+        if (!testimonialsGrid) return;
+
+        testimonialsGrid.innerHTML = items.map((item, index) => `
+            <article class="reveal group flex h-full flex-col rounded-2xl border border-surface-container-highest bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" style="transition-delay: ${index * 80}ms;">
+                <div class="flex items-start justify-between gap-4 mb-5">
+                    <div class="flex items-center gap-4 min-w-0">
+                        <img src="${item.avatar}" alt="${escapeHtml(item.name)} profile" loading="lazy" class="h-14 w-14 rounded-full object-cover ring-2 ring-primary-fixed" />
+                        <div class="min-w-0">
+                            <h3 class="truncate text-lg font-bold text-on-surface">${escapeHtml(item.name)}</h3>
+                            <p class="text-sm font-medium text-on-surface-variant">${escapeHtml(item.role || '')}</p>
+                            <p class="text-sm text-on-surface-variant">${escapeHtml(item.company || '')}</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-preview flex-1 text-sm leading-relaxed text-on-surface-variant mb-5">“${escapeHtml(truncateText(item.comment, 230))}”</p>
+                <div class="mt-auto flex items-center justify-between gap-3 pt-4 border-t border-surface-container-highest">
+                    <div class="flex items-center gap-2 text-sm font-semibold text-on-surface-variant">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" class="h-4 w-4" loading="lazy" />
+                        <span>${escapeHtml(item.date || '')}</span>
+                    </div>
+                    <button type="button"
+                        data-recommendation-name="${escapeHtml(item.name)}"
+                        data-recommendation-role="${escapeHtml(item.role || item.company || '')}"
+                        data-recommendation-comment="${escapeHtml(item.comment)}"
+                        data-recommendation-avatar="${escapeHtml(item.avatar || '')}"
+                        class="testimonial-view-button inline-flex items-center gap-2 text-sm font-bold text-primary transition-all duration-300 hover:gap-3"
+                        aria-label="View full recommendation from ${escapeHtml(item.name)}">
+                        View Recommendation
+                        <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    </button>
+                </div>
+            </article>
+        `).join('');
+
+        const revealElements = testimonialsGrid.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(element => revealObserver.observe(element));
+    }
+
+    loadTestimonials();
+
+    document.addEventListener('click', event => {
+        const button = event.target.closest('.testimonial-view-button');
+        if (!button) return;
+
+        openRecommendationModal({
+            name: button.dataset.recommendationName || 'LinkedIn Recommendation',
+            role: button.dataset.recommendationRole || '',
+            comment: button.dataset.recommendationComment || '',
+            avatar: button.dataset.recommendationAvatar || ''
+        });
+    });
+
+    closeRecommendationModalButton?.addEventListener('click', closeRecommendationModal);
+    recommendationModal?.addEventListener('click', event => {
+        if (event.target === recommendationModal) closeRecommendationModal();
+    });
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && recommendationModal && !recommendationModal.classList.contains('hidden')) {
+            closeRecommendationModal();
+        }
+    });
+
     // Theme toggle: preserves the visitor's preference between visits.
     const themeToggles = document.querySelectorAll('.theme-toggle');
     const themeIcons = document.querySelectorAll('.theme-icon');

@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "Muhammad Umer Haq Qureshi",
+    "role": "SQA Engineer | Automation & Manual Testing | API Testing | Bug Tracking",
+    "company": "",
+    "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQG1INPmv-9Utg/profile-displayphoto-scale_100_100/B4DZ.K26GsI4Ac-/0/1784741079933?e=1786579200&v=beta&t=eQJtqb4D-7e5dJ8Nixj6gO-YUAzONupIUIemAmgmlGM",
+    "comment": "It has been great working together with such a supportive and hardworking SQA Engineer. Their attention to detail, professionalism, and dedication to delivering quality work truly stand out. They approach every task with responsibility, ensuring that things are handled properly and efficiently. What I appreciate the most is their positive attitude and willingness to help others whenever needed. They are not only technically strong but also an excellent team player who create a comfortable and collaborative working environment. I genuinely enjoyed working with them and would highly recommend them to any team or organization.",
+    "profileUrl": "https://www.linkedin.com/in/muhammadumerhaqqureshi/",
+    "featured": true,
+    "date": "May 13, 2026"
+  },
+  {
+    "id": 2,
+    "name": "Usama Ahmed Siddique",
+    "role": "React | React native | Next | Node | MySql | Express | JavaScript | TypeScript | Software Engineer | Mobile App Developer | Frontend Web Engineer @ WeUno Technologies",
+    "company": "WeUno Technologies",
+    "avatar": "https://media.licdn.com/dms/image/v2/C4D03AQGj9ESNIJuTcw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1660553756686?e=1786579200&v=beta&t=ioRcLxPp3Zick4whjDyTmk7IUVECSfwd4kREvcAA1ZY",
+    "comment": "I highly recommend Permeet as a dedicated and detail-oriented SQA professional. I’ve had the opportunity to see his work closely, and he consistently demonstrates strong analytical thinking, excellent attention to detail, and a clear understanding of software testing principles. He is very thorough when it comes to identifying bugs, writing clear test cases, and ensuring the overall quality of the product. What makes him stand out is his responsibility, teamwork, and commitment to delivering reliable results on time. Any company looking for a hardworking and dependable QA engineer would be lucky to have him on their team. I’m confident he will continue to grow and add great value wherever he works.",
+    "profileUrl": "https://www.linkedin.com/in/usama-ahmed-siddique-60357a218/",
+    "featured": false,
+    "date": "March 22, 2026"
+  },
+  {
+    "id": 3,
+    "name": "Adeeb Qambrani",
+    "role": "Senior Full Stack Developer | Laravel & MERN Specialist | Enterprise MIS Architect",
+    "company": "",
+    "avatar": "https://media.licdn.com/dms/image/v2/C4D03AQH8l2XgcZQTdg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1654745250208?e=1786579200&v=beta&t=6ESYTxIcxPARJDvoN5V8zjVgPvwVb_M6xHE_Ur6v3aE",
+    "comment": "It has been a pleasure working with Permeet in software quality assurance. His attention to detail and dedication to excellence have significantly enhanced our product's reliability and user experience. He demonstrates a strong combination of technical skills, teamwork, and a passion for learning, making him a valuable asset to any team. I wholeheartedly recommend him for future opportunities in the tech industry. Keep up the great work, my friend!",
+    "profileUrl": "https://www.linkedin.com/in/adeeb-qambrani/",
+    "featured": false,
+    "date": "December 28, 2024"
+  }
+]

@@ -2,6 +2,14 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
+        .testimonial-preview {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 8;
+            min-height: 11rem;
+            overflow: hidden;
+        }
+
         /* Conditional selection disable */
         body.no-select {
             -webkit-user-select: none;
