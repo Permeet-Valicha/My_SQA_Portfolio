@@ -2,12 +2,19 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
+        .testimonial-role,
         .testimonial-preview {
             display: -webkit-box;
             -webkit-box-orient: vertical;
-            -webkit-line-clamp: 8;
-            min-height: 11rem;
             overflow: hidden;
+        }
+
+        .testimonial-role {
+            -webkit-line-clamp: 2;
+        }
+
+        .testimonial-preview {
+            -webkit-line-clamp: 6;
         }
 
         /* Conditional selection disable */

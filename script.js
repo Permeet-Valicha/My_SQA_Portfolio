@@ -168,9 +168,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalAvatar = document.getElementById('modal-recommendation-avatar');
     const closeRecommendationModalButton = document.getElementById('close-recommendation-modal');
 
-    function truncateText(text = '', maxLength = 230) {
-        if (!text) return '';
-        return text.length > maxLength ? `${text.slice(0, maxLength).trim()}…` : text;
+    function formatTestimonialSubtitle(item) {
+        const role = (item.role || '').trim();
+        const company = (item.company || '').trim();
+        if (!role) return company;
+        if (!company || role.includes(company)) return role;
+        return `${role} · ${company}`;
     }
 
     function openRecommendationModal(item) {
@@ -215,32 +218,31 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!testimonialsGrid) return;
 
         testimonialsGrid.innerHTML = items.map((item, index) => `
-            <article class="reveal group flex h-full flex-col rounded-2xl border border-surface-container-highest bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" style="transition-delay: ${index * 80}ms;">
+            <article class="reveal group flex flex-col rounded-2xl border border-surface-container-highest bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" style="transition-delay: ${index * 80}ms;">
                 <div class="flex items-start justify-between gap-4 mb-5">
-                    <div class="flex items-center gap-4 min-w-0">
-                        <img src="${item.avatar}" alt="${escapeHtml(item.name)} profile" loading="lazy" class="h-14 w-14 rounded-full object-cover ring-2 ring-primary-fixed" />
+                    <div class="flex items-start gap-4 min-w-0">
+                        <img src="${item.avatar}" alt="${escapeHtml(item.name)} profile" loading="lazy" class="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-primary-fixed" />
                         <div class="min-w-0">
                             <h3 class="truncate text-lg font-bold text-on-surface">${escapeHtml(item.name)}</h3>
-                            <p class="text-sm font-medium text-on-surface-variant">${escapeHtml(item.role || '')}</p>
-                            <p class="text-sm text-on-surface-variant">${escapeHtml(item.company || '')}</p>
+                            <p class="testimonial-role text-sm font-medium text-on-surface-variant">${escapeHtml(formatTestimonialSubtitle(item))}</p>
                         </div>
                     </div>
                 </div>
-                <p class="testimonial-preview flex-1 text-sm leading-relaxed text-on-surface-variant mb-5">“${escapeHtml(truncateText(item.comment, 230))}”</p>
-                <div class="mt-auto flex items-center justify-between gap-3 pt-4 border-t border-surface-container-highest">
-                    <div class="flex items-center gap-2 text-sm font-semibold text-on-surface-variant">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" class="h-4 w-4" loading="lazy" />
-                        <span>${escapeHtml(item.date || '')}</span>
+                <p class="testimonial-preview text-sm leading-relaxed text-on-surface-variant mb-5">“${escapeHtml(item.comment)}”</p>
+                <div class="flex items-center justify-between gap-2 pt-4 border-t border-surface-container-highest">
+                    <div class="flex min-w-0 items-center gap-1.5 text-xs font-semibold text-on-surface-variant">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" class="h-3.5 w-3.5 shrink-0" loading="lazy" />
+                        <span class="whitespace-nowrap">${escapeHtml(item.date || '')}</span>
                     </div>
                     <button type="button"
                         data-recommendation-name="${escapeHtml(item.name)}"
                         data-recommendation-role="${escapeHtml(item.role || item.company || '')}"
                         data-recommendation-comment="${escapeHtml(item.comment)}"
                         data-recommendation-avatar="${escapeHtml(item.avatar || '')}"
-                        class="testimonial-view-button inline-flex items-center gap-2 text-sm font-bold text-primary transition-all duration-300 hover:gap-3"
+                        class="testimonial-view-button inline-flex shrink-0 items-center gap-1 whitespace-nowrap text-xs font-bold text-primary transition-all duration-300 hover:gap-2"
                         aria-label="View full recommendation from ${escapeHtml(item.name)}">
                         View Recommendation
-                        <span class="material-symbols-outlined text-base">arrow_forward</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
                     </button>
                 </div>
             </article>
