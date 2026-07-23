@@ -1330,6 +1330,32 @@
             border-radius: 10px;
         }
 
+        /* Experience responsibility bullets */
+        .experience-entry ul {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .qa-samples-intro {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .experience-entry li > .material-symbols-outlined {
+            flex: 0 0 auto;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        /* Avoid stretched word spacing in narrow mobile layouts. */
+        @media (max-width: 767px) {
+            .experience-entry ul,
+            .qa-samples-intro {
+                text-align: left;
+                text-justify: auto;
+            }
+        }
+
         /* Dark theme */
         html.dark body { background: #0b1220; color: #e5edf8; }
         html.dark nav, html.dark #mobile-menu, html.dark footer, html.dark .bg-white, html.dark .bg-surface-container-lowest { background-color: #111b2e !important; }

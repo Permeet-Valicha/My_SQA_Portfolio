@@ -18,33 +18,113 @@ document.addEventListener('DOMContentLoaded', function () {
         experienceTrigger?.focus();
     }
 
-    document.querySelectorAll('[data-experience-letter]').forEach(button => {
-        button.addEventListener('click', () => {
-            if (!experienceModal || !experiencePreview || !experienceDownload) return;
-            const imagePath = button.dataset.experienceLetter;
-            experienceTrigger = button;
-            experiencePreview.src = imagePath;
-            experiencePreview.alt = `${button.dataset.experienceTitle || 'Experience letter'} preview`;
-            experienceTitle.textContent = button.dataset.experienceTitle || 'Experience Letter';
-            experienceDownload.href = imagePath;
-            experienceDownload.download = imagePath.split('/').pop() || 'experience-letter.jpg';
-            experienceModal.classList.remove('hidden');
-            experienceModal.classList.add('flex');
-            experienceModal.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('overflow-hidden');
-            experienceCloseButton?.focus();
-        });
+    function openExperienceLetter(button) {
+        if (!experienceModal || !experiencePreview || !experienceDownload) return;
+        const imagePath = button.dataset.experienceLetter;
+        experienceTrigger = button;
+        experiencePreview.src = imagePath;
+        experiencePreview.alt = `${button.dataset.experienceTitle || 'Experience letter'} preview`;
+        experienceTitle.textContent = button.dataset.experienceTitle || 'Experience Letter';
+        experienceDownload.href = imagePath;
+        experienceDownload.download = imagePath.split('/').pop() || 'experience-letter.jpg';
+        experienceModal.classList.remove('hidden');
+        experienceModal.classList.add('flex');
+        experienceModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('overflow-hidden');
+        experienceCloseButton?.focus();
+    }
+
+    document.addEventListener('click', event => {
+        const button = event.target.closest('[data-experience-letter]');
+        if (button) openExperienceLetter(button);
     });
 
     // Only former employers can display a letter. "Present" means the job is still current.
-    document.querySelectorAll('.experience-entry').forEach(entry => {
+    function updateExperienceLetterButtons(scope = document) {
+        scope.querySelectorAll('.experience-entry').forEach(entry => {
         const period = entry.querySelector('.experience-date')?.textContent || '';
         const letterButton = entry.querySelector('[data-experience-letter]');
         if (!letterButton || /\bpresent\b/i.test(period)) return;
 
         letterButton.classList.remove('hidden');
         letterButton.classList.add('inline-flex');
-    });
+        });
+    }
+
+    updateExperienceLetterButtons();
+
+    // Paste a published Google Sheet CSV URL here once. After that, future edits happen only in Google Sheets.
+    const GOOGLE_SHEET_EXPERIENCE_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRqd_jeruC8e1swrlIpvfJYwijMCXTLY-Tty4Lz9xouU5fRJfO6fSIW65TC8Nv_dCPheHUnSSzhCMic/pub?output=csv';
+    const experienceList = document.getElementById('experience-list');
+
+    function parseCsv(csv) {
+        const rows = [];
+        let row = [], value = '', quoted = false;
+        for (let i = 0; i < csv.length; i += 1) {
+            const char = csv[i], next = csv[i + 1];
+            if (char === '"' && quoted && next === '"') { value += '"'; i += 1; }
+            else if (char === '"') quoted = !quoted;
+            else if (char === ',' && !quoted) { row.push(value.trim()); value = ''; }
+            else if ((char === '\n' || char === '\r') && !quoted) {
+                if (char === '\r' && next === '\n') i += 1;
+                row.push(value.trim());
+                if (row.some(cell => cell)) rows.push(row);
+                row = []; value = '';
+            } else value += char;
+        }
+        if (value || row.length) { row.push(value.trim()); rows.push(row); }
+        const headers = rows.shift().map(header => header.toLowerCase().replace(/[^a-z]/g, ''));
+        return rows.map(rowData => Object.fromEntries(headers.map((header, index) => [header, rowData[index] || ''])));
+    }
+
+    function escapeHtml(value = '') {
+        return value.replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
+    }
+
+    function renderSheetExperiences(experiences) {
+        if (!experienceList || !experiences.length) return;
+        const existingLetterImages = {
+            'weuno technologies': 'images/experience-letters/weuno-experience-letter.jfif',
+            'sapphire consultancy services': 'images/experience-letters/sapphire-experience-letter.jfif',
+            'vativeapps': 'images/experience-letters/vativeapps-experience-letter.jpg'
+        };
+        const companyLogos = {
+            'vativeapps': { src: 'images/dark-logo.png', alt: 'vativeApps', width: 130, website: 'https://vativeapps.com' },
+            'weuno technologies': { src: 'images/Weuno_logo.png', alt: 'WeUno Logo', width: 70, website: 'https://weuno.com' },
+            'sapphire consultancy services': { src: 'images/sapphire.png', alt: 'Sapphire Logo', width: 80, website: 'https://sapphire.co' }
+        };
+        experienceList.innerHTML = experiences.map((experience, index) => {
+            const company = escapeHtml(experience.company);
+            const companyKey = (experience.company || '').trim().toLowerCase();
+            const letterImage = experience.letterimage || existingLetterImages[companyKey] || '';
+            const logo = companyLogos[companyKey];
+            const role = escapeHtml(experience.role);
+            const startDate = escapeHtml(experience.startdate);
+            const endDate = escapeHtml(experience.enddate || 'Present');
+            const period = `${startDate} — ${endDate}`;
+            const companyWebsite = experience.website || logo?.website || '';
+            const companyHeading = logo
+                ? `<div class="flex items-center gap-3"><a href="${escapeHtml(companyWebsite)}" target="_blank" rel="noopener noreferrer" class="relative z-50 flex items-center gap-4 group hover:scale-[1.02] transition-all duration-300"><img src="${logo.src}" alt="${logo.alt}" class="experience-logo" style="width: ${logo.width}px; height: auto; object-fit: contain;"><h4 class="text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">${company}</h4></a></div>`
+                : `<h4 class="text-2xl font-bold text-on-surface">${companyWebsite ? `<a href="${escapeHtml(companyWebsite)}" target="_blank" rel="noopener noreferrer" class="group hover:text-primary transition-colors">${company}</a>` : company}</h4>`;
+            // Every new line in the Google Sheet Description cell becomes its own bullet point.
+            // A pipe (|) is also supported for users who prefer entering bullets on one line.
+            const duties = (experience.description || '').split(/\r?\n|\|/).filter(duty => duty.trim()).map(duty => `<li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>${escapeHtml(duty.trim())}</li>`).join('');
+            const letterButton = letterImage ? `<button type="button" data-experience-letter="${escapeHtml(letterImage)}" data-experience-title="${company} — Experience Letter" class="experience-letter-button mt-6 hidden items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white transition-all hover:bg-primary-container hover:shadow-lg"><span class="material-symbols-outlined text-base">description</span>View Experience Letter</button>` : '';
+            return `<div class="experience-entry relative pl-12 border-l-2 ${index === 0 ? 'border-primary-container' : 'border-outline-variant'} reveal active"><div class="absolute -left-[9px] top-0 w-4 h-4 ${index === 0 ? 'bg-primary ring-primary-fixed' : 'bg-outline-variant ring-surface'} rounded-full ring-4"></div><div class="flex flex-col md:flex-row md:items-center justify-between mb-4">${companyHeading}<span class="experience-date text-sm font-bold text-on-surface-variant px-3 py-1 bg-surface-container-high rounded-lg w-fit">${period}</span></div><h5 class="text-lg font-semibold text-on-surface-variant mb-4">${role}</h5><ul class="space-y-3 text-on-surface-variant max-w-3xl">${duties}</ul>${letterButton}</div>`;
+        }).join('');
+        updateExperienceLetterButtons(experienceList);
+    }
+
+    if (GOOGLE_SHEET_EXPERIENCE_CSV_URL) {
+        fetch(GOOGLE_SHEET_EXPERIENCE_CSV_URL)
+            .then(response => {
+                if (!response.ok) throw new Error('Unable to load Google Sheet');
+                return response.text();
+            })
+            .then(parseCsv)
+            .then(renderSheetExperiences)
+            .catch(() => console.warn('Google Sheet could not be loaded; showing portfolio fallback experiences.'));
+    }
 
     experienceCloseButton?.addEventListener('click', closeExperienceModal);
     experienceDownload?.addEventListener('click', async event => {
