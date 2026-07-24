@@ -42,12 +42,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Only former employers can display a letter. "Present" means the job is still current.
     function updateExperienceLetterButtons(scope = document) {
         scope.querySelectorAll('.experience-entry').forEach(entry => {
-        const period = entry.querySelector('.experience-date')?.textContent || '';
-        const letterButton = entry.querySelector('[data-experience-letter]');
-        if (!letterButton || /\bpresent\b/i.test(period)) return;
+            const period = entry.querySelector('.experience-date')?.textContent || '';
+            const letterButton = entry.querySelector('[data-experience-letter]');
+            if (!letterButton || /\bpresent\b/i.test(period)) return;
 
-        letterButton.classList.remove('hidden');
-        letterButton.classList.add('inline-flex');
+            letterButton.classList.remove('hidden');
+            letterButton.classList.add('inline-flex');
         });
     }
 
