@@ -1669,3 +1669,325 @@
         html.dark body * {
             color: #fff !important;
         }
+
+        /* ============================================
+           QA Process Timeline
+           ============================================ */
+        .qa-process-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            position: relative;
+        }
+
+        @media (max-width: 1023px) {
+            .qa-process-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 639px) {
+            .qa-process-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .qa-process-step {
+            position: relative;
+            text-align: center;
+            padding: 1.5rem 0.75rem;
+        }
+
+        .qa-process-connector {
+            position: absolute;
+            top: 2.25rem;
+            right: 0;
+            left: 50%;
+            height: 2px;
+            background: linear-gradient(to right, rgba(0, 63, 135, 0.3), rgba(0, 63, 135, 0.05));
+            pointer-events: none;
+        }
+
+        .qa-process-step:last-child .qa-process-connector {
+            display: none;
+        }
+
+        @media (max-width: 1023px) {
+            .qa-process-connector {
+                display: none;
+            }
+        }
+
+        .qa-step-number {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #003f87 0%, #0056b3 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            margin: 0 auto 0.75rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 12px rgba(0, 63, 135, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .qa-process-step:hover .qa-step-number {
+            transform: scale(1.12);
+            box-shadow: 0 8px 24px rgba(0, 63, 135, 0.45);
+        }
+
+        /* ============================================
+           Case Study Accordion
+           ============================================ */
+        .case-study-item {
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .case-study-item:hover {
+            border-color: rgba(0, 63, 135, 0.15);
+            box-shadow: 0 8px 24px rgba(0, 63, 135, 0.06);
+        }
+
+        .case-study-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            cursor: pointer;
+            user-select: none;
+            gap: 1rem;
+        }
+
+        .case-study-header:hover {
+            background: rgba(0, 63, 135, 0.02);
+        }
+
+        .case-study-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .case-study-body.open {
+            max-height: 1200px;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .case-study-chevron {
+            transition: transform 0.35s ease;
+            flex-shrink: 0;
+        }
+
+        .case-study-header.is-open .case-study-chevron {
+            transform: rotate(180deg);
+        }
+
+        /* ============================================
+           Artifact Download Cards
+           ============================================ */
+        .artifact-card {
+            position: relative;
+            overflow: hidden;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .artifact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #003f87, #115cb9);
+            transform: scaleX(0);
+            transition: transform 0.35s ease;
+            transform-origin: left;
+        }
+
+        .artifact-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .artifact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 36px rgba(0, 63, 135, 0.1);
+            border-color: rgba(0, 63, 135, 0.1);
+        }
+
+        /* ============================================
+           International Readiness Badges
+           ============================================ */
+        .international-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.25rem;
+            background: rgba(0, 63, 135, 0.05);
+            border: 1px solid rgba(0, 63, 135, 0.1);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #003f87;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .international-badge:hover {
+            background: rgba(0, 63, 135, 0.09);
+            border-color: rgba(0, 63, 135, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 63, 135, 0.08);
+        }
+
+        /* ============================================
+           Tool Cards
+           ============================================ */
+        .tool-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem 1rem;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tool-card:hover {
+            border-color: rgba(0, 63, 135, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 63, 135, 0.09);
+        }
+
+        .tool-card img {
+            width: 2.5rem;
+            height: 2.5rem;
+            object-fit: contain;
+        }
+
+        .tool-card-name {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #424752;
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        /* ============================================
+           Testing Expertise Cards
+           ============================================ */
+        .expertise-card {
+            padding: 1.25rem;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .expertise-card:hover {
+            border-color: rgba(0, 63, 135, 0.18);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 63, 135, 0.08);
+        }
+
+        /* ============================================
+           Why Hire Me Cards
+           ============================================ */
+        .why-hire-card {
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+
+        .why-hire-card:hover {
+            background: rgba(255, 255, 255, 0.11);
+            border-color: rgba(255, 255, 255, 0.22);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ============================================
+           Contact CTA Section
+           ============================================ */
+        .contact-cta-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .contact-cta-card:hover {
+            background: rgba(255, 255, 255, 0.13);
+            border-color: rgba(255, 255, 255, 0.22);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           Dark Mode — New Sections
+           ============================================ */
+        html.dark .artifact-card,
+        html.dark .case-study-item,
+        html.dark .tool-card,
+        html.dark .expertise-card {
+            background: #111b2e !important;
+            border-color: #2a3d57 !important;
+        }
+
+        html.dark .international-badge {
+            background: rgba(96, 165, 250, 0.1) !important;
+            border-color: rgba(147, 197, 253, 0.2) !important;
+            color: #93c5fd !important;
+        }
+
+        html.dark .case-study-header:hover {
+            background: rgba(96, 165, 250, 0.05) !important;
+        }
+
+        html.dark .tool-card-name {
+            color: #dbeafe !important;
+        }
+
+        html.dark .qa-process-connector {
+            background: linear-gradient(to right, rgba(147, 197, 253, 0.25), rgba(147, 197, 253, 0.03));
+        }
+
+        html.dark .qa-step-number {
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+        }
+
+        html.dark .why-hire-card {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            background: rgba(255, 255, 255, 0.04) !important;
+        }
+
+        html.dark .contact-cta-card {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
