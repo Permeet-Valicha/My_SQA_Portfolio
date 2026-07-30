@@ -1008,4 +1008,40 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// ============================================
+// Case Study Accordion
+// ============================================
+document.addEventListener('DOMContentLoaded', function () {
+    const caseStudyHeaders = document.querySelectorAll('.case-study-header');
+
+    caseStudyHeaders.forEach(function (header) {
+        header.addEventListener('click', function () {
+            const body = this.nextElementSibling;
+            const isOpen = body.classList.contains('open');
+
+            // Close all other case studies
+            document.querySelectorAll('.case-study-body').forEach(function (b) {
+                b.classList.remove('open');
+                b.previousElementSibling.classList.remove('is-open');
+                b.previousElementSibling.setAttribute('aria-expanded', 'false');
+            });
+
+            // Toggle current
+            if (!isOpen) {
+                body.classList.add('open');
+                this.classList.add('is-open');
+                this.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        // Keyboard support for accessibility
+        header.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+});
+
 
