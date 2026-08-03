@@ -338,37 +338,6 @@
             animation-duration: 25s;
         }
 
-        /* Technical Arsenal Background Floating Icons */
-        .floating-icon {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            opacity: 0.08;
-            animation: floatBackground 8s ease-in-out infinite;
-            z-index: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tool-logo {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        @keyframes floatBackground {
-
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-30px) rotate(10deg);
-            }
-        }
-
         .vector-2 {
             top: 60%;
             left: -100px;
@@ -578,10 +547,6 @@
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
-        }
-
-        .skill-chip {
-            flex-shrink: 0;
         }
 
         /* Project Marquee Utilities */
@@ -1600,13 +1565,6 @@
             filter: invert(1) grayscale(1) brightness(2) !important;
         }
 
-        html.dark .skill-modal-logo {
-            background: #fff;
-            border-radius: .5rem;
-            padding: .3rem;
-            filter: none !important;
-        }
-
         html.dark .certification-year {
             background-color: #1d4ed8 !important;
             color: #eff6ff !important;
@@ -1643,7 +1601,6 @@
             color: #bfdbfe !important;
         }
 
-        html.dark .tool-logo,
         html.dark img[alt*="Logo"] {
             filter: brightness(1.12) contrast(1.05);
         }
