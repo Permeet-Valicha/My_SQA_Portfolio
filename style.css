@@ -1814,22 +1814,49 @@
         /* ============================================
            Tool Cards
            ============================================ */
+        .tools-carousel-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .tools-carousel {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 0.25rem 0.1rem 1rem;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-snap-type: x proximity;
+            flex: 1;
+        }
+
+        .tools-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
         .tool-card {
+            flex: 0 0 min(11rem, calc(100% - 2rem));
+            min-height: 10.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 0.75rem;
-            padding: 1.5rem 1rem;
-            background: white;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1.25rem 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 63, 135, 0.08);
             border-radius: 1rem;
+            box-shadow: 0 10px 24px rgba(0, 63, 135, 0.06);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            scroll-snap-align: start;
         }
 
         .tool-card:hover {
-            border-color: rgba(0, 63, 135, 0.15);
+            border-color: rgba(0, 63, 135, 0.18);
             transform: translateY(-5px);
-            box-shadow: 0 12px 28px rgba(0, 63, 135, 0.09);
+            box-shadow: 0 16px 32px rgba(0, 63, 135, 0.12);
         }
 
         .tool-card img {
@@ -1844,6 +1871,44 @@
             color: #424752;
             text-align: center;
             letter-spacing: 0.02em;
+        }
+
+        .tools-carousel-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.75rem;
+            height: 2.75rem;
+            border: 1px solid rgba(0, 63, 135, 0.12);
+            background: white;
+            color: #003f87;
+            border-radius: 999px;
+            box-shadow: 0 10px 24px rgba(0, 63, 135, 0.08);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .tools-carousel-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(0, 63, 135, 0.12);
+        }
+
+        .tools-carousel-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        @media (max-width: 767px) {
+            .tools-carousel-wrapper {
+                gap: 0.5rem;
+            }
+
+            .tools-carousel-btn {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
         }
 
         /* ============================================
@@ -1871,18 +1936,18 @@
            ============================================ */
         .why-hire-card {
             padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(0, 63, 135, 0.08);
             border-radius: 1rem;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(4px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 24px rgba(0, 63, 135, 0.06);
             transition: all 0.3s ease;
         }
 
         .why-hire-card:hover {
-            background: rgba(255, 255, 255, 0.11);
-            border-color: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.98);
+            border-color: rgba(0, 63, 135, 0.16);
             transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 16px 30px rgba(0, 63, 135, 0.1);
         }
 
         /* ============================================
@@ -1915,6 +1980,12 @@
         html.dark .tool-card,
         html.dark .expertise-card {
             background: #111b2e !important;
+            border-color: #2a3d57 !important;
+        }
+
+        html.dark .tools-carousel-btn {
+            background: #111b2e !important;
+            color: #dbeafe !important;
             border-color: #2a3d57 !important;
         }
 

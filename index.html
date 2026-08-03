@@ -210,18 +210,11 @@
             </div>
             <div class="hidden md:flex gap-8 items-center">
                 <a class="text-sm text-slate-600 hover:text-blue-900 transition-colors" href="#about">About</a>
-                <a class="text-sm text-slate-600 hover:text-blue-900 transition-colors" href="#testing-expertise">Skills</a>
+                <a class="text-sm text-slate-600 hover:text-blue-900 transition-colors" href="#skills-tools">Skills &amp; Tools</a>
                 <a class="text-sm text-slate-600 hover:text-blue-900 transition-colors" href="#experience">Experience</a>
-                <a class="text-sm text-slate-600 hover:text-blue-900 transition-colors"
-                    href="#certifications">Certifications</a>
                 <a class="text-sm text-slate-600 hover:text-blue-900 transition-colors" href="#projects">Projects</a>
                 <a class="text-sm text-slate-600 hover:text-blue-900 transition-colors" href="#case-studies">Case Studies</a>
-
-                <button id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"
-                    class="theme-toggle w-10 h-10 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors inline-flex items-center justify-center">
-                    <span class="material-symbols-outlined theme-icon">dark_mode</span>
-                    <span class="sr-only">Toggle dark mode</span>
-                </button>
+                <a class="text-sm text-slate-600 hover:text-blue-900 transition-colors" href="#certifications">Certifications</a>
 
                 <button id="contact-btn-nav"
                     class="bg-primary text-on-primary px-6 py-2 rounded-lg font-semibold hover:bg-primary-container transition-colors inline-flex items-center justify-center">Contact
@@ -229,12 +222,6 @@
             </div>
             <!-- Mobile Menu Icon -->
             <div class="md:hidden flex items-center gap-3">
-                <button id="theme-toggle-mobile" type="button" aria-label="Switch to dark mode"
-                    title="Switch to dark mode"
-                    class="theme-toggle w-10 h-10 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors inline-flex items-center justify-center">
-                    <span class="material-symbols-outlined theme-icon">dark_mode</span>
-                    <span class="sr-only">Toggle dark mode</span>
-                </button>
                 <div class="cursor-pointer" id="mobile-menu-btn">
                     <span class="material-symbols-outlined text-primary text-3xl">menu</span>
                 </div>
@@ -281,15 +268,10 @@
                     <span class="material-symbols-outlined">science</span>
                     <span class="text-sm font-medium">Case Studies</span>
                 </a>
-                <a href="#testing-expertise"
+                <a href="#skills-tools"
                     class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
                     <span class="material-symbols-outlined">verified</span>
-                    <span class="text-sm font-medium">Skills</span>
-                </a>
-                <a href="#tools"
-                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
-                    <span class="material-symbols-outlined">build</span>
-                    <span class="text-sm font-medium">Tools</span>
+                    <span class="text-sm font-medium">Skills &amp; Tools</span>
                 </a>
                 <a href="#qa-artifacts"
                     class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
@@ -1263,83 +1245,169 @@
             </div>
         </div>
     </section>
-    <!-- Testing Expertise Section -->
-    <section class="py-12 bg-surface-container-low relative overflow-hidden" id="testing-expertise" aria-label="Testing Expertise">
+    <!-- Skills & Tools Section -->
+    <section class="py-12 bg-surface-container-low relative overflow-hidden" id="skills-tools" aria-label="Skills & Tools">
         <div class="editorial-margin relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-                <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3">WHAT I TEST</h3>
-                <h2 class="text-4xl font-headline font-bold text-on-surface">Testing Expertise</h2>
+            <div class="text-center max-w-2xl mx-auto mb-8 reveal">
+                <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3 text-[0.7rem] sm:text-[0.8rem]">Skills &amp; Tools</h3>
+                <h2 class="text-2xl sm:text-3xl font-headline font-bold text-on-surface">What I Bring to the Team</h2>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 reveal" style="transition-delay: 200ms;">
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">fact_check</span>
-                    <h4 class="font-bold text-on-surface text-sm">Manual Testing</h4>
-                    <p class="text-xs text-on-surface-variant">End-to-end functional validation</p>
+
+            <div class="mb-10 reveal" style="transition-delay: 150ms;">
+                <div class="text-center max-w-2xl mx-auto mb-6">
+                    <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-2 text-[0.7rem] sm:text-[0.8rem]">Testing Expertise</h3>
                 </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">api</span>
-                    <h4 class="font-bold text-on-surface text-sm">API Testing</h4>
-                    <p class="text-xs text-on-surface-variant">REST, endpoints, data integrity</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">fact_check</span>
+                        <h4 class="font-bold text-on-surface text-sm">Manual Testing</h4>
+                        <p class="text-xs text-on-surface-variant">End-to-end functional validation</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">api</span>
+                        <h4 class="font-bold text-on-surface text-sm">API Testing</h4>
+                        <p class="text-xs text-on-surface-variant">REST, endpoints, data integrity</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">phone_android</span>
+                        <h4 class="font-bold text-on-surface text-sm">Mobile Testing</h4>
+                        <p class="text-xs text-on-surface-variant">Android &amp; iOS validation</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">web</span>
+                        <h4 class="font-bold text-on-surface text-sm">Web Testing</h4>
+                        <p class="text-xs text-on-surface-variant">Cross-browser, responsive</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">settings_backup_restore</span>
+                        <h4 class="font-bold text-on-surface text-sm">Regression</h4>
+                        <p class="text-xs text-on-surface-variant">Stability across releases</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">bolt</span>
+                        <h4 class="font-bold text-on-surface text-sm">Smoke Testing</h4>
+                        <p class="text-xs text-on-surface-variant">Build verification checks</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                        <h4 class="font-bold text-on-surface text-sm">Sanity Testing</h4>
+                        <p class="text-xs text-on-surface-variant">Focused module validation</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">science</span>
+                        <h4 class="font-bold text-on-surface text-sm">Exploratory</h4>
+                        <p class="text-xs text-on-surface-variant">Unscripted defect discovery</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">touch_app</span>
+                        <h4 class="font-bold text-on-surface text-sm">Usability</h4>
+                        <p class="text-xs text-on-surface-variant">User experience validation</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">accessibility</span>
+                        <h4 class="font-bold text-on-surface text-sm">Accessibility</h4>
+                        <p class="text-xs text-on-surface-variant">WCAG &amp; a11y compliance</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">devices</span>
+                        <h4 class="font-bold text-on-surface text-sm">Cross Browser</h4>
+                        <p class="text-xs text-on-surface-variant">Chrome, Safari, Firefox, Edge</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">smartphone</span>
+                        <h4 class="font-bold text-on-surface text-sm">Cross Platform</h4>
+                        <p class="text-xs text-on-surface-variant">Web, mobile, tablet coverage</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">speed</span>
+                        <h4 class="font-bold text-on-surface text-sm">Performance Basics</h4>
+                        <p class="text-xs text-on-surface-variant">Load &amp; responsiveness checks</p>
+                    </div>
+                    <div class="expertise-card">
+                        <span class="material-symbols-outlined text-primary">security</span>
+                        <h4 class="font-bold text-on-surface text-sm">Security Awareness</h4>
+                        <p class="text-xs text-on-surface-variant">Input validation &amp; auth checks</p>
+                    </div>
                 </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">phone_android</span>
-                    <h4 class="font-bold text-on-surface text-sm">Mobile Testing</h4>
-                    <p class="text-xs text-on-surface-variant">Android & iOS validation</p>
+            </div>
+
+            <div class="mt-10 reveal" style="transition-delay: 200ms;">
+                <div class="text-center max-w-2xl mx-auto mb-6">
+                    <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-2 text-[0.7rem] sm:text-[0.8rem]">My Toolkit</h3>
                 </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">web</span>
-                    <h4 class="font-bold text-on-surface text-sm">Web Testing</h4>
-                    <p class="text-xs text-on-surface-variant">Cross-browser, responsive</p>
-                </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">settings_backup_restore</span>
-                    <h4 class="font-bold text-on-surface text-sm">Regression</h4>
-                    <p class="text-xs text-on-surface-variant">Stability across releases</p>
-                </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">bolt</span>
-                    <h4 class="font-bold text-on-surface text-sm">Smoke Testing</h4>
-                    <p class="text-xs text-on-surface-variant">Build verification checks</p>
-                </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">check_circle</span>
-                    <h4 class="font-bold text-on-surface text-sm">Sanity Testing</h4>
-                    <p class="text-xs text-on-surface-variant">Focused module validation</p>
-                </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">science</span>
-                    <h4 class="font-bold text-on-surface text-sm">Exploratory</h4>
-                    <p class="text-xs text-on-surface-variant">Unscripted defect discovery</p>
-                </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">touch_app</span>
-                    <h4 class="font-bold text-on-surface text-sm">Usability</h4>
-                    <p class="text-xs text-on-surface-variant">User experience validation</p>
-                </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">accessibility</span>
-                    <h4 class="font-bold text-on-surface text-sm">Accessibility</h4>
-                    <p class="text-xs text-on-surface-variant">WCAG & a11y compliance</p>
-                </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">devices</span>
-                    <h4 class="font-bold text-on-surface text-sm">Cross Browser</h4>
-                    <p class="text-xs text-on-surface-variant">Chrome, Safari, Firefox, Edge</p>
-                </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">smartphone</span>
-                    <h4 class="font-bold text-on-surface text-sm">Cross Platform</h4>
-                    <p class="text-xs text-on-surface-variant">Web, mobile, tablet coverage</p>
-                </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">speed</span>
-                    <h4 class="font-bold text-on-surface text-sm">Performance Basics</h4>
-                    <p class="text-xs text-on-surface-variant">Load & responsiveness checks</p>
-                </div>
-                <div class="expertise-card">
-                    <span class="material-symbols-outlined text-primary">security</span>
-                    <h4 class="font-bold text-on-surface text-sm">Security Awareness</h4>
-                    <p class="text-xs text-on-surface-variant">Input validation & auth checks</p>
+                <div class="tools-carousel-wrapper">
+                    <button type="button" class="tools-carousel-btn tools-carousel-prev" aria-label="Scroll tools backward">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <div id="tools-carousel" class="tools-carousel">
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Jira" loading="lazy">
+                            <span class="tool-card-name">Jira</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" loading="lazy">
+                            <span class="tool-card-name">VS Code</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" loading="lazy">
+                            <span class="tool-card-name">Postman</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swagger/swagger-original.svg" alt="Swagger" loading="lazy">
+                            <span class="tool-card-name">Swagger</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" loading="lazy">
+                            <span class="tool-card-name">Firebase</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy">
+                            <span class="tool-card-name">Git</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy">
+                            <span class="tool-card-name">GitHub</span>
+                        </div>
+                        <div class="tool-card">
+                            <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">developer_mode</span>
+                            <span class="tool-card-name">DevTools</span>
+                        </div>
+                        <div class="tool-card">
+                            <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">auto_fix_high</span>
+                            <span class="tool-card-name">AI Tools</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" loading="lazy">
+                            <span class="tool-card-name">Figma</span>
+                        </div>
+                        <div class="tool-card">
+                            <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">android</span>
+                            <span class="tool-card-name">Android Studio</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://jmeter.apache.org/images/logo.svg" alt="JMeter" loading="lazy" style="width: 2.5rem; height: 2.5rem; object-fit: contain;">
+                            <span class="tool-card-name">JMeter</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" loading="lazy">
+                            <span class="tool-card-name">SQL</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" alt="Selenium" loading="lazy">
+                            <span class="tool-card-name">Selenium</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg" alt="Playwright" loading="lazy">
+                            <span class="tool-card-name">Playwright</span>
+                        </div>
+                        <div class="tool-card">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy">
+                            <span class="tool-card-name">Python</span>
+                        </div>
+                    </div>
+                    <button type="button" class="tools-carousel-btn tools-carousel-next" aria-label="Scroll tools forward">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1348,9 +1416,9 @@
     <!-- QA Process Timeline Section -->
     <section class="py-12 bg-surface relative overflow-hidden" id="qa-process" aria-label="QA Process">
         <div class="editorial-margin relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-                <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3">How I Work</h3>
-                <h2 class="text-4xl font-headline font-bold text-on-surface">QA Process</h2>
+            <div class="text-center max-w-2xl mx-auto mb-8 reveal">
+                <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-2">How I Work</h3>
+                <h2 class="text-3xl sm:text-4xl font-headline font-bold text-on-surface">QA Process</h2>
             </div>
             <div class="qa-process-grid reveal" style="transition-delay: 200ms;">
                 <div class="qa-process-step">
@@ -1393,82 +1461,6 @@
                     <div class="qa-step-number">7</div>
                     <h4 class="font-bold text-on-surface text-sm mb-1">Release Validation</h4>
                     <p class="text-xs text-on-surface-variant">Final sign-off & UAT</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tools Section -->
-    <section class="py-12 bg-surface-container-low relative overflow-hidden" id="tools" aria-label="Tools & Technologies">
-        <div class="editorial-margin relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-                <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3">My Toolkit</h3>
-                <h2 class="text-4xl font-headline font-bold text-on-surface">Tools & Technologies</h2>
-            </div>
-            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 reveal" style="transition-delay: 200ms;">
-                <div class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Jira" loading="lazy">
-                    <span class="tool-card-name">Jira</span>
-                </div>
-                <div class="tool-card">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">description</span>
-                    <span class="tool-card-name">Confluence</span>
-                </div>
-                <div class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" loading="lazy">
-                    <span class="tool-card-name">Postman</span>
-                </div>
-                <div class="tool-card">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">api</span>
-                    <span class="tool-card-name">Swagger</span>
-                </div>
-                <div class="tool-card">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">local_fire_department</span>
-                    <span class="tool-card-name">Firebase</span>
-                </div>
-                <div class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="Git" class="github-logo" loading="lazy">
-                    <span class="tool-card-name">Git</span>
-                </div>
-                <div class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="github-logo" loading="lazy">
-                    <span class="tool-card-name">GitHub</span>
-                </div>
-                <div class="tool-card">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">developer_mode</span>
-                    <span class="tool-card-name">DevTools</span>
-                </div>
-                <div class="tool-card">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">sensors</span>
-                    <span class="tool-card-name">Charles Proxy</span>
-                </div>
-                <div class="tool-card">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">design_services</span>
-                    <span class="tool-card-name">Figma</span>
-                </div>
-                <div class="tool-card">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">android</span>
-                    <span class="tool-card-name">Android Studio</span>
-                </div>
-                <div class="tool-card">
-                    <span class="material-symbols-outlined text-primary" style="font-size: 2.5rem;">phone_iphone</span>
-                    <span class="tool-card-name">Xcode</span>
-                </div>
-                <div class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" loading="lazy">
-                    <span class="tool-card-name">SQL</span>
-                </div>
-                <div class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" alt="Selenium" loading="lazy">
-                    <span class="tool-card-name">Selenium</span>
-                </div>
-                <div class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg" alt="Playwright" loading="lazy">
-                    <span class="tool-card-name">Playwright</span>
-                </div>
-                <div class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy">
-                    <span class="tool-card-name">Python</span>
                 </div>
             </div>
         </div>
@@ -1546,126 +1538,73 @@
         </div>
     </section>
 
-    <!-- QA Artifacts Section -->
-    <section class="py-12 bg-surface-container-low relative overflow-hidden" id="qa-artifacts" aria-label="QA Artifacts">
-        <div class="editorial-margin relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-                <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3">Downloadable Resources</h3>
-                <h2 class="text-4xl font-headline font-bold text-on-surface">QA Artifacts</h2>
-                <p class="text-on-surface-variant mt-3">Real QA documentation samples from my testing work.</p>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 reveal" style="transition-delay: 200ms;">
-                <a href="#" class="artifact-card group">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">description</span>
-                    <h4 class="font-bold text-on-surface text-sm mb-1">Test Plan</h4>
-                    <p class="text-xs text-on-surface-variant">Comprehensive test strategy document</p>
-                    <span class="text-xs font-bold text-primary mt-3 inline-flex items-center gap-1">Download <span class="material-symbols-outlined" style="font-size: 0.875rem;">download</span></span>
-                </a>
-                <a href="#" class="artifact-card group">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">fact_check</span>
-                    <h4 class="font-bold text-on-surface text-sm mb-1">Test Cases</h4>
-                    <p class="text-xs text-on-surface-variant">Detailed test case specifications</p>
-                    <span class="text-xs font-bold text-primary mt-3 inline-flex items-center gap-1">Download <span class="material-symbols-outlined" style="font-size: 0.875rem;">download</span></span>
-                </a>
-                <a href="#" class="artifact-card group">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">bug_report</span>
-                    <h4 class="font-bold text-on-surface text-sm mb-1">Bug Reports</h4>
-                    <p class="text-xs text-on-surface-variant">Structured defect report samples</p>
-                    <span class="text-xs font-bold text-primary mt-3 inline-flex items-center gap-1">Download <span class="material-symbols-outlined" style="font-size: 0.875rem;">download</span></span>
-                </a>
-                <a href="#" class="artifact-card group">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">api</span>
-                    <h4 class="font-bold text-on-surface text-sm mb-1">Postman Collection</h4>
-                    <p class="text-xs text-on-surface-variant">API test collection samples</p>
-                    <span class="text-xs font-bold text-primary mt-3 inline-flex items-center gap-1">Download <span class="material-symbols-outlined" style="font-size: 0.875rem;">download</span></span>
-                </a>
-                <a href="#" class="artifact-card group">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">code</span>
-                    <h4 class="font-bold text-on-surface text-sm mb-1">API Documentation</h4>
-                    <p class="text-xs text-on-surface-variant">Endpoint documentation samples</p>
-                    <span class="text-xs font-bold text-primary mt-3 inline-flex items-center gap-1">Download <span class="material-symbols-outlined" style="font-size: 0.875rem;">download</span></span>
-                </a>
-                <a href="#" class="artifact-card group">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">database</span>
-                    <h4 class="font-bold text-on-surface text-sm mb-1">SQL Practice</h4>
-                    <p class="text-xs text-on-surface-variant">Database query validation samples</p>
-                    <span class="text-xs font-bold text-primary mt-3 inline-flex items-center gap-1">Download <span class="material-symbols-outlined" style="font-size: 0.875rem;">download</span></span>
-                </a>
-                <div class="artifact-card group opacity-60 cursor-not-allowed">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">smart_toy</span>
-                    <h4 class="font-bold text-on-surface text-sm mb-1">Automation Scripts</h4>
-                    <p class="text-xs text-on-surface-variant">Coming Soon</p>
-                    <span class="text-xs font-bold text-on-surface-variant mt-3 inline-flex items-center gap-1">Coming Soon <span class="material-symbols-outlined" style="font-size: 0.875rem;">schedule</span></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Why Hire Me Section -->
-    <section class="py-14 bg-primary relative overflow-hidden" id="why-hire-me" aria-label="Why Hire Me">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-20">
-            <div class="circuit-line horizontal top-[25%]"></div>
-            <div class="circuit-line horizontal top-[75%] animation-delay-2"></div>
+    <section class="py-14 bg-surface relative overflow-hidden" id="why-hire-me" aria-label="Why Hire Me">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+            <div class="circuit-line horizontal top-[20%]"></div>
+            <div class="circuit-line horizontal top-[70%] animation-delay-2"></div>
+            <div class="circuit-line vertical left-[15%]"></div>
+            <div class="circuit-line vertical right-[18%] animation-delay-1"></div>
         </div>
         <div class="editorial-margin relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-                <h3 class="text-label text-on-primary-container font-bold tracking-[0.2em] uppercase mb-3">What Sets Me Apart</h3>
-                <h2 class="text-4xl font-headline font-bold text-on-primary">Why Hire Me</h2>
+            <div class="text-center max-w-2xl mx-auto mb-6 reveal">
+                <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-2">What Sets Me Apart</h3>
+                <h2 class="text-3xl sm:text-4xl font-headline font-bold text-on-surface">Why Hire Me</h2>
+                <p class="mt-2 text-sm sm:text-base text-on-surface-variant">A quality-first mindset shaped by analytical thinking, strong communication, and hands-on delivery across web, mobile, API, and enterprise platforms.</p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal" style="transition-delay: 200ms;">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 reveal" style="transition-delay: 200ms;">
                 <div class="why-hire-card">
-                    <span class="material-symbols-outlined text-on-primary-container text-3xl mb-3">psychology</span>
-                    <h4 class="font-bold text-on-primary text-sm mb-1">Strong Analytical Skills</h4>
-                    <p class="text-xs text-on-primary-container opacity-80">Break down complex systems into testable components</p>
+                    <span class="material-symbols-outlined text-primary text-3xl mb-3">psychology</span>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">Strong Analytical Skills</h4>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Break down complex systems into clear, testable flows.</p>
                 </div>
                 <div class="why-hire-card">
-                    <span class="material-symbols-outlined text-on-primary-container text-3xl mb-3">search</span>
-                    <h4 class="font-bold text-on-primary text-sm mb-1">Excellent Bug Investigation</h4>
-                    <p class="text-xs text-on-primary-container opacity-80">Deep-dive root cause analysis for every defect</p>
+                    <span class="material-symbols-outlined text-primary text-3xl mb-3">search</span>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">Excellent Bug Investigation</h4>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Go beyond symptoms to find root causes and prevent regressions.</p>
                 </div>
                 <div class="why-hire-card">
-                    <span class="material-symbols-outlined text-on-primary-container text-3xl mb-3">visibility</span>
-                    <h4 class="font-bold text-on-primary text-sm mb-1">Detail Oriented</h4>
-                    <p class="text-xs text-on-primary-container opacity-80">Catch edge cases others miss</p>
+                    <span class="material-symbols-outlined text-primary text-3xl mb-3">visibility</span>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">Detail Oriented</h4>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Catch edge cases others miss before they become production issues.</p>
                 </div>
                 <div class="why-hire-card">
-                    <span class="material-symbols-outlined text-on-primary-container text-3xl mb-3">verified</span>
-                    <h4 class="font-bold text-on-primary text-sm mb-1">Quality Focused</h4>
-                    <p class="text-xs text-on-primary-container opacity-80">Quality-first mindset in every deliverable</p>
+                    <span class="material-symbols-outlined text-primary text-3xl mb-3">verified</span>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">Quality Focused</h4>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Bring a quality-first mindset to every release and deliverable.</p>
                 </div>
                 <div class="why-hire-card">
-                    <span class="material-symbols-outlined text-on-primary-container text-3xl mb-3">forum</span>
-                    <h4 class="font-bold text-on-primary text-sm mb-1">Excellent Communication</h4>
-                    <p class="text-xs text-on-primary-container opacity-80">Clear, concise bug reports & updates</p>
+                    <span class="material-symbols-outlined text-primary text-3xl mb-3">forum</span>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">Excellent Communication</h4>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Write clear bug reports and keep stakeholders aligned.</p>
                 </div>
                 <div class="why-hire-card">
-                    <span class="material-symbols-outlined text-on-primary-container text-3xl mb-3">school</span>
-                    <h4 class="font-bold text-on-primary text-sm mb-1">Fast Learner</h4>
-                    <p class="text-xs text-on-primary-container opacity-80">Quickly adapt to new domains & tools</p>
+                    <span class="material-symbols-outlined text-primary text-3xl mb-3">school</span>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">Fast Learner</h4>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Adapt quickly to new domains, products, and tools.</p>
                 </div>
                 <div class="why-hire-card">
-                    <span class="material-symbols-outlined text-on-primary-container text-3xl mb-3">assignment_ind</span>
-                    <h4 class="font-bold text-on-primary text-sm mb-1">Ownership Mindset</h4>
-                    <p class="text-xs text-on-primary-container opacity-80">Take full responsibility for quality outcomes</p>
+                    <span class="material-symbols-outlined text-primary text-3xl mb-3">assignment_ind</span>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">Ownership Mindset</h4>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Take full responsibility for quality outcomes from planning to release.</p>
                 </div>
                 <div class="why-hire-card">
-                    <span class="material-symbols-outlined text-on-primary-container text-3xl mb-3">groups</span>
-                    <h4 class="font-bold text-on-primary text-sm mb-1">Cross-functional Collaboration</h4>
-                    <p class="text-xs text-on-primary-container opacity-80">Work seamlessly with devs, PMs & designers</p>
+                    <span class="material-symbols-outlined text-primary text-3xl mb-3">groups</span>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">Cross-functional Collaboration</h4>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Work smoothly with developers, PMs, and design teams.</p>
                 </div>
             </div>
 
-            <!-- Social Proof — LinkedIn Recommendations -->
-            <div class="mt-10 pt-8 border-t border-on-primary-container/20 reveal" style="transition-delay: 400ms;">
+            <div class="mt-10 pt-8 border-t border-primary/10 reveal" style="transition-delay: 400ms;">
                 <div class="text-center max-w-xl mx-auto">
-                    <span class="material-symbols-outlined text-on-primary-container text-3xl mb-2">workspace_premium</span>
-                    <h3 class="text-xl font-headline font-bold text-on-primary mb-2">Trusted by Peers & Leaders</h3>
-                    <p class="text-sm text-on-primary-container opacity-80 mb-5">
+                    <span class="material-symbols-outlined text-primary text-3xl mb-2">workspace_premium</span>
+                    <h3 class="text-xl font-headline font-bold text-on-surface mb-2">Trusted by Peers & Leaders</h3>
+                    <p class="text-sm text-on-surface-variant mb-5">
                         See what colleagues and managers have to say about my work ethic, testing skills, and collaboration.
                     </p>
                     <a href="https://www.linkedin.com/in/permeet-valicha-016511210/details/recommendations/?detailScreenTabIndex=0" 
                        target="_blank" rel="noopener noreferrer"
-                       class="inline-flex items-center gap-2 rounded-xl bg-white/20 px-6 py-3 text-sm font-bold text-on-primary shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/30 hover:shadow-lg backdrop-blur-sm">
+                       class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-bold text-on-primary shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-primary-container hover:shadow-lg">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" 
                              class="w-4 h-4 brightness-0 invert" alt="">
                         View Recommendations on LinkedIn
@@ -1684,92 +1623,31 @@
                 <h2 class="text-4xl font-headline font-bold text-on-surface">International Readiness</h2>
                 <p class="text-on-surface-variant mt-3">Ready to collaborate with international product teams across time zones.</p>
             </div>
-            <div class="flex flex-wrap justify-center gap-3 reveal" style="transition-delay: 200ms;">
-                <span class="international-badge">
-                    <span class="material-symbols-outlined" style="font-size: 1.125rem;">flight_takeoff</span>
+            <div class="flex flex-wrap justify-center gap-2 reveal" style="transition-delay: 200ms;">
+                <span class="international-badge px-3 py-2 text-[0.72rem] sm:text-[0.75rem]">
+                    <span class="material-symbols-outlined" style="font-size: 1rem;">flight_takeoff</span>
                     Open to Relocation
                 </span>
-                <span class="international-badge">
-                    <span class="material-symbols-outlined" style="font-size: 1.125rem;">wifi</span>
+                <span class="international-badge px-3 py-2 text-[0.72rem] sm:text-[0.75rem]">
+                    <span class="material-symbols-outlined" style="font-size: 1rem;">wifi</span>
                     Remote Ready
                 </span>
-                <span class="international-badge">
-                    <span class="material-symbols-outlined" style="font-size: 1.125rem;">public</span>
+                <span class="international-badge px-3 py-2 text-[0.72rem] sm:text-[0.75rem]">
+                    <span class="material-symbols-outlined" style="font-size: 1rem;">public</span>
                     International Collaboration
                 </span>
-                <span class="international-badge">
-                    <span class="material-symbols-outlined" style="font-size: 1.125rem;">schedule</span>
+                <span class="international-badge px-3 py-2 text-[0.72rem] sm:text-[0.75rem]">
+                    <span class="material-symbols-outlined" style="font-size: 1rem;">schedule</span>
                     Flexible Time Zones
                 </span>
-                <span class="international-badge">
-                    <span class="material-symbols-outlined" style="font-size: 1.125rem;">school</span>
+                <span class="international-badge px-3 py-2 text-[0.72rem] sm:text-[0.75rem]">
+                    <span class="material-symbols-outlined" style="font-size: 1rem;">school</span>
                     Continuous Learner
                 </span>
-                <span class="international-badge">
-                    <span class="material-symbols-outlined" style="font-size: 1.125rem;">sync</span>
+                <span class="international-badge px-3 py-2 text-[0.72rem] sm:text-[0.75rem]">
+                    <span class="material-symbols-outlined" style="font-size: 1rem;">sync</span>
                     Agile Mindset
                 </span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact CTA Section -->
-    <section class="py-14 bg-primary relative overflow-hidden" id="contact-cta" aria-label="Get in Touch">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-20">
-            <div class="circuit-line horizontal top-[30%]"></div>
-            <div class="circuit-line horizontal top-[70%] animation-delay-3"></div>
-            <div class="circuit-line vertical left-[30%]"></div>
-            <div class="circuit-line vertical right-[30%] animation-delay-2"></div>
-        </div>
-        <div class="editorial-margin relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-                <h3 class="text-label text-on-primary-container font-bold tracking-[0.2em] uppercase mb-3">Let's Connect</h3>
-                <h2 class="text-4xl font-headline font-bold text-on-primary">Get in Touch</h2>
-                <p class="text-on-primary-container mt-3">Available for international opportunities, relocation, and remote roles. Let's build quality software together.</p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto reveal" style="transition-delay: 200ms;">
-                <a href="https://www.linkedin.com/in/permeet-valicha-016511210/" target="_blank" rel="noopener noreferrer" class="contact-cta-card text-on-primary">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" class="w-8 h-8" alt="LinkedIn" style="filter: brightness(0) invert(1);">
-                    <div>
-                        <p class="text-[10px] font-bold text-on-primary-container uppercase tracking-widest">LinkedIn</p>
-                        <p class="font-bold text-sm">/permeet-valicha</p>
-                    </div>
-                </a>
-                <a href="mailto:permeetvalicha@gmail.com" class="contact-cta-card text-on-primary">
-                    <span class="material-symbols-outlined text-on-primary-container text-2xl">mail</span>
-                    <div>
-                        <p class="text-[10px] font-bold text-on-primary-container uppercase tracking-widest">Email</p>
-                        <p class="font-bold text-sm">permeetvalicha@gmail.com</p>
-                    </div>
-                </a>
-                <a href="https://github.com/permeetvalicha" target="_blank" rel="noopener noreferrer" class="contact-cta-card text-on-primary">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="w-8 h-8" alt="GitHub" style="filter: brightness(0) invert(1);">
-                    <div>
-                        <p class="text-[10px] font-bold text-on-primary-container uppercase tracking-widest">GitHub</p>
-                        <p class="font-bold text-sm">/permeetvalicha</p>
-                    </div>
-                </a>
-                <a href="Permeet_Valicha_QA_Resume.pdf" download class="contact-cta-card text-on-primary">
-                    <span class="material-symbols-outlined text-on-primary-container text-2xl">description</span>
-                    <div>
-                        <p class="text-[10px] font-bold text-on-primary-container uppercase tracking-widest">Resume</p>
-                        <p class="font-bold text-sm">Download CV (PDF)</p>
-                    </div>
-                </a>
-                <a href="https://wa.me/923022081313" target="_blank" rel="noopener noreferrer" class="contact-cta-card text-on-primary">
-                    <span class="material-symbols-outlined text-on-primary-container text-2xl">call</span>
-                    <div>
-                        <p class="text-[10px] font-bold text-on-primary-container uppercase tracking-widest">Phone</p>
-                        <p class="font-bold text-sm">+92 302 2081313</p>
-                    </div>
-                </a>
-                <div class="contact-cta-card text-on-primary">
-                    <span class="material-symbols-outlined text-on-primary-container text-2xl">event_available</span>
-                    <div>
-                        <p class="text-[10px] font-bold text-on-primary-container uppercase tracking-widest">Availability</p>
-                        <p class="font-bold text-sm">Open to New Roles</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

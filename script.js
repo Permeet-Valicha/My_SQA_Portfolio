@@ -372,6 +372,41 @@ document.addEventListener('DOMContentLoaded', function () {
         revealObserver.observe(el);
     });
 
+    // Tools carousel
+    const toolsCarousel = document.getElementById('tools-carousel');
+    const toolsPrevButton = document.querySelector('.tools-carousel-prev');
+    const toolsNextButton = document.querySelector('.tools-carousel-next');
+
+    function updateToolsCarouselButtons() {
+        if (!toolsCarousel || !toolsPrevButton || !toolsNextButton) return;
+
+        const maxScrollLeft = toolsCarousel.scrollWidth - toolsCarousel.clientWidth;
+        toolsPrevButton.disabled = toolsCarousel.scrollLeft <= 4;
+        toolsNextButton.disabled = toolsCarousel.scrollLeft >= maxScrollLeft - 4;
+    }
+
+    if (toolsCarousel && toolsPrevButton && toolsNextButton) {
+        const getScrollAmount = () => {
+            const card = toolsCarousel.querySelector('.tool-card');
+            if (!card) return 240;
+            const styles = getComputedStyle(toolsCarousel);
+            const gap = parseFloat(styles.columnGap || styles.gap || '16');
+            return card.getBoundingClientRect().width + (Number.isFinite(gap) ? gap : 16);
+        };
+
+        toolsPrevButton.addEventListener('click', () => {
+            toolsCarousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+        });
+
+        toolsNextButton.addEventListener('click', () => {
+            toolsCarousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+        });
+
+        toolsCarousel.addEventListener('scroll', updateToolsCarouselButtons, { passive: true });
+        window.addEventListener('resize', updateToolsCarouselButtons);
+        requestAnimationFrame(updateToolsCarouselButtons);
+    }
+
     // Typing Animation Logic
     const typingElement = document.getElementById('typing-role');
     const roles = ["SQA Engineer", "Automation Tester", "Bug Hunter"];
