@@ -550,14 +550,17 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
-    // Counter Animation Logic
+// Counter Animation Logic
     const counters = document.querySelectorAll('.counter');
     const startCounter = (counter) => {
         const target = +counter.getAttribute('data-target');
         const suffix = counter.getAttribute('data-suffix') || '';
         let current = 0;
         const duration = 2000;
-        const increment = target / (duration / 16); // 60fps
+        // Use a minimum increment of 1 per frame so small targets (like 2)
+        // reach their final value almost instantly instead of counting slowly.
+        let increment = target / (duration / 16); // 60fps
+        if (increment < 1) increment = 1;
 
         const updateCount = () => {
             current += increment;
