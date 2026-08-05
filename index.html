@@ -161,8 +161,10 @@
             },
         }
     </script>
-    <link rel="icon" type="image/png" href="images/logo.png">
+<link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="style.css">
+    <!-- Chart.js for Skills Proficiency Doughnut Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 
 <body class="bg-surface font-body text-on-surface overflow-x-hidden">
@@ -912,87 +914,29 @@
     <!-- Skills & Tools Section -->
     <section class="py-12 bg-surface-container-low relative overflow-hidden" id="skills-tools" aria-label="Skills & Tools">
         <div class="editorial-margin relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-8 reveal">
+<div class="text-center max-w-2xl mx-auto mb-8 reveal">
                 <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3 text-[0.7rem] sm:text-[0.8rem]">Skills &amp; Tools</h3>
                 <h2 class="text-2xl sm:text-3xl font-headline font-bold text-on-surface">What I Bring to the Team</h2>
+                <p class="mt-3 text-sm sm:text-base text-on-surface-variant">Delivering reliable software through structured testing, quality assurance, and continuous improvement.</p>
             </div>
 
-            <div class="mb-10 reveal" style="transition-delay: 150ms;">
+<div class="mt-10 reveal" style="transition-delay: 150ms;">
                 <div class="text-center max-w-2xl mx-auto mb-6">
-                    <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-2 text-[0.7rem] sm:text-[0.8rem]">Testing Expertise</h3>
+                    <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-2 text-[0.7rem] sm:text-[0.8rem]">Skills Proficiency</h3>
+                    <p class="text-sm text-on-surface-variant">Proficiency across core testing disciplines</p>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">fact_check</span>
-                        <h4 class="font-bold text-on-surface text-sm">Manual Testing</h4>
-                        <p class="text-xs text-on-surface-variant">End-to-end functional validation</p>
+<div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div class="skill-chart-container mx-auto w-full max-w-[230px] sm:max-w-[255px] relative">
+                        <canvas id="skills-doughnut-chart" role="img" aria-label="Skills proficiency doughnut chart"></canvas>
+                        <div class="skill-chart-center">
+                            <div class="skill-chart-center-value" id="skills-chart-center-value">QA Engineer</div>
+                            <div class="skill-chart-center-label" id="skills-chart-center-label">Testing Expertise</div>
+                        </div>
                     </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">api</span>
-                        <h4 class="font-bold text-on-surface text-sm">API Testing</h4>
-                        <p class="text-xs text-on-surface-variant">REST, endpoints, data integrity</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">phone_android</span>
-                        <h4 class="font-bold text-on-surface text-sm">Mobile Testing</h4>
-                        <p class="text-xs text-on-surface-variant">Android &amp; iOS validation</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">web</span>
-                        <h4 class="font-bold text-on-surface text-sm">Web Testing</h4>
-                        <p class="text-xs text-on-surface-variant">Cross-browser, responsive</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">settings_backup_restore</span>
-                        <h4 class="font-bold text-on-surface text-sm">Regression</h4>
-                        <p class="text-xs text-on-surface-variant">Stability across releases</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">bolt</span>
-                        <h4 class="font-bold text-on-surface text-sm">Smoke Testing</h4>
-                        <p class="text-xs text-on-surface-variant">Build verification checks</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">check_circle</span>
-                        <h4 class="font-bold text-on-surface text-sm">Sanity Testing</h4>
-                        <p class="text-xs text-on-surface-variant">Focused module validation</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">science</span>
-                        <h4 class="font-bold text-on-surface text-sm">Exploratory</h4>
-                        <p class="text-xs text-on-surface-variant">Unscripted defect discovery</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">touch_app</span>
-                        <h4 class="font-bold text-on-surface text-sm">Usability</h4>
-                        <p class="text-xs text-on-surface-variant">User experience validation</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">accessibility</span>
-                        <h4 class="font-bold text-on-surface text-sm">Accessibility</h4>
-                        <p class="text-xs text-on-surface-variant">WCAG &amp; a11y compliance</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">devices</span>
-                        <h4 class="font-bold text-on-surface text-sm">Cross Browser</h4>
-                        <p class="text-xs text-on-surface-variant">Chrome, Safari, Firefox, Edge</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">smartphone</span>
-                        <h4 class="font-bold text-on-surface text-sm">Cross Platform</h4>
-                        <p class="text-xs text-on-surface-variant">Web, mobile, tablet coverage</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">speed</span>
-                        <h4 class="font-bold text-on-surface text-sm">Performance Basics</h4>
-                        <p class="text-xs text-on-surface-variant">Load &amp; responsiveness checks</p>
-                    </div>
-                    <div class="expertise-card">
-                        <span class="material-symbols-outlined text-primary">security</span>
-                        <h4 class="font-bold text-on-surface text-sm">Security Awareness</h4>
-                        <p class="text-xs text-on-surface-variant">Input validation &amp; auth checks</p>
-                    </div>
+                    <div id="skills-chart-legend" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
                 </div>
+                <!-- Skills Metrics Strip -->
+                <div id="skills-metrics" class="mt-10 flex flex-wrap justify-center gap-3"></div>
             </div>
 
             <div class="mt-10 reveal" style="transition-delay: 200ms;">
@@ -1669,7 +1613,41 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
+
+    <!-- AI Skills Chat Widget -->
+    <button id="ai-chat-btn" class="ai-chat-btn" aria-label="Open QA skills chat" title="Ask about my QA skills">
+        <span class="material-symbols-outlined chat-icon">chat</span>
+        <span class="material-symbols-outlined close-icon">close</span>
+    </button>
+    <div id="ai-chat-window" class="ai-chat-window" role="dialog" aria-label="QA Skills Assistant">
+        <div class="ai-chat-header">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary">smart_toy</span>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-on-surface">QA Skills Assistant</h4>
+                    <p class="text-[11px] text-on-surface-variant">Ask me about Permeet's testing skills</p>
+                </div>
+            </div>
+            <button id="ai-chat-close" class="ai-chat-close" aria-label="Close chat">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div id="ai-messages" class="ai-messages">
+            <div class="ai-msg">
+                <div class="msg-bubble">Hi! 👋 I'm Permeet's QA assistant. Ask me about skills like <b>Manual Testing</b>, <b>API Testing</b>, <b>Mobile Testing</b>, <b>Web Testing</b>, <b>Regression</b>, <b>Smoke</b>, <b>Sanity</b>, <b>Exploratory</b>, <b>Usability</b>, <b>Accessibility</b>, <b>Cross Browser</b>, <b>Cross Platform</b>, <b>Performance</b>, <b>Security</b>, or <b>AI-Assisted</b> testing.</div>
+            </div>
+        </div>
+        <form id="ai-chat-form" class="ai-chat-form">
+            <input id="ai-chat-input" type="text" placeholder="Ask about a skill..." autocomplete="off" />
+            <button type="submit" class="ai-chat-send" aria-label="Send message">
+                <span class="material-symbols-outlined">send</span>
+            </button>
+        </form>
+    </div>
+
     <!-- Contact Modal -->
     <div id="contact-modal"
         class="fixed inset-0 z-[100] flex items-center justify-center hidden opacity-0 transition-all duration-300 pointer-events-none">

@@ -587,6 +587,157 @@ document.addEventListener('DOMContentLoaded', function () {
         counterObserver.observe(counter);
     });
 
+// Skills Proficiency Doughnut Chart (Chart.js)
+    const skillsCanvas = document.getElementById('skills-doughnut-chart');
+    const skillsCenterValue = document.getElementById('skills-chart-center-value');
+    const skillsLegendContainer = document.getElementById('skills-chart-legend');
+
+    if (skillsCanvas && typeof Chart !== 'undefined') {
+        const skillsData = [
+            { label: 'Manual Testing', value: 95 },
+            { label: 'API Testing', value: 90 },
+            { label: 'Mobile Testing', value: 85 },
+            { label: 'Regression Testing', value: 92 },
+            { label: 'Web / Cross-Browser', value: 88 },
+            { label: 'AI-Assisted Testing', value: 80 },
+{ label: 'Performance Testing', value: 75 },
+            { label: 'Automation Testing', value: 70 }
+        ];
+
+// Portfolio theme palette (premium blue family with subtle harmony)
+        const palette = ['#003f87', '#115cb9', '#0056b3', '#2f6fd6', '#4a7fd4', '#7ba3e8', '#a6c0f2', '#c7d6f8'];
+
+        const labels = skillsData.map(item => item.label);
+        const values = skillsData.map(item => item.value);
+        const colors = palette;
+
+        const overall = Math.round(values.reduce((sum, value) => sum + value, 0) / values.length);
+
+        const skillsChart = new Chart(skillsCanvas, {
+            type: 'doughnut',
+            data: {
+                labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: colors,
+                    borderColor: '#f8f9fa',
+                    borderWidth: 3,
+                    hoverOffset: 8,
+                    hoverBorderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '72%',
+                onClick: (event, elements) => {
+                    if (elements && elements.length) {
+                        const index = elements[0].index;
+                        highlightSkill(index);
+                    }
+                },
+                onHover: (event, elements) => {
+                    if (elements && elements.length) {
+                        const index = elements[0].index;
+                        highlightSkill(index);
+                    } else {
+                        resetCenter();
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        enabled: false,
+                    }
+                },
+                animation: {
+                    animateRotate: true,
+                    animateScale: true,
+                    duration: 1200
+                }
+            }
+        });
+
+        // --- Center text logic: show meaningful role by default, skill on hover ---
+        const centerValueEl = document.getElementById('skills-chart-center-value');
+        const centerLabelEl = document.getElementById('skills-chart-center-label');
+        const defaultValue = 'QA Engineer';
+        const defaultLabel = 'Testing Expertise';
+
+        function highlightSkill(index) {
+            const item = skillsData[index];
+            if (centerValueEl) centerValueEl.textContent = item.label;
+            if (centerLabelEl) centerLabelEl.textContent = `${item.value}% Proficiency`;
+        }
+
+        function resetCenter() {
+            if (centerValueEl) centerValueEl.textContent = defaultValue;
+            if (centerLabelEl) centerLabelEl.textContent = defaultLabel;
+        }
+
+        // --- Build skill cards with animated progress bars ---
+        if (skillsLegendContainer) {
+            skillsLegendContainer.innerHTML = skillsData.map((item, index) => `
+                <div class="skill-card" data-skill-index="${index}">
+                    <div class="skill-card-head">
+                        <span class="skill-card-dot" style="background-color: ${colors[index]};"></span>
+                        <span class="skill-card-name">${item.label}</span>
+                        <span class="skill-card-value">${item.value}%</span>
+                    </div>
+                    <div class="skill-card-track">
+                        <div class="skill-card-fill" data-width="${item.value}" style="background: linear-gradient(90deg, ${colors[index]}, ${colors[index]}cc);"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Hover on a card highlights the matching chart segment
+            skillsLegendContainer.querySelectorAll('.skill-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    const idx = parseInt(card.dataset.skillIndex, 10);
+                    skillsChart.setActiveElements([{ datasetIndex: 0, index: idx }]);
+                    skillsChart.update();
+                    highlightSkill(idx);
+                });
+                card.addEventListener('mouseleave', () => {
+                    skillsChart.setActiveElements([]);
+                    skillsChart.update();
+                    resetCenter();
+                });
+            });
+
+            // Animate progress bars when the legend enters the viewport
+            const fills = skillsLegendContainer.querySelectorAll('.skill-card-fill');
+            const fillObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const fill = entry.target;
+                        fill.style.width = fill.dataset.width + '%';
+                        obs.unobserve(fill);
+                    }
+                });
+            }, { threshold: 0.3 });
+            fills.forEach(fill => fillObserver.observe(fill));
+        }
+
+        // --- Build the metrics strip below the cards ---
+        const skillsMetrics = document.getElementById('skills-metrics');
+        if (skillsMetrics) {
+            const metrics = [
+                { icon: 'workspace_premium', text: '3+ Years Experience' },
+                { icon: 'fact_check', text: '1200+ Test Cases Executed' },
+                { icon: 'bug_report', text: '600+ Bugs Reported' },
+                { icon: 'api', text: '40+ APIs Tested' },
+                { icon: 'rocket_launch', text: 'Multiple Production Releases Supported' }
+            ];
+            skillsMetrics.innerHTML = metrics.map(metric => `
+                <span class="skill-metric">
+                    <span class="material-symbols-outlined">${metric.icon}</span>
+                    ${metric.text}
+                </span>
+            `).join('');
+        }
+    }
+
     // Video Modal Logic
     const videoModal = document.getElementById('video-modal');
     const videoModalBackdrop = document.getElementById('video-modal-backdrop');
@@ -931,12 +1082,177 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Keyboard support for accessibility
+// Keyboard support for accessibility
         header.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 this.click();
             }
+        });
+    });
+});
+
+// ============================================
+// AI Skills Chat Widget (Floating Assistant)
+// ============================================
+document.addEventListener('DOMContentLoaded', function () {
+    const chatBtn = document.getElementById('ai-chat-btn');
+    const chatWindow = document.getElementById('ai-chat-window');
+    const chatClose = document.getElementById('ai-chat-close');
+    const chatForm = document.getElementById('ai-chat-form');
+    const chatInput = document.getElementById('ai-chat-input');
+    const chatMessages = document.getElementById('ai-messages');
+
+    if (!chatBtn || !chatWindow || !chatForm || !chatInput || !chatMessages) return;
+
+    // Knowledge base: keywords -> answer
+    const knowledgeBase = [
+        {
+            keywords: ['manual', 'manual testing', 'manual'],
+            answer: 'Permeet is a <b>Manual QA Specialist</b> with 2+ years of experience. He performs end-to-end manual testing of mobile & web applications, designs detailed test cases (positive, negative & edge scenarios), and validates core feature functionality across enterprise and product-based environments.'
+        },
+        {
+            keywords: ['api', 'postman', 'swagger', 'rest', 'endpoint'],
+            answer: 'Permeet performs <b>API Testing</b> using tools like <b>Postman</b> and <b>Swagger</b>. He validates data integrity, request/response schemas, status codes, error handling, and system communication across modules. He has tested 150+ APIs and also validates payment flows via webhook-style triggers.'
+        },
+        {
+            keywords: ['mobile', 'android', 'ios', 'mobile testing', 'app'],
+            answer: 'Permeet has strong <b>Mobile Testing</b> skills on Android (and cross-platform thinking for iOS). He tests mobile applications using Android Studio, covering functional flows, UI/UX, device compatibility, and cross-platform behavior.'
+        },
+        {
+            keywords: ['web', 'cross browser', 'browser', 'web testing', 'responsive'],
+            answer: 'Permeet performs <b>Web Testing & Cross-Browser</b> validation, ensuring responsive layouts and consistent functionality across browsers (Chrome, Firefox, Safari, Edge). He uses browser DevTools for debugging and responsive design verification.'
+        },
+        {
+            keywords: ['regression', 'regression testing'],
+            answer: 'Permeet runs <b>Regression Testing</b> across every release cycle to ensure application stability and that fixes don\u2019t introduce new issues. He has completed 50+ regression cycles and supports the core regression suite both manually and with Selenium automation.'
+        },
+        {
+            keywords: ['smoke', 'smoke testing'],
+            answer: '<b>Smoke Testing</b> is a core part of Permeet\u2019s workflow. He runs quick, high-level smoke checks on critical functionality to validate that a build is stable enough for detailed testing.'
+        },
+        {
+            keywords: ['sanity', 'sanity testing'],
+            answer: 'Permeet uses <b>Sanity Testing</b> to verify that specific new features or fixes work correctly after a new build, without running the full regression suite.'
+        },
+        {
+            keywords: ['exploratory', 'exploratory testing', 'ad hoc', 'ad-hoc'],
+            answer: 'Permeet applies <b>Exploratory Testing</b> (ad-hoc) to uncover issues not covered by scripted tests. He combines it with structured suites to catch edge cases an automated test alone would miss.'
+        },
+        {
+            keywords: ['usability', 'ux', 'ui', 'user experience'],
+            answer: 'Permeet performs <b>Usability & UI/UX Testing</b> to validate intuitive navigation, clear feedback, consistent styling, and smooth user flows across desktop and mobile.'
+        },
+        {
+            keywords: ['accessibility', 'a11y', '508', 'wcag'],
+            answer: 'Permeet considers <b>Accessibility Testing</b> by validating keyboard navigation, screen-reader friendliness, contrast, and ARIA attributes to make products usable for everyone.'
+        },
+        {
+            keywords: ['performance', 'load', 'jmeter', 'performance testing'],
+            answer: 'Permeet has performed <b>Performance Testing</b> using tools like <b>JMeter</b> to evaluate system responsiveness, stability, and behavior under various load conditions.'
+        },
+        {
+            keywords: ['security', 'rbac', 'authorization', 'authentication', 'security testing'],
+            answer: 'Permeet conducts <b>Security Testing</b> including <b>Role-Based Access Control (RBAC)</b> validation. He personally uncovered 15+ critical RBAC bypass issues and validates authorization boundaries, authentication flows, and sensitive data protection.'
+        },
+        {
+            keywords: ['ai', 'ai assisted', 'ai-assisted', 'ai testing', 'machine learning', 'ml', 'ai-based'],
+            answer: 'Permeet has hands-on experience with <b>AI-Assisted Testing</b> on AI-based assessment, personality evaluation, and AI-driven platform systems. He validates scoring integrity, AI workflow logic, and data consistency between the UI and the AI backend.'
+        },
+        {
+            keywords: ['automation', 'selenium', 'playwright', 'automation testing'],
+            answer: 'Permeet has <b>Automation Testing</b> experience with <b>Selenium</b> (and exposure to <b>Playwright</b>). He builds core regression suites for repeatable, reliable validation while pairing automation with manual exploratory testing.'
+        },
+        {
+            keywords: ['cross platform', 'cross-platform', 'platform'],
+            answer: 'Permeet validates <b>Cross-Platform</b> behavior so applications work consistently across different operating systems, devices, and environments.'
+        },
+        {
+            keywords: ['test case', 'test cases', 'test design', 'test case design', 'scenario'],
+            answer: 'Permeet is a <b>Test Case Design Expert</b>. He creates structured, comprehensive test cases covering positive, negative, edge, and boundary scenarios to ensure full requirement validation.'
+        },
+        {
+            keywords: ['bug', 'defect', 'bugs', 'bug reporting', 'bug report', 'jira', 'redmine'],
+            answer: 'Permeet is skilled in <b>Bug Lifecycle Management</b>. He reports and tracks defects using <b>Jira</b> and <b>Redmine</b>, with clear reproduction steps, prioritization, and verification after fixes. He has reported 300+ bugs.'
+        },
+        {
+            keywords: ['experience', 'years', 'background', 'about', 'experience?', 'who is', 'cv', 'resume'],
+            answer: 'Permeet Valicha is a Software QA Engineer with <b>2+ years of experience</b> across vativeApps (Mid-level SQA Engineer), WeUno Technologies (Jr. SQA Engineer), and Sapphire Consultancy Services (SQA Intern). He specializes in Manual, API, Mobile, Web, and AI-Assisted testing.'
+        },
+        {
+            keywords: ['tools', 'toolkit', 'tech stack', 'stack'],
+            answer: 'Permeet\u2019s toolkit includes <b>Jira, Postman, Swagger, Firebase, Git, GitHub, DevTools, AI Tools, Figma, Android Studio, JMeter, SQL, Selenium, Playwright, Python</b>, and VS Code.'
+        },
+        {
+            keywords: ['contact', 'email', 'phone', 'linkedin', 'reach', 'hire'],
+            answer: 'You can reach Permeet via email at <b>permeetvalicha@gmail.com</b>, phone <b>0302 2081313</b>, or on <a href="https://www.linkedin.com/in/permeet-valicha-016511210/" target="_blank" rel="noopener noreferrer" style="color:#003f87;font-weight:700;text-decoration:underline;">LinkedIn</a>. He is open to international, remote, and relocation roles.'
+        },
+        {
+            keywords: ['hello', 'hi', 'hey', 'salam', 'help', 'what can you do'],
+            answer: 'Hi! 👋 I can tell you about Permeet\u2019s QA skills. Try asking about <b>Manual</b>, <b>API</b>, <b>Mobile</b>, <b>Web</b>, <b>Regression</b>, <b>Smoke</b>, <b>Sanity</b>, <b>Exploratory</b>, <b>Usability</b>, <b>Accessibility</b>, <b>Cross Browser</b>, <b>Performance</b>, <b>Security</b>, or <b>AI-Assisted</b> testing.'
+        }
+    ];
+
+    const fallback = 'I can help with Permeet\u2019s QA skills! Try asking about <b>Manual Testing</b>, <b>API Testing</b>, <b>Mobile Testing</b>, <b>Web Testing</b>, <b>Regression</b>, <b>Smoke</b>, <b>Sanity</b>, <b>Exploratory</b>, <b>Usability</b>, <b>Accessibility</b>, <b>Cross Browser</b>, <b>Performance</b>, <b>Security</b>, or <b>AI-Assisted</b> testing.';
+
+    function getAnswer(query) {
+        const text = query.toLowerCase().trim();
+        // First try exact keyword match
+        for (const item of knowledgeBase) {
+            for (const keyword of item.keywords) {
+                if (text.includes(keyword)) return item.answer;
+            }
+        }
+        return fallback;
+    }
+
+    function addMessage(text, sender) {
+        const wrapper = document.createElement('div');
+        wrapper.className = sender === 'user' ? 'user-msg' : 'ai-msg';
+        const bubble = document.createElement('div');
+        bubble.className = 'msg-bubble';
+        bubble.innerHTML = text;
+        wrapper.appendChild(bubble);
+        chatMessages.appendChild(wrapper);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showTyping(callback) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'ai-msg';
+        wrapper.id = 'typing-indicator';
+        wrapper.innerHTML = '<div class="msg-bubble typing-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+        chatMessages.appendChild(wrapper);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        setTimeout(() => {
+            const typing = document.getElementById('typing-indicator');
+            if (typing) typing.remove();
+            callback();
+        }, 700);
+    }
+
+    function toggleChat(open) {
+        chatWindow.classList.toggle('active', open);
+        chatBtn.classList.toggle('open', open);
+        if (open) {
+            chatInput.focus();
+        }
+    }
+
+    chatBtn.addEventListener('click', () => {
+        toggleChat(!chatWindow.classList.contains('active'));
+    });
+
+    chatClose.addEventListener('click', () => toggleChat(false));
+
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const query = chatInput.value.trim();
+        if (!query) return;
+        addMessage(query, 'user');
+        chatInput.value = '';
+        showTyping(() => {
+            addMessage(getAnswer(query), 'ai');
         });
     });
 });
