@@ -705,17 +705,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
 
-            // Animate progress bars when the legend enters the viewport
+// Animate progress bars from 0% when the legend enters the viewport.
+            // Use requestAnimationFrame twice so the browser first paints the
+            // empty (0%) state, then animates the width transition smoothly.
             const fills = skillsLegendContainer.querySelectorAll('.skill-card-fill');
+            // Ensure every bar starts at 0 before observing
+            fills.forEach(fill => fill.style.width = '0%');
+
             const fillObserver = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const fill = entry.target;
-                        fill.style.width = fill.dataset.width + '%';
+                        const target = fill.dataset.width + '%';
+                        // Multi-frame deferral guarantees the 0% state is rendered first
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                fill.style.width = target;
+                            });
+                        });
                         obs.unobserve(fill);
                     }
                 });
-            }, { threshold: 0.3 });
+            }, { threshold: 0.2 });
             fills.forEach(fill => fillObserver.observe(fill));
         }
 
