@@ -530,6 +530,325 @@
             filter: grayscale(0);
         }
 
+        /* ============================================
+           PREMIUM ANIMATED ABOUT ME IMAGE FRAME
+           ============================================ */
+
+        /* Container - floating + 3D tilt ready */
+        #about .relative.w-\[280px\] {
+            animation: aboutFrameFloat 6s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        /* Outer rotating ring (faster, more vibrant) */
+        #about .relative.w-\[280px\] .about-image-frame {
+            position: relative;
+            border-radius: 2rem;
+            box-shadow:
+                0 24px 60px rgba(0, 63, 135, 0.22),
+                0 0 0 1px rgba(0, 63, 135, 0.06);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.6s ease;
+        }
+
+        #about .relative.w-\[280px\] .about-image-frame::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: inherit;
+            padding: 3px;
+            background: conic-gradient(from var(--ring-angle, 0deg),
+                #003f87, #115cb9, #7ba3e8, #d7e2ff, #ffffff, #d7e2ff, #7ba3e8, #115cb9, #003f87);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: 2;
+            pointer-events: none;
+            animation: rotateRing 5s linear infinite;
+            opacity: 0.9;
+        }
+
+        /* Inner shimmer sweep across the frame */
+        #about .relative.w-\[280px\] .about-image-frame::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(115deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.55) 45%,
+                rgba(255, 255, 255, 0.85) 50%,
+                rgba(255, 255, 255, 0.55) 55%,
+                transparent 100%);
+            z-index: 6;
+            pointer-events: none;
+            animation: shimmerSweep 4s ease-in-out infinite;
+            border-radius: inherit;
+            mix-blend-mode: overlay;
+        }
+
+        @keyframes shimmerSweep {
+            0% { left: -120%; }
+            60% { left: 130%; }
+            100% { left: 130%; }
+        }
+
+        /* Pulsing glow halo behind frame */
+        #about .relative.w-\[280px\]::before {
+            content: '';
+            position: absolute;
+            inset: -14px;
+            border-radius: 2.5rem;
+            background: radial-gradient(circle,
+                rgba(0, 63, 135, 0.28) 0%,
+                rgba(17, 92, 185, 0.18) 35%,
+                transparent 70%);
+            filter: blur(28px);
+            z-index: -1;
+            animation: aboutGlowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes aboutGlowPulse {
+            0%, 100% { opacity: 0.55; transform: scale(0.96); }
+            50% { opacity: 1; transform: scale(1.06); }
+        }
+
+        /* Second outer ring - counter-rotating */
+        #about .relative.w-\[280px\]::after {
+            content: '';
+            position: absolute;
+            inset: -22px;
+            border-radius: 2.75rem;
+            background: conic-gradient(from var(--ring-angle2, 0deg),
+                transparent 0deg,
+                rgba(0, 63, 135, 0.18) 60deg,
+                transparent 120deg,
+                rgba(123, 163, 232, 0.15) 240deg,
+                transparent 360deg);
+            z-index: -2;
+            pointer-events: none;
+            animation: rotateRingReverse 10s linear infinite;
+            opacity: 0.7;
+        }
+
+        @property --ring-angle2 {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @keyframes rotateRingReverse {
+            to { --ring-angle2: -360deg; }
+        }
+
+        /* Orbit dots around the frame */
+        .about-orbit {
+            position: absolute;
+            inset: -30px;
+            pointer-events: none;
+            z-index: 0;
+            animation: aboutOrbitSpin 14s linear infinite;
+        }
+
+        .about-orbit-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #003f87;
+            box-shadow: 0 0 14px rgba(0, 63, 135, 0.7), 0 0 28px rgba(0, 63, 135, 0.35);
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
+        }
+
+        .about-orbit-dot.d1 { animation: aboutOrbitDot1 14s linear infinite; }
+        .about-orbit-dot.d2 { animation: aboutOrbitDot2 14s linear infinite; }
+        .about-orbit-dot.d3 { animation: aboutOrbitDot3 14s linear infinite; }
+
+        @keyframes aboutOrbitSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes aboutOrbitDot1 {
+            0%   { transform: rotate(0deg)   translateX(calc(min(45vw, 220px))) translateY(-50%); opacity: 1; }
+            25%  { opacity: 0.4; }
+            50%  { opacity: 1; }
+            75%  { opacity: 0.4; }
+            100% { transform: rotate(360deg) translateX(calc(min(45vw, 220px))) translateY(-50%); opacity: 1; }
+        }
+
+        @keyframes aboutOrbitDot2 {
+            0%   { transform: rotate(120deg)  translateX(calc(min(50vw, 240px))) translateY(-50%); opacity: 0.6; }
+            50%  { opacity: 1; }
+            100% { transform: rotate(480deg)  translateX(calc(min(50vw, 240px))) translateY(-50%); opacity: 0.6; }
+        }
+
+        @keyframes aboutOrbitDot3 {
+            0%   { transform: rotate(240deg)  translateX(calc(min(42vw, 210px))) translateY(-50%); opacity: 0.8; }
+            50%  { opacity: 0.3; }
+            100% { transform: rotate(600deg)  translateX(calc(min(42vw, 210px))) translateY(-50%); opacity: 0.8; }
+        }
+
+        /* Floating tech particles around frame */
+        .about-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(0, 63, 135, 0.65);
+            box-shadow: 0 0 10px rgba(0, 63, 135, 0.55);
+            pointer-events: none;
+            z-index: 3;
+            animation: aboutParticleFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes aboutParticleFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            25%      { transform: translate(10px, -14px) scale(1.2); opacity: 1; }
+            50%      { transform: translate(-8px, -22px) scale(0.9); opacity: 0.6; }
+            75%      { transform: translate(6px, -8px) scale(1.1); opacity: 0.9; }
+        }
+
+        /* Animated corner brackets — extend/retract */
+        #about .relative.w-\[280px\] .corner-bracket {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #003f87;
+            z-index: 5;
+            opacity: 0.9;
+            pointer-events: none;
+            animation: bracketPulse 3s ease-in-out infinite;
+            transition: all 0.4s ease;
+        }
+
+        #about .relative.w-\[280px\] .corner-bracket.tl { top: -12px; left: -12px; border-right: none; border-bottom: none; border-top-left-radius: 14px; animation-delay: 0s; }
+        #about .relative.w-\[280px\] .corner-bracket.tr { top: -12px; right: -12px; border-left: none; border-bottom: none; border-top-right-radius: 14px; animation-delay: 0.5s; }
+        #about .relative.w-\[280px\] .corner-bracket.bl { bottom: -12px; left: -12px; border-right: none; border-top: none; border-bottom-left-radius: 14px; animation-delay: 1s; }
+        #about .relative.w-\[280px\] .corner-bracket.br { bottom: -12px; right: -12px; border-left: none; border-top: none; border-bottom-right-radius: 14px; animation-delay: 1.5s; }
+
+        @keyframes bracketPulse {
+            0%, 100% { width: 30px; height: 30px; opacity: 0.85; box-shadow: 0 0 0 rgba(0, 63, 135, 0); }
+            50%      { width: 38px; height: 38px; opacity: 1; box-shadow: 0 0 12px rgba(0, 63, 135, 0.45); }
+        }
+
+        /* Hover effects on frame */
+        #about .relative.w-\[280px\]:hover .about-image-frame {
+            transform: scale(1.03) rotate(-1deg);
+            box-shadow:
+                0 32px 80px rgba(0, 63, 135, 0.35),
+                0 0 0 2px rgba(0, 63, 135, 0.15);
+        }
+
+        #about .relative.w-\[280px\]:hover {
+            animation-play-state: paused;
+        }
+
+        /* Scanning line overlay */
+        .about-scanline {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(0, 63, 135, 0.7) 50%,
+                transparent 100%);
+            box-shadow: 0 0 12px rgba(0, 63, 135, 0.7);
+            top: 0;
+            z-index: 7;
+            pointer-events: none;
+            border-radius: inherit;
+            animation: aboutScan 3.5s ease-in-out infinite;
+        }
+
+        @keyframes aboutScan {
+            0%   { top: 0%; opacity: 0; }
+            10%  { opacity: 1; }
+            90%  { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* Status badge floating above frame */
+        .about-status-badge {
+            position: absolute;
+            top: -18px;
+            right: -18px;
+            background: linear-gradient(135deg, #003f87, #115cb9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            box-shadow: 0 8px 24px rgba(0, 63, 135, 0.45);
+            z-index: 8;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            animation: aboutBadgeBounce 3s ease-in-out infinite;
+        }
+
+        .about-status-badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 8px #4ade80;
+            animation: badgeDotPulse 1.4s ease-in-out infinite;
+        }
+
+        @keyframes aboutBadgeBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50%      { transform: translateY(-6px) rotate(2deg); }
+        }
+
+        @keyframes badgeDotPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: 0.5; transform: scale(0.7); }
+        }
+
+        /* Hexagon grid pattern behind frame */
+        .about-hex-bg {
+            position: absolute;
+            inset: -40px;
+            z-index: -3;
+            pointer-events: none;
+            opacity: 0.35;
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(0, 63, 135, 0.25) 1px, transparent 0);
+            background-size: 18px 18px;
+            animation: aboutHexDrift 20s linear infinite;
+            mask-image: radial-gradient(circle, black 30%, transparent 75%);
+            -webkit-mask-image: radial-gradient(circle, black 30%, transparent 75%);
+        }
+
+        @keyframes aboutHexDrift {
+            to { background-position: 180px 180px; }
+        }
+
+        /* Reduced motion accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            #about .relative.w-\[280px\],
+            #about .relative.w-\[280px\] .about-image-frame::before,
+            #about .relative.w-\[280px\] .about-image-frame::after,
+            #about .relative.w-\[280px\]::before,
+            #about .relative.w-\[280px\]::after,
+            .about-orbit,
+            .about-orbit-dot,
+            .about-particle,
+            .about-scanline,
+            .about-status-badge,
+            .about-hex-bg,
+            #about .relative.w-\[280px\] .corner-bracket {
+                animation: none !important;
+            }
+        }
+
 .blueprint-grid::before {
             content: '';
             position: absolute;
@@ -2828,4 +3147,579 @@ html.dark .contact-cta-card {
                 right: 1rem;
                 width: calc(100vw - 2rem);
             }
+        }
+
+        /* ============================================================
+           COMPREHENSIVE RESPONSIVE UTILITIES
+           Covers: 320px mobile → 480px small → 640px large mobile
+                   768px tablet → 900px small laptop → 1024px laptop
+                   1280px desktop → 1440px large desktop → 1920px+ 4K
+           ============================================================ */
+
+        /* --- Horizontal scroll guard --- */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* --- Editorial margin: fluid padding across breakpoints --- */
+        .editorial-margin {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            width: 100%;
+        }
+
+        @media (min-width: 480px) {
+            .editorial-margin { padding-left: 1.25rem; padding-right: 1.25rem; }
+        }
+
+        @media (min-width: 640px) {
+            .editorial-margin { padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+
+        @media (min-width: 768px) {
+            .editorial-margin { padding-left: 2rem; padding-right: 2rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .editorial-margin { padding-left: 2.5rem; padding-right: 2.5rem; }
+        }
+
+        @media (min-width: 1280px) {
+            .editorial-margin { padding-left: 3rem; padding-right: 3rem; }
+        }
+
+        @media (min-width: 1536px) {
+            .editorial-margin { max-width: 1400px; padding-left: 3rem; padding-right: 3rem; }
+        }
+
+        /* --- Fluid typography base --- */
+        .text-fluid-sm { font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem); }
+        .text-fluid-base { font-size: clamp(0.875rem, 0.8rem + 0.3vw, 1rem); }
+        .text-fluid-lg { font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); }
+        .text-fluid-xl { font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem); }
+        .text-fluid-2xl { font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem); }
+        .text-fluid-3xl { font-size: clamp(1.75rem, 1.4rem + 2vw, 3rem); }
+
+        /* ============================================================
+           HERO SECTION RESPONSIVENESS
+           ============================================================ */
+
+        /* Small laptops (900–1023px) */
+        @media (max-width: 1023px) and (min-width: 768px) {
+            #hero-section {
+                padding-top: 6rem;
+                padding-bottom: 2rem;
+                min-height: auto;
+            }
+            #hero-section h1 {
+                font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem) !important;
+            }
+            #hero-section .lg\:col-span-7,
+            #hero-section .lg\:col-span-5 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+            #hero-section .cube-glow,
+            #hero-section #cube-wrapper {
+                transform: scale(0.85);
+            }
+        }
+
+        /* 768–900px (small tablet landscape / small laptop) */
+        @media (max-width: 900px) {
+            #hero-section {
+                min-height: auto;
+                padding-top: 5rem;
+                padding-bottom: 1.5rem;
+            }
+            #hero-section .scale-\[0\.6\] {
+                transform: scale(0.7);
+            }
+        }
+
+        /* 640–767px (large mobile / small tablet) */
+        @media (max-width: 767px) {
+            #hero-section {
+                min-height: auto;
+                padding-top: 5rem;
+            }
+            #hero-section h1 {
+                font-size: clamp(1.75rem, 1.3rem + 2vw, 2.5rem) !important;
+                line-height: 1.1;
+            }
+            #hero-section .fade-up.delay-1,
+            #hero-section .fade-up.delay-2,
+            #hero-section .fade-up.delay-3 {
+                animation-delay: 0s !important;
+            }
+        }
+
+        /* 480–639px (medium mobile) */
+        @media (max-width: 639px) {
+            #hero-section .scale-\[0\.6\] {
+                transform: scale(0.55);
+            }
+            #hero-section .badge-pulse,
+            #hero-section .text-\[10px\] {
+                font-size: 9px;
+            }
+        }
+
+        /* <480px (small mobile) */
+        @media (max-width: 479px) {
+            #hero-section .scale-\[0\.6\] {
+                transform: scale(0.45);
+            }
+            #hero-section h1 {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        /* --- CTA buttons: shrink gracefully on small screens --- */
+        @media (max-width: 480px) {
+            #hero-section a.box-border {
+                height: 44px !important;
+                width: 140px !important;
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ============================================================
+           METRICS SECTION GRID
+           ============================================================ */
+        @media (max-width: 639px) {
+            #metrics .grid.grid-cols-2,
+            #metrics .grid.sm\:grid-cols-3,
+            #metrics .grid.md\:grid-cols-4,
+            #metrics .grid.lg\:grid-cols-7 {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                gap: 0.5rem;
+            }
+            #metrics .stats-card {
+                padding: 0.5rem;
+            }
+            #metrics .text-3xl.font-black {
+                font-size: 1.25rem;
+            }
+            #metrics .text-xs {
+                font-size: 0.6rem;
+            }
+        }
+
+        @media (min-width: 640px) and (max-width: 1023px) {
+            #metrics .grid.lg\:grid-cols-7 {
+                grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+            }
+        }
+
+        @media (min-width: 1024px) and (max-width: 1279px) {
+            #metrics .grid.lg\:grid-cols-7 {
+                grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            #metrics .grid.lg\:grid-cols-7 {
+                grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+            }
+        }
+
+        /* ============================================================
+           ABOUT ME — Image frame orbit/particle scaling
+           ============================================================ */
+
+        /* Orbit dots: scale distance based on container */
+        #about .relative.w-\[280px\] {
+            position: relative;
+        }
+
+        @media (max-width: 1023px) {
+            #about .relative.w-\[280px\] {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            #about .about-orbit-dot.d1 { animation-name: aboutOrbitDot1Small; }
+            #about .about-orbit-dot.d2 { animation-name: aboutOrbitDot2Small; }
+            #about .about-orbit-dot.d3 { animation-name: aboutOrbitDot3Small; }
+        }
+
+        @keyframes aboutOrbitDot1Small {
+            0%   { transform: rotate(0deg)   translateX(170px) translateY(-50%); opacity: 1; }
+            25%  { opacity: 0.4; }
+            50%  { opacity: 1; }
+            75%  { opacity: 0.4; }
+            100% { transform: rotate(360deg) translateX(170px) translateY(-50%); opacity: 1; }
+        }
+
+        @keyframes aboutOrbitDot2Small {
+            0%   { transform: rotate(120deg)  translateX(190px) translateY(-50%); opacity: 0.6; }
+            50%  { opacity: 1; }
+            100% { transform: rotate(480deg)  translateX(190px) translateY(-50%); opacity: 0.6; }
+        }
+
+        @keyframes aboutOrbitDot3Small {
+            0%   { transform: rotate(240deg)  translateX(160px) translateY(-50%); opacity: 0.8; }
+            50%  { opacity: 0.3; }
+            100% { transform: rotate(600deg)  translateX(160px) translateY(-50%); opacity: 0.8; }
+        }
+
+        @media (max-width: 639px) {
+            #about .relative.w-\[280px\] {
+                max-width: 260px;
+            }
+            #about .about-orbit-dot.d1 { animation-name: aboutOrbitDot1XS; }
+            #about .about-orbit-dot.d2 { animation-name: aboutOrbitDot2XS; }
+            #about .about-orbit-dot.d3 { animation-name: aboutOrbitDot3XS; }
+            #about .about-orbit {
+                inset: -20px;
+            }
+            #about .about-hex-bg {
+                inset: -25px;
+            }
+        }
+
+        @keyframes aboutOrbitDot1XS {
+            0%   { transform: rotate(0deg)   translateX(135px) translateY(-50%); opacity: 1; }
+            50%  { opacity: 0.5; }
+            100% { transform: rotate(360deg) translateX(135px) translateY(-50%); opacity: 1; }
+        }
+
+        @keyframes aboutOrbitDot2XS {
+            0%   { transform: rotate(120deg)  translateX(150px) translateY(-50%); opacity: 0.6; }
+            50%  { opacity: 1; }
+            100% { transform: rotate(480deg)  translateX(150px) translateY(-50%); opacity: 0.6; }
+        }
+
+        @keyframes aboutOrbitDot3XS {
+            0%   { transform: rotate(240deg)  translateX(130px) translateY(-50%); opacity: 0.8; }
+            50%  { opacity: 0.3; }
+            100% { transform: rotate(600deg)  translateX(130px) translateY(-50%); opacity: 0.8; }
+        }
+
+        /* ============================================================
+           SKILLS & TOOLS SECTION
+           ============================================================ */
+
+        @media (max-width: 1023px) {
+            #skills-tools .grid.lg\:grid-cols-2 {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+            #skills-tools .skill-chart-container {
+                max-width: 220px !important;
+                margin: 0 auto;
+            }
+            #skills-tools .tools-carousel-wrapper {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+        }
+
+        @media (max-width: 639px) {
+            #skills-tools .skill-chart-container {
+                max-width: 200px !important;
+            }
+            #skills-tools #skills-chart-legend {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* ============================================================
+           QA PROCESS GRID
+           ============================================================ */
+
+        /* Default desktop: 7 columns inline */
+        .qa-process-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 1279px) and (min-width: 1024px) {
+            .qa-process-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+                row-gap: 2rem;
+            }
+            .qa-process-grid .qa-process-step:nth-child(4) .qa-process-connector,
+            .qa-process-grid .qa-process-step:last-child .qa-process-connector {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1023px) and (min-width: 768px) {
+            .qa-process-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                row-gap: 2rem;
+            }
+            .qa-process-grid .qa-process-step:nth-child(3n) .qa-process-connector,
+            .qa-process-grid .qa-process-step:last-child .qa-process-connector {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 767px) and (min-width: 481px) {
+            .qa-process-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                row-gap: 2rem;
+            }
+            .qa-process-grid .qa-process-step:nth-child(2n) .qa-process-connector,
+            .qa-process-grid .qa-process-step:last-child .qa-process-connector {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .qa-process-grid {
+                grid-template-columns: 1fr !important;
+                row-gap: 1.5rem;
+            }
+            .qa-process-grid .qa-process-connector {
+                display: none !important;
+            }
+            .qa-process-step {
+                text-align: center;
+            }
+        }
+
+        /* ============================================================
+           PROJECTS CAROUSEL — arrow positioning + arrow visibility
+           ============================================================ */
+
+        /* Make arrows visible inside the section bounds on all laptops */
+        #projects {
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 1024px) {
+            #project-prev {
+                left: 0.5rem !important;
+            }
+            #project-next {
+                right: 0.5rem !important;
+            }
+        }
+
+        @media (max-width: 1279px) and (min-width: 1024px) {
+            #projects .lg\:min-w-\[calc\(33\.333\%-1\.5rem\)\] {
+                min-width: calc(50% - 1rem) !important;
+            }
+        }
+
+        @media (max-width: 1023px) and (min-width: 768px) {
+            #projects .md\:min-w-\[calc\(50\%-1rem\)\] {
+                min-width: calc(100% - 2rem) !important;
+            }
+        }
+
+        /* ============================================================
+           WHY HIRE ME — card grid
+           ============================================================ */
+        @media (max-width: 1279px) and (min-width: 640px) {
+            #why-hire-me .grid.xl\:grid-cols-4 {
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            }
+        }
+
+        @media (max-width: 639px) {
+            #why-hire-me .grid.xl\:grid-cols-4 {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                gap: 0.75rem !important;
+            }
+        }
+
+        @media (max-width: 380px) {
+            #why-hire-me .grid.xl\:grid-cols-4 {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* ============================================================
+           INTERNATIONAL READINESS — badges wrap nicely
+           ============================================================ */
+        @media (max-width: 639px) {
+            #international-readiness .international-badge {
+                font-size: 0.65rem !important;
+            }
+        }
+
+        /* ============================================================
+           CASE STUDIES — body text wrap
+           ============================================================ */
+        @media (max-width: 767px) {
+            .case-study-header h4 {
+                font-size: 0.8rem !important;
+            }
+        }
+
+        /* ============================================================
+           CERTIFICATIONS GRID
+           ============================================================ */
+        @media (max-width: 767px) {
+            #certifications .grid.lg\:grid-cols-3 {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            #certifications .grid.lg\:grid-cols-3 {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+        }
+
+        /* ============================================================
+           NAVBAR RESPONSIVE
+           ============================================================ */
+
+        @media (max-width: 1023px) {
+            nav.fixed.top-0 .font-extrabold {
+                font-size: 1rem !important;
+            }
+            nav.fixed.top-0 .brand-logo {
+                height: 3rem !important;
+                width: 3rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav.fixed.top-0 .flex.items-center.gap-4 {
+                gap: 0.5rem !important;
+            }
+        }
+
+        /* ============================================================
+           EXPERIENCE SECTION — date badge wrap
+           ============================================================ */
+        @media (max-width: 767px) {
+            #experience .experience-date {
+                margin-top: 0.5rem;
+                display: inline-block !important;
+            }
+        }
+
+        /* ============================================================
+           CONTACT MODAL — fits small laptop screens
+           ============================================================ */
+        @media (max-width: 480px) {
+            #contact-modal-content {
+                padding: 1rem !important;
+            }
+            #contact-modal-content h2 {
+                font-size: 1.25rem !important;
+            }
+        }
+
+        /* ============================================================
+           VIDEO MODAL — better small-screen sizing
+           ============================================================ */
+        @media (max-width: 640px) {
+            #video-modal-content {
+                width: 100% !important;
+                border-radius: 0 !important;
+            }
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        @media (max-width: 767px) {
+            footer .flex.flex-col.md\:flex-row {
+                text-align: center;
+            }
+            footer .flex.gap-6 {
+                justify-content: center;
+            }
+        }
+
+        /* ============================================================
+           TYPOGRAPHY SCALING — headings on all sizes
+           ============================================================ */
+
+        @media (max-width: 767px) {
+            h1.text-3xl,
+            h1.text-4xl,
+            h1.text-5xl,
+            h1.text-7xl {
+                font-size: clamp(1.5rem, 1rem + 3vw, 2.25rem) !important;
+            }
+            h2.text-2xl,
+            h2.text-3xl,
+            h2.text-4xl {
+                font-size: clamp(1.25rem, 1rem + 2vw, 1.75rem) !important;
+            }
+            h3.text-xl,
+            h3.text-2xl {
+                font-size: clamp(1rem, 0.9rem + 0.6vw, 1.25rem) !important;
+            }
+        }
+
+        /* ============================================================
+           LARGE DESKTOPS (1280px+) — better use of space
+           ============================================================ */
+        @media (min-width: 1280px) {
+            #hero-section {
+                min-height: 100vh;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            body {
+                font-size: 17px;
+            }
+        }
+
+        /* ============================================================
+           MEDIUM LAPTOP (1024–1279px) adjustments
+           ============================================================ */
+        @media (min-width: 1024px) and (max-width: 1279px) {
+            #hero-section h1 {
+                font-size: 3rem !important;
+            }
+            #hero-section .text-xl.sm\:text-2xl.lg\:text-3xl {
+                font-size: 1.25rem !important;
+            }
+            #hero-section .text-xl.sm\:text-2xl {
+                font-size: 1.25rem !important;
+            }
+            .cube-glow, #cube-wrapper {
+                transform: scale(0.85);
+            }
+        }
+
+        /* ============================================================
+           ULTRA-WIDE (1920px+)
+           ============================================================ */
+        @media (min-width: 1920px) {
+            .editorial-margin {
+                max-width: 1600px;
+            }
+            body {
+                font-size: 18px;
+            }
+            h1.text-3xl.sm\:text-5xl.lg\:text-7xl {
+                font-size: 5rem !important;
+            }
+        }
+
+        /* ============================================================
+           PREVENT TEXT OVERFLOW
+           ============================================================ */
+        h1, h2, h3, h4, h5, h6, p {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* ============================================================
+           SAFE WIDTH — prevent content from getting too wide on huge screens
+           ============================================================ */
+        .max-w-safe {
+            max-width: min(100%, 1280px);
+            margin-left: auto;
+            margin-right: auto;
         }

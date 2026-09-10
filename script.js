@@ -682,7 +682,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="skill-card-head">
                         <span class="skill-card-dot" style="background-color: ${colors[index]};"></span>
                         <span class="skill-card-name">${item.label}</span>
-                        <span class="skill-card-value">${item.value}%</span>
+                        <span class="skill-card-value" data-target="${item.value}">0%</span>
                     </div>
                     <div class="skill-card-track">
                         <div class="skill-card-fill" data-width="${item.value}" style="background: linear-gradient(90deg, ${colors[index]}, ${colors[index]}cc);"></div>
@@ -705,22 +705,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
 
-// Animate progress bars from 0% when the legend enters the viewport.
-            // Use requestAnimationFrame twice so the browser first paints the
-            // empty (0%) state, then animates the width transition smoothly.
             const fills = skillsLegendContainer.querySelectorAll('.skill-card-fill');
-            // Ensure every bar starts at 0 before observing
-            fills.forEach(fill => fill.style.width = '0%');
+            const valueElements = skillsLegendContainer.querySelectorAll('.skill-card-value');
+            fills.forEach(fill => { fill.style.width = '0%'; });
+            valueElements.forEach(value => { value.textContent = '0%'; });
+
+            const animateValue = (valueElement, target, delay) => {
+                setTimeout(() => {
+                    const start = performance.now();
+                    const duration = 2500;
+                    const update = now => {
+                        const progress = Math.min((now - start) / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        valueElement.textContent = `${Math.round(target * eased)}%`;
+                        if (progress < 1) requestAnimationFrame(update);
+                    };
+                    requestAnimationFrame(update);
+                }, delay);
+            };
 
             const fillObserver = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const fill = entry.target;
-                        const target = fill.dataset.width + '%';
-                        // Multi-frame deferral guarantees the 0% state is rendered first
+                        const index = Array.prototype.indexOf.call(fills, fill);
+                        const target = Number(fill.dataset.width);
+                        const delay = 100 + index * 250;
+                        const card = fill.closest('.skill-card');
+                        const valueElement = card ? card.querySelector('.skill-card-value') : null;
                         requestAnimationFrame(() => {
                             requestAnimationFrame(() => {
-                                fill.style.width = target;
+                                fill.style.width = `${target}%`;
+                                if (valueElement) animateValue(valueElement, target, delay);
                             });
                         });
                         obs.unobserve(fill);
@@ -1119,7 +1135,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Knowledge base: keywords -> answer
     const knowledgeBase = [
         {
-            keywords: ['manual', 'manual testing', 'manual'],
+            keywords: ['manual', 'manual testing'],
             answer: 'Permeet is a <b>Manual QA Specialist</b> with 2+ years of experience. He performs end-to-end manual testing of mobile & web applications, designs detailed test cases (positive, negative & edge scenarios), and validates core feature functionality across enterprise and product-based environments.'
         },
         {
