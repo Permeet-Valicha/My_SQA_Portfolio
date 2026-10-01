@@ -605,38 +605,6 @@
             </div>
         </div>
     </section>
-    <section class="py-12 bg-surface relative overflow-hidden" aria-label="Why teams hire me">
-        <div class="editorial-margin">
-            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
-                <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3">Why Teams Hire Me</h3>
-                <h2 class="text-4xl font-headline font-bold text-on-surface">I reduce release risk before it reaches users</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 reveal" style="transition-delay: 200ms;">
-                <div class="bg-white border border-surface-container-highest rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">shield</span>
-                    <h4 class="font-bold text-on-surface text-lg mb-2">Release Confidence</h4>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">I validate products early so teams can ship with more confidence and fewer surprises.</p>
-                </div>
-                <div class="bg-white border border-surface-container-highest rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">groups</span>
-                    <h4 class="font-bold text-on-surface text-lg mb-2">Cross-functional Communication</h4>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">I translate bugs, risks, and product issues clearly for developers, PMs, and stakeholders.</p>
-                </div>
-                <div class="bg-white border border-surface-container-highest rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">troubleshoot</span>
-                    <h4 class="font-bold text-on-surface text-lg mb-2">Bug Prevention</h4>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">I focus on the root cause, not just the symptom, so defects are removed before release.</p>
-                </div>
-                <div class="bg-white border border-surface-container-highest rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-3">speed</span>
-                    <h4 class="font-bold text-on-surface text-lg mb-2">Fast Quality Feedback</h4>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">I help teams move quickly without sacrificing stability, usability, or user trust.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="py-12 bg-surface-container-low relative overflow-hidden book-container" id="about">
         <!-- Subtle Tech Background with Animation -->
         <div class="absolute inset-0 z-0 opacity-[0.08] pointer-events-none overflow-hidden">
@@ -1409,12 +1377,19 @@
                     </div>
                     <div class="case-study-body">
                         <div class="space-y-4 pt-2">
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Problem</p><p class="text-sm text-on-surface-variant">A large enterprise HRMS / public-sector platform with 10+ user roles (admin, HR, payroll, managers, and citizens) needed end-to-end validation. The biggest risk was role-based access control (RBAC) — a faulty permission boundary could expose sensitive payroll and employee data or allow unauthorized actions.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Problem</p><p class="text-sm text-on-surface-variant">An enterprise HRMS / public-sector platform with multiple user roles (including admin, HR, payroll, managers, and citizens) needed end-to-end validation. The biggest risk was role-based access control (RBAC) — a faulty permission boundary could expose sensitive payroll and employee data or allow unauthorized actions.</p></div>
                             <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Approach</p><p class="text-sm text-on-surface-variant">As an SQA intern & trainee consultant, I analyzed the role matrix, built a role-permission test matrix, and executed smoke, sanity, UI, and regression cycles. I designed detailed test cases covering positive, negative, and edge permission scenarios, and reported defects through Redmine with clear reproduction steps.</p></div>
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Testing Strategy</p><p class="text-sm text-on-surface-variant">Manual testing across all modules + Selenium automation for the core regression suite. Validated data integrity for 500+ employee records, ran payroll calculations against tax-bracket logic, and injected unprivileged tokens to confirm 403 responses were correctly triggered.</p></div>
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Bugs Found</p><p class="text-sm text-on-surface-variant">Identified 15+ critical RBAC bypass issues where lower-privilege roles could access restricted modules, plus 20+ functional defects in payroll calculations, role transitions, and UI flows — all caught before release.</p></div>
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Impact</p><p class="text-sm text-on-surface-variant">Zero critical security issues post-release. The core regression suite (42/42 tests) passed ahead of the release, and the platform was deployed successfully for thousands of users with protected payroll and employee data.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Testing Strategy</p><p class="text-sm text-on-surface-variant">Combined manual testing with Selenium checks for repeatable regression flows. Focused on role-permission boundaries, payroll calculations, and expected access for positive and negative scenarios.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Findings</p><p class="text-sm text-on-surface-variant">Reported access-control, payroll, role-transition, and UI defects with clear reproduction steps and expected-versus-actual behavior.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Outcome</p><p class="text-sm text-on-surface-variant">Surfaced high-risk workflow and permission issues for the team to address, then retested fixes and strengthened regression coverage around critical user roles.</p></div>
                             <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Lessons Learned</p><p class="text-sm text-on-surface-variant">Role-matrix testing early in the cycle prevents costly late-stage security fixes, and combining Selenium automation with manual exploratory testing catches the issues an automated suite alone would miss.</p></div>
+                        </div>
+                        <div class="case-study-demo mt-8">
+                            <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+                                <h5 class="inline-flex items-center gap-2 text-sm font-bold text-on-surface"><span class="material-symbols-outlined text-primary">play_circle</span>HRMS &amp; RBAC Demo</h5>
+                            </div>
+                            <button type="button" class="case-study-demo-toggle" aria-expanded="false" aria-controls="hrms-case-demo"><span class="material-symbols-outlined">play_circle</span><span class="case-study-demo-toggle-label">View Detail</span></button>
+                            <div class="case-study-demo-frame" id="hrms-case-demo" hidden><iframe data-src="./hrms-demo.html" title="Interactive HRMS and public sector platform QA demo" loading="lazy"></iframe></div>
                         </div>
                     </div>
                 </div>
@@ -1430,11 +1405,18 @@
                     <div class="case-study-body">
                         <div class="space-y-4 pt-2">
                             <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Problem</p><p class="text-sm text-on-surface-variant">An AI-driven personality & behavioral assessment platform with a dynamic questionnaire engine needed rigorous validation. The core risk was scoring integrity — if the evaluation algorithm computed incorrect personality types, the entire product would lose credibility with users and clients.</p></div>
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Approach</p><p class="text-sm text-on-surface-variant">As a Jr. SQA Engineer, I collaborated closely with the AI/ML team to understand the scoring matrix, then designed edge-case test scenarios for extreme and mixed personality inputs. I mapped every workflow state — question flow, skip logic, progress tracking, and result generation — into executable manual test cases covering positive, negative, and boundary scenarios.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Approach</p><p class="text-sm text-on-surface-variant">As a Jr. SQA Engineer, I mapped questionnaire states — question flow, skip logic, progress tracking, and result generation — into executable manual test cases. Coverage included positive, negative, boundary, and mixed-answer scenarios against expected scoring behavior.</p></div>
                             <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Testing Strategy</p><p class="text-sm text-on-surface-variant">End-to-end manual testing of questionnaire workflows + API testing of the assessment endpoints via Postman to verify request/response integrity and data consistency between the frontend and the scoring backend. Also performed UI/UX validation of progress bars, option selection states, and result rendering across browsers.</p></div>
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Bugs Found</p><p class="text-sm text-on-surface-variant">Found 10+ scoring inconsistency bugs where identical answer sets produced different results, 8+ workflow defects (questions skippable without selection, incorrect progress percentage), and several API response schema mismatches.</p></div>
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Impact</p><p class="text-sm text-on-surface-variant">Improved assessment accuracy by ~30% by catching the scoring bugs before users did, and ensured consistent, reliable results across all test scenarios. Helped strengthen regression cycles so every release maintained the same quality bar.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Findings</p><p class="text-sm text-on-surface-variant">Documented scoring inconsistencies, questionnaire-flow issues, progress-tracking defects, and API response mismatches with repeatable test inputs.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Outcome</p><p class="text-sm text-on-surface-variant">Gave the team reproducible cases for investigating scoring and workflow behavior; retested fixes and added key scenarios to regression checks to support consistent results.</p></div>
                             <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Lessons Learned</p><p class="text-sm text-on-surface-variant">Testing AI systems requires close collaboration with data scientists, creative edge-case thinking, and API-level validation to confirm the UI truly reflects the backend scoring logic.</p></div>
+                        </div>
+                        <div class="case-study-demo mt-8">
+                            <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+                                <h5 class="inline-flex items-center gap-2 text-sm font-bold text-on-surface"><span class="material-symbols-outlined text-primary">play_circle</span>AI Assessment Demo</h5>
+                            </div>
+                            <button type="button" class="case-study-demo-toggle" aria-expanded="false" aria-controls="ai-case-demo"><span class="material-symbols-outlined">play_circle</span><span class="case-study-demo-toggle-label">View Detail</span></button>
+                            <div class="case-study-demo-frame" id="ai-case-demo" hidden><iframe data-src="./manual-ai-demo.html" title="Interactive AI assessment QA demo" loading="lazy"></iframe></div>
                         </div>
                     </div>
                 </div>
@@ -1449,12 +1431,19 @@
                     </div>
                     <div class="case-study-body">
                         <div class="space-y-4 pt-2">
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Problem</p><p class="text-sm text-on-surface-variant">A business workflow & job marketplace connecting hirers, workers, and admins needed end-to-end validation. The highest-risk areas were the role state machine (job posted → open → under review → paid) and the escrow-style payment releases — any error could cause financial leakage or jobs stuck in the wrong state.</p></div>
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Approach</p><p class="text-sm text-on-surface-variant">As an SQA Engineer on platform-based and AI-driven systems, I mapped every role transition and payment flow into a state-transition matrix, then designed test cases for each workflow state. I executed manual testing across the hirer, worker, and admin journeys, and validated the payment release via Stripe-webhook-style flows.</p></div>
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Testing Strategy</p><p class="text-sm text-on-surface-variant">End-to-end manual testing of job posting, submission, approval, and payment workflows + API testing of payment endpoints with Postman to verify balance updates and webhook triggers. Performed regression testing across multiple release cycles to ensure role transitions never locked jobs into an invalid state.</p></div>
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Bugs Found</p><p class="text-sm text-on-surface-variant">Identified 12+ payment calculation errors (including incorrect escrow amounts and fees) and 6+ workflow state-transition defects where jobs could be prematurely marked paid or could not transition from "under review" to "paid".</p></div>
-                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Impact</p><p class="text-sm text-on-surface-variant">Prevented financial discrepancies and revenue leakage, and ensured smooth, reliable payment releases for all marketplace participants. Strengthened regression coverage across 30+ cycles so each release stayed stable.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Problem</p><p class="text-sm text-on-surface-variant">A multi-role job marketplace needed end-to-end validation across job posting, review, approval, and payment-related workflows. Key risks included invalid role transitions, incorrect status changes, and inconsistent payment information.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Approach</p><p class="text-sm text-on-surface-variant">Mapped the main role transitions and payment-related states, then designed test cases for hirer, worker, and admin journeys. Coverage included expected and invalid state changes, with clear checks for each workflow outcome.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Testing Strategy</p><p class="text-sm text-on-surface-variant">Manually tested job posting, submission, review, and approval flows, with API checks where available to validate request and response behavior. Re-ran core workflow scenarios during regression testing.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Findings</p><p class="text-sm text-on-surface-variant">Focused defect reporting on invalid workflow transitions, incorrect status changes, and inconsistencies in payment-related information.</p></div>
+                            <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Outcome</p><p class="text-sm text-on-surface-variant">Provided reproducible workflow scenarios for issue triage and fix verification, and clearer regression checks for the marketplace’s core user journeys.</p></div>
                             <div><p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Lessons Learned</p><p class="text-sm text-on-surface-variant">Payment systems require exhaustive state-transition testing and edge-case financial validation — and combining manual workflow checks with API-level payment verification catches the issues that break real transactions.</p></div>
+                        </div>
+                        <div class="case-study-demo mt-8">
+                            <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+                                <h5 class="inline-flex items-center gap-2 text-sm font-bold text-on-surface"><span class="material-symbols-outlined text-primary">play_circle</span>Marketplace Workflow Demo</h5>
+                            </div>
+                            <button type="button" class="case-study-demo-toggle" aria-expanded="false" aria-controls="marketplace-case-demo"><span class="material-symbols-outlined">play_circle</span><span class="case-study-demo-toggle-label">View Detail</span></button>
+                            <div class="case-study-demo-frame" id="marketplace-case-demo" hidden><iframe data-src="./manual-marketplace-demo.html" title="Interactive job marketplace QA demo" loading="lazy"></iframe></div>
                         </div>
                     </div>
                 </div>

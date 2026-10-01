@@ -1093,6 +1093,37 @@ document.addEventListener('DOMContentLoaded', function () {
 // ============================================
 document.addEventListener('DOMContentLoaded', function () {
     const caseStudyHeaders = document.querySelectorAll('.case-study-header');
+    const caseStudyDemoButtons = document.querySelectorAll('.case-study-demo-toggle');
+
+    function resetCaseStudyDemo(body) {
+        const frame = body.querySelector('.case-study-demo-frame');
+        const button = body.querySelector('.case-study-demo-toggle');
+        if (!frame || !button) return;
+
+        frame.hidden = true;
+        frame.querySelector('iframe')?.removeAttribute('src');
+        button.setAttribute('aria-expanded', 'false');
+        button.querySelector('.case-study-demo-toggle-label').textContent = 'View Detail';
+        button.querySelector('.material-symbols-outlined').textContent = 'play_circle';
+    }
+
+    caseStudyDemoButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            const frame = button.closest('.case-study-body').querySelector('.case-study-demo-frame');
+            const iframe = frame.querySelector('iframe');
+            const isOpening = frame.hidden;
+
+            frame.hidden = !isOpening;
+            button.setAttribute('aria-expanded', String(isOpening));
+            button.querySelector('.case-study-demo-toggle-label').textContent = isOpening ? 'Hide Demo' : 'View Detail';
+            button.querySelector('.material-symbols-outlined').textContent = isOpening ? 'close' : 'play_circle';
+
+            if (isOpening && !iframe.getAttribute('src')) {
+                iframe.src = iframe.dataset.src;
+            }
+            if (!isOpening) iframe.removeAttribute('src');
+        });
+    });
 
     caseStudyHeaders.forEach(function (header) {
         header.addEventListener('click', function () {
@@ -1104,6 +1135,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 b.classList.remove('open');
                 b.previousElementSibling.classList.remove('is-open');
                 b.previousElementSibling.setAttribute('aria-expanded', 'false');
+                resetCaseStudyDemo(b);
             });
 
             // Toggle current
