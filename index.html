@@ -168,39 +168,6 @@
 </head>
 
 <body class="bg-surface font-body text-on-surface overflow-x-hidden">
-    <!-- Stunning 2-Page Intro Section -->
-    <div id="intro-overlay">
-        <!-- Blueprint Grid & Circuit Background -->
-        <div class="intro-bg-grid"></div>
-        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
-            <div class="circuit-line horizontal top-[30%]"></div>
-            <div class="circuit-line horizontal top-[60%] animation-delay-2"></div>
-            <div class="circuit-line vertical left-[25%]"></div>
-            <div class="circuit-line vertical right-[20%] animation-delay-3"></div>
-
-            <!-- Tech Particles -->
-            <div class="tech-marker top-[20%] left-[15%]"></div>
-            <div class="tech-marker top-[80%] right-[10%]"></div>
-        </div>
-
-        <div class="intro-particle-layer">
-            <div class="intro-particle" style="left: 10%; animation-delay: 0s;"></div>
-            <div class="intro-particle" style="left: 30%; animation-delay: 2s;"></div>
-            <div class="intro-particle" style="left: 50%; animation-delay: 4s;"></div>
-            <div class="intro-particle" style="left: 70%; animation-delay: 1s;"></div>
-            <div class="intro-particle" style="left: 90%; animation-delay: 3s;"></div>
-        </div>
-
-        <!-- Page 1 -->
-        <div id="intro-page-1" class="intro-page">
-            <h1 class="intro-text-1">SQA Engineer | Ensuring Bug-Free & Reliable Software Experiences</h1>
-        </div>
-
-        <!-- Page 2 -->
-        <div id="intro-page-2" class="intro-page">
-            <h1 class="intro-text-2">Quality Architect | Breaking Systems to Build Better User Experiences</h1>
-        </div>
-    </div>
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 bg-white border-b border-slate-100">
         <div
@@ -1681,7 +1648,8 @@
                         </div>
                         <div>
                             <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0">Email</p>
-                            <p class="text-on-surface font-semibold text-sm">permeetvalicha@gmail.com</p>
+                            <a href="mailto:permeetvalicha@gmail.com"
+                                class="text-on-surface font-semibold text-sm hover:text-primary transition-colors">permeetvalicha@gmail.com</a>
                         </div>
                     </div>
                     <button
@@ -1790,56 +1758,6 @@
         </div>
     </div>
 
-    <script>
-        // --- Fixed Intro Sequence Logic ---
-        function runIntro() {
-            // Force scroll to top and prevent browser scroll restoration
-            window.scrollTo(0, 0);
-            if ('scrollRestoration' in history) {
-                history.scrollRestoration = 'manual';
-            }
-
-            const overlay = document.getElementById('intro-overlay');
-            const page1 = document.getElementById('intro-page-1');
-            const page2 = document.getElementById('intro-page-2');
-            const page3 = document.getElementById('intro-page-3');
-            const pageLoader = document.getElementById('intro-page-loader');
-
-            // Stage 1: Statement 1
-            setTimeout(() => {
-                page1.classList.add('active');
-            }, 300);
-
-            // Stage 2: Statement 2
-            setTimeout(() => {
-                page1.classList.remove('active');
-                page1.classList.add('exit');
-                setTimeout(() => {
-                    page2.classList.add('active');
-                }, 800);
-            }, 3000);
-
-            // Final Reveal (Skip Stage 3 and Stage 4)
-            setTimeout(() => {
-                page2.classList.remove('active');
-                page2.classList.add('exit');
-                setTimeout(() => {
-                    overlay.classList.add('intro-reveal-zoom');
-                    document.body.classList.remove('overflow-hidden');
-                    setTimeout(() => {
-                        overlay.remove();
-                    }, 1200);
-                }, 800);
-            }, 6500);
-        }
-
-        // Initialize when ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', runIntro);
-        } else {
-            runIntro();
-        }
-    </script>
 </body>
 
 </html>
