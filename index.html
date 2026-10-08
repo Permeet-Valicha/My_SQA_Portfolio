@@ -77,11 +77,21 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=block"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+        }
+
+        .font-headline,
+        [class~="font-['Manrope']"] {
+            font-family: "Manrope", sans-serif;
+        }
+    </style>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -220,32 +230,32 @@
                 <a href="#about"
                     class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl bg-blue-50 text-blue-900 transition-all duration-300">
                     <span class="material-symbols-outlined text-blue-700">person</span>
-                    <span class="text-sm font-medium">About</span>
+                    <span class="text-base font-medium">About</span>
                 </a>
                 <a href="#experience"
-                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
                     <span class="material-symbols-outlined">work</span>
-                    <span class="text-sm font-medium">Experience</span>
+                    <span class="text-base font-medium">Experience</span>
                 </a>
                 <a href="#skills-tools"
-                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
                     <span class="material-symbols-outlined">verified</span>
-                    <span class="text-sm font-medium">Skills & Tools</span>
+                    <span class="text-base font-medium">Skills & Tools</span>
                 </a>
                 <a href="#projects"
-                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
                     <span class="material-symbols-outlined">rocket_launch</span>
-                    <span class="text-sm font-medium">Projects</span>
+                    <span class="text-base font-medium">Projects</span>
                 </a>
                 <a href="#case-studies"
-                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
                     <span class="material-symbols-outlined">science</span>
-                    <span class="text-sm font-medium">Case Studies</span>
+                    <span class="text-base font-medium">Case Studies</span>
                 </a>
                 <a href="#certifications"
-                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
+                    class="mobile-link group flex items-center gap-4 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-blue-900 transition-all duration-300">
                     <span class="material-symbols-outlined">description</span>
-                    <span class="text-sm font-medium">Certifications</span>
+                    <span class="text-base font-medium">Certifications</span>
                 </a>
             </div>
 
@@ -359,11 +369,6 @@
                     <a href="Permeet_Valicha_QA_Resume.pdf" download
                         class="box-border h-[50px] w-[160px] sm:h-[60px] sm:w-[180px] shrink-0 justify-center whitespace-nowrap bg-primary text-on-primary px-3 py-3 sm:px-4 sm:py-4 rounded-xl font-bold flex items-center hover:bg-primary-container transition-all hover:shadow-xl hover:translate-y-[-4px]">
                         Download CV
-                    </a>
-                    <a href="#about" aria-label="View my portfolio profile without signing in to LinkedIn"
-                        class="box-border min-h-[50px] sm:min-h-[60px] shrink-0 justify-center whitespace-nowrap border-2 border-primary text-primary px-4 py-3 sm:px-5 sm:py-4 rounded-xl font-bold flex items-center gap-2 hover:bg-primary/5 transition-all hover:shadow-xl hover:translate-y-[-4px]">
-                        View My Profile Here
-                        <span class="material-symbols-outlined">person</span>
                     </a>
                 </div>
             </div>
@@ -1496,12 +1501,6 @@
                         Open LinkedIn Profile
                         <span class="material-symbols-outlined text-base">arrow_forward</span>
                     </a>
-                    <p class="mt-3 text-xs text-on-surface-variant">
-                        LinkedIn may ask you to sign in. You can
-                        <a href="#experience" class="font-semibold text-primary hover:underline">view my experience here</a>
-                        or <a href="Permeet_Valicha_QA_Resume.pdf" download
-                            class="font-semibold text-primary hover:underline">download my CV</a>.
-                    </p>
                 </div>
             </div>
         </div>
@@ -1659,7 +1658,9 @@
                         </a>
                         <div>
                             <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0">Email</p>
-                            <a href="mailto:permeetvalicha@gmail.com"
+                            <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=permeetvalicha%40gmail.com"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Compose an email to permeetvalicha@gmail.com in Gmail"
                                 class="text-on-surface font-semibold text-sm hover:text-primary transition-colors">permeetvalicha@gmail.com</a>
                         </div>
                     </div>
