@@ -289,13 +289,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Theme toggle: preserves the visitor's preference between visits.
+    // Start in light mode on every page load; the toggle can still switch themes until refresh.
     const themeToggles = document.querySelectorAll('.theme-toggle');
     const themeIcons = document.querySelectorAll('.theme-icon');
-    const isLocalhost = window.location.hostname === 'localhost' ||
-        window.location.hostname === '127.0.0.1' ||
-        window.location.protocol === 'file:';
-    const savedTheme = localStorage.getItem('portfolio-theme');
 
     function setTheme(isDark) {
         document.documentElement.classList.toggle('dark', isDark);
@@ -312,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    setTheme(isLocalhost ? false : savedTheme ? savedTheme === 'dark' : false);
+    setTheme(false);
     themeToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             setTheme(!document.documentElement.classList.contains('dark'));
@@ -1155,6 +1151,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
 
 
