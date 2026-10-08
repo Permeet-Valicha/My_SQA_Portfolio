@@ -299,12 +299,12 @@
 
 
         <div
-            class="editorial-margin grid lg:grid-cols-12 gap-4 lg:gap-16 items-center w-full relative z-20 pointer-events-none">
+            class="editorial-margin grid lg:grid-cols-12 gap-4 lg:gap-16 items-center w-full relative z-20 pointer-events-none lg:-translate-y-8">
             <!-- Left Side Content -->
             <div class="lg:col-span-7 space-y-2 pointer-events-auto min-w-0">
                 <!-- Availability Badge -->
 <!-- Availability Badge & Marquee -->
-                <div class="fade-up mt-12 sm:mt-16 lg:mt-20 flex flex-col gap-3 overflow-hidden">
+                <div class="fade-up flex flex-col gap-3 overflow-hidden">
                     <div class="badge-pulse flex-shrink-0 w-fit">
                         <span class="dot-pulsing"></span>
                         Available for New Roles
@@ -538,7 +538,7 @@
 </section>
     
     <!-- Professional Metrics Section -->
-    <section class="py-14 bg-surface blueprint-grid relative overflow-hidden" id="metrics" aria-label="Professional Metrics">
+    <section class="py-10 bg-surface blueprint-grid relative overflow-hidden" id="metrics" aria-label="Professional Metrics">
         <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
             <div class="circuit-line horizontal top-[30%]"></div>
             <div class="circuit-line horizontal top-[70%] animation-delay-2"></div>
@@ -546,7 +546,7 @@
             <div class="circuit-line vertical right-[15%] animation-delay-3"></div>
         </div>
         <div class="editorial-margin relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+            <div class="text-center max-w-2xl mx-auto mb-8 reveal">
                 <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3">Impact at a Glance</h3>
                 <h2 class="text-4xl font-headline font-bold text-on-surface">Impact That Moves Products Forward</h2>
             </div>
@@ -582,7 +582,7 @@
             </div>
         </div>
     </section>
-    <section class="py-12 bg-surface-container-low relative overflow-hidden book-container" id="about">
+    <section class="py-10 bg-surface-container-low relative overflow-hidden book-container" id="about">
         <!-- Subtle Tech Background with Animation -->
         <div class="absolute inset-0 z-0 opacity-[0.08] pointer-events-none overflow-hidden">
             <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop"
@@ -608,7 +608,7 @@
                     <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase text-center">About Me</h3>
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                     <!-- Image Left -->
                     <div class="order-1 lg:order-1 relative reveal reveal-left flex justify-center"
                         style="transition-delay: 100ms;">
@@ -694,7 +694,7 @@
             </div>
     </section>
     <!-- Experience Section -->
-    <section class="py-12 bg-surface-container-low relative overflow-hidden blueprint-grid" id="experience">
+    <section class="py-10 bg-surface-container-low relative overflow-hidden blueprint-grid" id="experience">
         <!-- Advanced Circuit Background Animation -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
             <div class="circuit-line horizontal top-[20%]"></div>
@@ -709,9 +709,9 @@
             <div class="tech-marker top-[70%] right-[30%]"></div>
         </div>
         <div class="editorial-margin">
-            <h2 class="text-4xl font-headline font-bold text-on-surface mb-10 text-center lg:text-left reveal">
+            <h2 class="text-4xl font-headline font-bold text-on-surface mb-8 text-center lg:text-left reveal">
                 Professional Experience</h2>
-            <div id="experience-list" class="space-y-12">
+            <div id="experience-list" class="space-y-8">
                 <!-- VativeApps -->
                 <div class="experience-entry relative pl-12 border-l-2 border-primary-container reveal">
                     <div class="absolute -left-[9px] top-0 w-4 h-4 bg-primary rounded-full ring-4 ring-primary-fixed">
@@ -900,7 +900,7 @@
         </div>
     </section>
     <!-- Skills & Tools Section -->
-    <section class="py-12 bg-surface-container-low relative overflow-hidden" id="skills-tools" aria-label="Skills & Tools">
+    <section class="py-10 bg-surface-container-low relative overflow-hidden" id="skills-tools" aria-label="Skills & Tools">
         <div class="editorial-margin relative z-10">
 <div class="text-center max-w-2xl mx-auto mb-8 reveal">
                 <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3 text-[0.7rem] sm:text-[0.8rem]">Skills &amp; Tools</h3>
@@ -908,12 +908,12 @@
                 <p class="mt-3 text-sm sm:text-base text-on-surface-variant">Delivering reliable software through structured testing, quality assurance, and continuous improvement.</p>
             </div>
 
-<div class="mt-10 reveal" style="transition-delay: 150ms;">
+<div class="mt-8 reveal" style="transition-delay: 150ms;">
                 <div class="text-center max-w-2xl mx-auto mb-6">
                     <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-2 text-[0.7rem] sm:text-[0.8rem]">Skills Proficiency</h3>
                     <p class="text-sm text-on-surface-variant">Proficiency across core testing disciplines</p>
                 </div>
-<div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+<div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                     <div class="skill-chart-container mx-auto w-full max-w-[230px] sm:max-w-[255px] relative">
                         <canvas id="skills-doughnut-chart" role="img" aria-label="Skills proficiency doughnut chart"></canvas>
                         <div class="skill-chart-center">
@@ -924,10 +924,10 @@
                     <div id="skills-chart-legend" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
                 </div>
                 <!-- Skills Metrics Strip -->
-                <div id="skills-metrics" class="mt-10 flex flex-wrap justify-center gap-3"></div>
+                <div id="skills-metrics" class="mt-8 flex flex-wrap justify-center gap-3"></div>
             </div>
 
-            <div class="mt-10 reveal" style="transition-delay: 200ms;">
+            <div class="mt-8 reveal" style="transition-delay: 200ms;">
                 <div class="text-center max-w-2xl mx-auto mb-6">
                     <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-2 text-[0.7rem] sm:text-[0.8rem]">My Toolkit</h3>
                 </div>
@@ -1010,7 +1010,7 @@
     </section>
 
     <!-- QA Process Timeline Section -->
-    <section class="py-12 bg-surface relative overflow-hidden" id="qa-process" aria-label="QA Process">
+    <section class="py-10 bg-surface relative overflow-hidden" id="qa-process" aria-label="QA Process">
         <div class="editorial-margin relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-8 reveal">
                 <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-2">How I Work</h3>
@@ -1063,13 +1063,13 @@
     </section>
 
     <!-- Projects Section -->
-    <section class="py-12 bg-surface relative" id="projects">
+    <section class="py-10 bg-surface relative" id="projects">
         <div class="editorial-margin">
             <!-- Header -->
-            <div class="mb-10 text-center lg:text-left reveal">
+            <div class="mb-8 text-center lg:text-left reveal">
                 <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-4">Portfolio</h3>
                 <h2 class="text-4xl lg:text-4xl font-headline font-bold text-on-surface">Featured Projects</h2>
-                <div class="w-20 h-1.5 bg-primary mt-6 rounded-full mx-auto lg:mx-0"></div>
+                <div class="w-20 h-1.5 bg-primary mt-4 rounded-full mx-auto lg:mx-0"></div>
             </div>
 
             <!-- Carousel Container -->
@@ -1336,7 +1336,7 @@
         </div>
     </section>
     <!-- Case Studies Section -->
-    <section class="py-12 bg-surface relative overflow-hidden" id="case-studies" aria-label="Case Studies">
+    <section class="py-10 bg-surface relative overflow-hidden" id="case-studies" aria-label="Case Studies">
         <div class="editorial-margin relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-6 reveal">
                 <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-2">Real-World Impact</h3>
@@ -1429,7 +1429,7 @@
     </section>
 
     <!-- Why Hire Me Section -->
-    <section class="py-14 bg-surface relative overflow-hidden" id="why-hire-me" aria-label="Why Hire Me">
+    <section class="py-10 bg-surface relative overflow-hidden" id="why-hire-me" aria-label="Why Hire Me">
         <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
             <div class="circuit-line horizontal top-[20%]"></div>
             <div class="circuit-line horizontal top-[70%] animation-delay-2"></div>
@@ -1485,7 +1485,7 @@
                 </div>
             </div>
 
-            <div class="mt-10 pt-8 border-t border-primary/10 reveal" style="transition-delay: 400ms;">
+            <div class="mt-8 pt-6 border-t border-primary/10 reveal" style="transition-delay: 400ms;">
                 <div class="text-center max-w-xl mx-auto">
                     <span class="material-symbols-outlined text-primary text-3xl mb-2">workspace_premium</span>
                     <h3 class="text-xl font-headline font-bold text-on-surface mb-2">Trusted by Peers & Leaders</h3>
@@ -1507,9 +1507,9 @@
     </section>
 
     <!-- International Readiness Section -->
-    <section class="py-12 bg-surface relative overflow-hidden" id="international-readiness" aria-label="International Readiness">
+    <section class="py-10 bg-surface relative overflow-hidden" id="international-readiness" aria-label="International Readiness">
         <div class="editorial-margin relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+            <div class="text-center max-w-2xl mx-auto mb-8 reveal">
                 <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3">Global Ready</h3>
                 <h2 class="text-4xl font-headline font-bold text-on-surface">International Readiness</h2>
                 <p class="text-on-surface-variant mt-3">Ready to collaborate with international product teams across time zones.</p>
@@ -1544,9 +1544,9 @@
     </section>
 
     <!-- Licenses & Certifications Section -->
-    <section class="py-12 bg-surface" id="certifications">
+    <section class="py-10 bg-surface" id="certifications">
         <div class="editorial-margin">
-            <h2 class="text-4xl font-headline font-bold text-on-surface mb-10 text-center lg:text-left reveal">Credentials & Continuous Learning</h2>
+            <h2 class="text-4xl font-headline font-bold text-on-surface mb-8 text-center lg:text-left reveal">Credentials & Continuous Learning</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Certification 1 -->
                 <div class="reveal" style="transition-delay: 100ms;">
