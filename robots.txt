@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://permeetvalicha.netlify.app/sitemap.xml
+Sitemap: https://permeetvalicha.vercel.app/sitemap.xml
