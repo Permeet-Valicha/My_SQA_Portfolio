@@ -1444,18 +1444,31 @@
 
         /* Scroll Reveal Animations */
         .reveal {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: none;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: transform, opacity;
         }
 
-        .reveal.reveal-left {
+        .reveal.reveal-pending {
+            opacity: 1;
+            transform: translateY(30px);
+        }
+
+        .reveal.reveal-pending.reveal-left {
             transform: translateX(-50px);
         }
 
-        .reveal.reveal-right {
+        .reveal.reveal-pending.reveal-right {
             transform: translateX(50px);
+        }
+
+        .reveal.reveal-left {
+            transform: none;
+        }
+
+        .reveal.reveal-right {
+            transform: none;
         }
 
         .reveal.active {

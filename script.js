@@ -1,6 +1,9 @@
 // JavaScript for Permeet Valicha Portfolio
 
 document.addEventListener('DOMContentLoaded', function () {
+    const isLocalhost = window.location.protocol === 'file:' ||
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1';
     const currentYear = document.getElementById('current-year');
     if (currentYear) {
         currentYear.textContent = new Date().getFullYear();
@@ -11,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const experiencePreview = document.getElementById('experience-letter-preview');
     const experienceTitle = document.getElementById('experience-letter-title');
     const experienceDownload = document.getElementById('experience-letter-download');
-    const experienceCloseButton = document.querySelector('[data-close-experience-modal]');
+    const experienceCloseButton = experienceModal?.querySelector('button[data-close-experience-modal]');
+    const experienceModalBackdrop = experienceModal?.querySelector('[data-close-experience-modal]:not(button)');
     let experienceTrigger = null;
 
     function closeExperienceModal() {
@@ -132,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     experienceCloseButton?.addEventListener('click', closeExperienceModal);
+    experienceModalBackdrop?.addEventListener('click', closeExperienceModal);
     experienceDownload?.addEventListener('click', async event => {
         event.preventDefault();
         const imagePath = experienceDownload.href;
@@ -357,21 +362,26 @@ document.addEventListener('DOMContentLoaded', function () {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Optional: stop observing once revealed
+                entry.target.classList.remove('reveal-pending');
+                observer.unobserve(entry.target);
             }
         });
     };
 
-    const revealOptions = {
-        threshold: 0.15, // Trigger when 15% of the element is visible
-        rootMargin: "0px 0px -50px 0px"
-    };
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver(revealCallback, {
+            threshold: 0.01
+        });
 
-    const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
-
-    revealElements.forEach(el => {
-        revealObserver.observe(el);
-    });
+        revealElements.forEach(el => {
+            if (el.getBoundingClientRect().top > window.innerHeight) {
+                el.classList.add('reveal-pending');
+            }
+            revealObserver.observe(el);
+        });
+    } else {
+        revealElements.forEach(el => el.classList.add('active'));
+    }
 
     // Tools carousel
     const toolsCarousel = document.getElementById('tools-carousel');
@@ -444,57 +454,58 @@ document.addEventListener('DOMContentLoaded', function () {
     if (typingElement) {
         type();
     }
-    // SMTP.js Contact Form Submission
+    // Contact Form Submission
     const contactForm = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
     const submitBtn = document.getElementById('submit-btn');
     const spinner = document.getElementById('loading-spinner');
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const name = contactForm.querySelector('[name="name"]').value;
-            const email = contactForm.querySelector('[name="email"]').value;
-            const subject = contactForm.querySelector('[name="subject"]').value;
-            const message = contactForm.querySelector('[name="message"]').value;
-
-            // Show Loading State
+    if (contactForm && formStatus && submitBtn && spinner) {
+        contactForm.addEventListener('submit', async event => {
+            event.preventDefault();
             submitBtn.disabled = true;
             spinner.classList.remove('hidden');
             formStatus.classList.add('hidden');
 
-            Email.send({
-                Host: "smtp.gmail.com",
-                Username: "permeetvalicha@gmail.com",
-                Password: "ukcg dzew hcgs zmam",
-                To: 'permeet.valicha@vativeapps.com',
-                From: "permeetvalicha@gmail.com",
-                Subject: "Portfolio: " + (subject || "New Message"),
-                Body: `
-                    <h3>New Message from Portfolio</h3>
-                    <p><b>Name:</b> ${name}</p>
-                    <p><b>Email:</b> ${email}</p>
-                    <p><b>Message:</b></p>
-                    <p>${message}</p>
-                `
-            }).then(
-                message => {
-                    if (message === "OK") {
-                        formStatus.textContent = "Message sent successfully! I'll get back to you soon.";
-                        formStatus.className = "text-primary bg-primary-container p-4 rounded-lg block mb-4 text-center";
-                        contactForm.reset();
-                    } else {
-                        formStatus.textContent = "Error: " + message;
-                        formStatus.className = "text-error bg-error-container p-4 rounded-lg block mb-4 text-center";
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.fromEntries(formData))
+                });
+                const responseBody = await response.text();
+                let result = {};
+
+                if (responseBody) {
+                    try {
+                        result = JSON.parse(responseBody);
+                    } catch {
+                        throw new Error(`Email service returned an invalid response (HTTP ${response.status}). Please try again later.`);
                     }
-                    submitBtn.disabled = false;
-                    spinner.classList.add('hidden');
-                    formStatus.classList.remove('hidden');
                 }
-            );
+
+                if (!response.ok) {
+                    throw new Error(result.error || `Email service is unavailable (HTTP ${response.status}). Please try again later.`);
+                }
+                if (!responseBody || typeof result.message !== 'string') {
+                    throw new Error('Email service returned an empty response. Please try again later.');
+                }
+
+                formStatus.textContent = result.message;
+                formStatus.className = 'text-primary bg-primary-container p-4 rounded-lg block mb-4 text-center';
+                contactForm.reset();
+            } catch (error) {
+                formStatus.textContent = error.message || 'Unable to send your message right now. Please try again.';
+                formStatus.className = 'text-error bg-error-container p-4 rounded-lg block mb-4 text-center';
+            } finally {
+                submitBtn.disabled = false;
+                spinner.classList.add('hidden');
+                formStatus.classList.remove('hidden');
+            }
         });
     }
+
     // Contact Modal Logic
     const contactModal = document.getElementById('contact-modal');
     const contactModalBackdrop = document.getElementById('contact-modal-backdrop');
@@ -1151,5 +1162,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-

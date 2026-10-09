@@ -9,6 +9,7 @@ const metricsSection = `
             <div class="circuit-line horizontal top-[70%] animation-delay-2"></div>
             <div class="circuit-line vertical left-[15%]"></div>
             <div class="circuit-line vertical right-[15%] animation-delay-3"></div>
+        </div>
         <div class="editorial-margin relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-10 reveal">
                 <h3 class="text-label text-primary font-bold tracking-[0.2em] uppercase mb-3">Impact at a Glance</h3>
@@ -18,25 +19,33 @@ const metricsSection = `
                 <div class="stats-card text-center" aria-label="Years of Experience">
                     <div class="text-3xl font-black text-primary counter" data-target="2" data-suffix="+">0</div>
                     <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mt-1">Years<br>Experience</div>
+                </div>
                 <div class="stats-card text-center" aria-label="Test Cases Executed">
                     <div class="text-3xl font-black text-primary counter" data-target="500" data-suffix="+">0</div>
                     <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mt-1">Test<br>Cases</div>
+                </div>
                 <div class="stats-card text-center" aria-label="Bugs Reported">
                     <div class="text-3xl font-black text-primary counter" data-target="150" data-suffix="+">0</div>
                     <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mt-1">Bugs<br>Reported</div>
+                </div>
                 <div class="stats-card text-center" aria-label="Products Tested">
                     <div class="text-3xl font-black text-primary counter" data-target="10" data-suffix="+">0</div>
                     <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mt-1">Products<br>Tested</div>
+                </div>
                 <div class="stats-card text-center" aria-label="APIs Tested">
                     <div class="text-3xl font-black text-primary counter" data-target="50" data-suffix="+">0</div>
                     <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mt-1">APIs<br>Tested</div>
+                </div>
                 <div class="stats-card text-center" aria-label="Regression Cycles">
                     <div class="text-3xl font-black text-primary counter" data-target="30" data-suffix="+">0</div>
                     <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mt-1">Regression<br>Cycles</div>
+                </div>
                 <div class="stats-card text-center" aria-label="Production Releases">
                     <div class="text-3xl font-black text-primary counter" data-target="20" data-suffix="+">0</div>
                     <div class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mt-1">Releases<br>Supported</div>
+                </div>
             </div>
+        </div>
     </section>
 
     <!-- About Section -->`;
