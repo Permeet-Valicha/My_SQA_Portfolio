@@ -81,7 +81,7 @@ test('sends validated, escaped message using server-side SMTP settings', async t
     }), response);
 
     assert.equal(response.statusCode, 200);
-    assert.equal(response.payload.message, 'Message sent successfully. I will get back to you soon.');
+    assert.equal(response.payload.message, 'Message sent!');
     assert.equal(sentOptions.transport.auth.pass, 'test-password');
     assert.equal(sentOptions.mail.to, 'inbox@example.com');
     assert.equal(sentOptions.mail.replyTo, 'visitor@example.com');

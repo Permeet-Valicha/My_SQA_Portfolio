@@ -492,8 +492,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     throw new Error('Email service returned an empty response. Please try again later.');
                 }
 
-                formStatus.textContent = result.message;
-                formStatus.className = 'text-primary bg-primary-container p-4 rounded-lg block mb-4 text-center';
+                formStatus.textContent = 'Message sent!';
+                formStatus.className = 'mb-4 block whitespace-nowrap rounded-lg border border-green-200 bg-green-100 px-3 py-2 text-center text-sm font-medium text-green-900';
                 contactForm.reset();
             } catch (error) {
                 formStatus.textContent = error.message || 'Unable to send your message right now. Please try again.';

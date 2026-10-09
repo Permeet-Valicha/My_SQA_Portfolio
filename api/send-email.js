@@ -102,7 +102,7 @@ module.exports = async function handler(request, response) {
             html
         });
 
-        return sendJson(response, 200, { message: 'Message sent successfully. I will get back to you soon.' });
+        return sendJson(response, 200, { message: 'Message sent!' });
     } catch (error) {
         console.error('Contact email delivery failed:', error.code || 'SMTP_ERROR');
         return sendJson(response, 502, { error: 'Unable to send your message right now. Please try again later.' });
