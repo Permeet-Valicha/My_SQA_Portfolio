@@ -1711,11 +1711,12 @@
                 </div>
             </div>
 
-            <details class="mb-5 rounded-xl border border-slate-200 bg-slate-50">
-                <summary class="cursor-pointer list-none px-4 py-3 font-semibold text-primary">
-                    Send a message by email
+            <details class="mb-3">
+                <summary class="flex w-full cursor-pointer list-none items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-base font-bold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary-container">
+                    <span class="material-symbols-outlined text-base" aria-hidden="true">mail</span>
+                    Send Message (Email)
                 </summary>
-                <form id="contact-form" class="space-y-3 px-4 pb-4">
+                <form id="contact-form" class="w-full self-stretch space-y-3 pb-4">
                     <div class="absolute -left-[10000px]" aria-hidden="true">
                         <label for="contact-website">Leave this field empty</label>
                         <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off">
@@ -1742,7 +1743,7 @@
                     </div>
                     <p id="form-status" class="hidden" role="status" aria-live="polite"></p>
                     <button id="submit-btn" type="submit"
-                        class="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-container disabled:cursor-not-allowed disabled:opacity-60">
+                        class="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-base font-bold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary-container disabled:cursor-not-allowed disabled:opacity-60">
                         <span id="loading-spinner" class="material-symbols-outlined hidden animate-spin" aria-hidden="true">progress_activity</span>
                         Send Message
                     </button>
@@ -1751,7 +1752,7 @@
 
             <!-- CTA Button -->
             <a href="https://wa.me/923022081313" target="_blank"
-                class="w-full py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+                class="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-base font-bold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary-container">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
                     class="w-4 h-4 brightness-0 invert" alt="WhatsApp">
                 Drop a Message (WhatsApp)

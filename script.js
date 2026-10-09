@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 formStatus.textContent = 'Message sent!';
-                formStatus.className = 'mb-4 block whitespace-nowrap rounded-lg border border-green-200 bg-green-100 px-3 py-2 text-center text-sm font-medium text-green-900';
+                formStatus.className = 'mb-4 block whitespace-nowrap rounded-lg border border-primary bg-primary px-3 py-2 text-center text-sm font-bold text-white';
                 contactForm.reset();
             } catch (error) {
                 formStatus.textContent = error.message || 'Unable to send your message right now. Please try again.';
